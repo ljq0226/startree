@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import { Icon as Iconify } from '@iconify/react'
 
@@ -16,7 +17,6 @@ function Icon({ icon, height = 28, color, className }: IconProps) {
         height={height}
         color={color}
         className={className}
-
       />
     </>
   )

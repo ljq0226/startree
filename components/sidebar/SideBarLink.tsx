@@ -20,28 +20,20 @@ function SideBarLink({
   addPadding,
 }: SidebarLinkProps) {
   const asPath = usePathname()
-  const isActive = false
-  const t = useI18n()
+  const t = useI18n('nav')
+  const navName = asPath.split('/')[1]
+
   return (
-    <Link href={href}>
-      <div
-        className={cn(
-          'flex py-1 outline-none',
-          disabled && 'cursor-not-allowed',
-          addPadding && 'py-6',
-        )}
-      >
-        <div
-          className={cn(
-            'text-xl custom-button flex items-center justify-center self-start p-2',
-            isActive && 'font-bold',
-          )}
-        >
-          <Icon icon={iconName} />
-          <p className='hidden ml-4 xl:block'>{t(linkName)}</p>
+    <div className={cn('navLink', addPadding && 'my-4')} key={href}>
+      <Link href={href} className='w-full'>
+        <div className={cn('flex', navName === linkName ? 'text-primary' : '')} >
+          <div className='flex flex-center'>
+            <Icon icon={iconName} />
+          </div>
+          <p className='hidden ml-4 xl:flex xl:flex-center'>{t(linkName)}</p>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   )
 }
 

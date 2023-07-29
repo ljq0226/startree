@@ -4,7 +4,6 @@ import { NextIntlClientProvider } from 'next-intl'
 import { notFound } from 'next/navigation'
 import type { ReactNode } from 'react'
 import Sidebar from '@/components/sidebar/SideBar'
-import Aside from '@/components/aside/Aside'
 
 export function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'zh' }]
@@ -40,7 +39,6 @@ export default async function LocaleLayout({
           <div className="flex justify-center w-full h-screen gap-0 lg:gap-4">
             <Sidebar />
             {children}
-            <Aside />
           </div>
         </NextIntlClientProvider>
       </body>

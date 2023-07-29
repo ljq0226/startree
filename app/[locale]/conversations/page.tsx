@@ -1,5 +1,11 @@
+import Aside from '@/components/aside/Aside'
+
 export default function App() {
   return (
-    <div>lists</div>
+    <>
+      <div className="main-container">compose</div>
+      <Aside />
+    </>
+
   )
 }
