@@ -1,0 +1,10 @@
+{
+  "IndexPage": {
+    "title": "next-intl 示例",
+    "description": "This is a basic 这是一个基本的示例."
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, de {German} en {English} other {Unknown}}"
+  }
+}
