@@ -1,13 +1,14 @@
 'use client'
-import { useTranslations } from 'next-intl'
+import useI18n from '@/hooks/useI18n'
 import LocaleSwitcher from '@/components/LocaleSwitcher'
 
 export default function App() {
-  const t = useTranslations('IndexPage')
+  const t = useI18n('nav')
   return (
-    <p className="max-w-[590px]">
-      {t('title')}
+    <div className="max-w-[590px]">
+      {t('home')}
       <LocaleSwitcher />
-    </p>
+    </div>
+
   )
 }
