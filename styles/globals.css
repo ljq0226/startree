@@ -2,26 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer components{
+  .flex-center{
+    @apply justify-center items-center
+  }
+  .hover-animation {
+    @apply transition-colors duration-200;
+  }
+  .main-container{
+    @apply min-w-[600px]
+  }
+  .navLink{
+    @apply flex w-[52px] xl:w-[260px] h-[42px] rounded-xl px-4 my-2 py-2 hover-animation hover:bg-gray-300
   }
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer components{
+  .border-base{
+    @apply border-border
+  }
+  .border-dark{
+    @apply border-border-dark
+  }
+  .border-code{
+    @apply border-border-code
+  }
+  .bg-base{
+    @apply bg-bg-base
+  }
+  .bg-active{
+    @apply bg-bg-active
+  }
+  .bg-card{
+    @apply bg-bg-card
+  }
+  .bg-code{
+    @apply bg-bg-code
+  }
+  .bg-selection{
+    @apply bg-bg-selection
+  }
+  .bg-dm{
+    @apply bg-bg-dm
+  }
+  .text-base{
+    @apply text-text-base
+  }
+  .text-code{
+    @apply text-text-code
+  }
+  .text-secondary{
+    @apply text-text-secondary
+  }
+  .text-secondary-light{
+    @apply text-text-secondary-light
+  }
+  .text-btn-disabled{
+    @apply text-text-btn-disabled
+  }
+  .text-btn-disabled-deeper{
+    @apply text-text-btn-disabled-deeper
+  }
+  .text-btn{
+    @apply text-text-btn
+  }
 }
