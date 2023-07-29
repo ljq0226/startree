@@ -5,7 +5,7 @@ import LocaleSwitcher from '@/components/LocaleSwitcher'
 export default function App() {
   const t = useI18n('nav')
   return (
-    <div className="max-w-[590px]">
+    <div className="main-container">
       {t('home')}
       <LocaleSwitcher />
     </div>

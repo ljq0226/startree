@@ -1,5 +1,5 @@
 export default function App() {
   return (
-    <div>settings</div>
+    <div className="main-container">settings</div>
   )
 }
