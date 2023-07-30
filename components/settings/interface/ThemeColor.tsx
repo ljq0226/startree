@@ -1,25 +1,34 @@
 'use client'
 
 import useI18n from '@/hooks/useI18n'
-import themes from '@/constants/themes.json'
-import type { ThemeColors } from '@/types/theme'
-// import useColors from '@/hooks/useThemeColors'
+import useThemeColors from '@/hooks/useThemeColors'
+import themes from '@/constants/themes'
 
 function ThemeColor() {
   const t = useI18n('settings.interface')
-  // const [settings, setSettings] = useColors()
-  // const currentTheme = settings.themeColors?.['--theme-color-name'] || themes[0][0]
+  const { themeColor, setThemeColor } = useThemeColors()
 
-  // function updateTheme(theme: ThemeColors) {
-  //   setSettings({ ...settings, themeColors: theme })
-  // }
   return (
     <div>
       <p className="font-medium">{t('theme_color')}</p>
+      <div className="flex flex-wrap gap-4 p-2">
+        {themes.map(([key]) => (
+          <button
+            key={key}
+            style={{
+              background: key,
+            }}
+            className={`w-8 h-8 rounded-full transition-all ${themeColor === key ? 'ring-2' : 'scale-90'
+              }`}
+            onClick={() => setThemeColor(key)}
+          >
+          </button>
+        ))}
+
+      </div>
       {/* <div className="flex flex-wrap gap-4 p-2">
         {themes.map(([key, theme]) => (
           <button
-            key={key}
             // style={{
             //   'background': key,
             //   '--local-ring-color': key,
