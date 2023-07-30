@@ -36,9 +36,11 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <div className="flex justify-center w-full h-screen gap-0 lg:gap-4">
+          <div className="flex justify-center w-full h-screen gap-0 xl:gap-3">
             <Sidebar />
-            {children}
+            <div className="min-w-[900px] flex ">
+              {children}
+            </div>
           </div>
         </NextIntlClientProvider>
       </body>

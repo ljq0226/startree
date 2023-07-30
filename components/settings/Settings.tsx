@@ -3,7 +3,7 @@ import { SettingOptions } from './data'
 
 function Settings() {
   return (
-    <div>
+    <div className='border-red-500 border-solid border-r-10'>
       {
         SettingOptions.map((option) => {
           return (

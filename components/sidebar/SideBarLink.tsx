@@ -21,7 +21,7 @@ function SideBarLink({
 }: SidebarLinkProps) {
   const asPath = usePathname()
   const t = useI18n('nav')
-  const navName = asPath.split('/')[1]
+  const navName = asPath.split('/').pop()
 
   return (
     <div className={cn('navLink', addPadding && 'my-4')} key={href}>

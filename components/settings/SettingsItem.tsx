@@ -14,11 +14,11 @@ interface Props {
 
 function SettingsItem({ linkName, icon, href }: Props) {
   const asPath = usePathname()
-  const pathName = asPath.split('/')[2]
+  const pathName = asPath.split('/').pop()
   const t = useI18n('settings')
 
   return (
-    <div className='flex h-[42px] rounded-xl px-4 my-2 py-2 hover-animation hover:bg-gray-300'>
+    <div className='flex h-[42px] min-w-[285px] rounded-xl px-4 my-2 py-2 hover-animation hover:bg-gray-300'>
       <Link
         className='flex w-full'
         href={`/settings/${href}`}
