@@ -1,8 +1,4 @@
 {
-  "LocaleSwitcher": {
-    "label": "Change language",
-    "locale": "{locale, select, zh {Chinese} en {English} other {Unknown}}"
-  },
   "a11y": {
     "loading_page": "Loading page, please wait",
     "loading_titled_page": "Loading {0} page, please wait",
@@ -428,6 +424,7 @@
       "theme_color": "Theme Color"
     },
     "language": {
+      "locale": "{locale, select, zh {简体中文} en {English(US)} other {Other}}",
       "display_language": "Display Language",
       "label": "Language",
       "status": "Translation status: {0}/{1} ({2}%)",

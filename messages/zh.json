@@ -1,8 +1,4 @@
 {
-  "LocaleSwitcher": {
-    "label": "Change language",
-    "locale": "{locale, select, zh {Chinese} en {English} other {Unknown}}"
-  },
   "a11y": {
     "loading_page": "加载页面中，请稍后",
     "loading_titled_page": "加载{0}页面中，请稍后",
@@ -368,6 +364,7 @@
       "theme_color": "主题颜色"
     },
     "language": {
+      "locale": "{locale, select, zh {简体中文} en {English(US)} other {Other}}",
       "display_language": "首选语言",
       "label": "语言",
       "status": "翻译进度： {0}/{1} ({2}%)",
