@@ -31,7 +31,7 @@ export const SettingOptions: Readonly<SettingOption[]> = [
     icon: 'pajamas:preferences',
   },
   {
-    href: '/account_settings',
+    href: '/users',
     linkName: 'account_settings',
     icon: 'ri:group-line',
   },

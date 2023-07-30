@@ -4,8 +4,8 @@ import ThemeColor from '@/components/settings/interface/ThemeColor'
 
 function page() {
   return (
-    <div className='flex flex-col p-6 space-y-2 settings-container'>
-      <div className='hidden h-6 xl:block'></div>
+    <div className='flex flex-col p-6 space-y-2 '>
+
       <FontSize />
       <ColorMode />
       <ThemeColor />
