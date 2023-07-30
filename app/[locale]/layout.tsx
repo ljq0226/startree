@@ -33,7 +33,7 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className='dark'>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <div className="flex justify-center w-full h-screen gap-0 xl:gap-3">
