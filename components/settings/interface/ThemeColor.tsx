@@ -1,5 +1,6 @@
 'use client'
 
+import cn from 'clsx'
 import useI18n from '@/hooks/useI18n'
 import useThemeColors from '@/hooks/useThemeColors'
 import themes from '@/constants/themes'
@@ -9,7 +10,7 @@ function ThemeColor() {
   const { themeColor, setThemeColor } = useThemeColors()
 
   return (
-    <div>
+    <div className=''>
       <p className="font-medium">{t('theme_color')}</p>
       <div className="flex flex-wrap gap-4 p-2">
         {themes.map(([key]) => (
@@ -18,29 +19,13 @@ function ThemeColor() {
             style={{
               background: key,
             }}
-            className={`w-8 h-8 rounded-full transition-all ${themeColor === key ? 'ring-2' : 'scale-90'
-              }`}
+            className={cn('w-8 h-8 rounded-full transition-all ', themeColor === key ? `ring-2  ring-[${key}]` : 'scale-90')}
             onClick={() => setThemeColor(key)}
           >
           </button>
         ))}
 
       </div>
-      {/* <div className="flex flex-wrap gap-4 p-2">
-        {themes.map(([key, theme]) => (
-          <button
-            // style={{
-            //   'background': key,
-            //   '--local-ring-color': key,
-            // }}
-            className={`w-8 h-8 rounded-full transition-all ${currentTheme === key ? 'ring-2' : 'scale-90'
-              }`}
-            // title={key}
-            onClick={() => updateTheme(theme)}
-          ></button>
-        ))}
-      </div> */}
-
     </div>
   )
 }
