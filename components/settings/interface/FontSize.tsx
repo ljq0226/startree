@@ -8,7 +8,6 @@ function FontSize() {
   const t = useI18n('settings.interface')
   const fontArr = createFontArr()
   const { fontSize, setFontSize } = useFontSize()
-  // const [LFont, RFont] = [fontArr[0], fontArr[fontArr.length - 1]]
   const clickHandle = (size: string) => {
     setFontSize(size)
   }
@@ -25,6 +24,7 @@ function FontSize() {
               fontArr.map((size) => {
                 return (
                   <div
+                    key={size}
                     className={cn('w-4 h-4 rounded-full z-[1] ',
                       size === fontSize ? 'bg-primary scale-125' : 'bg-text-secondary-light',
                     )}

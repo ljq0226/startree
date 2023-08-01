@@ -9,7 +9,7 @@ interface IconProps {
   className?: string
 }
 
-function Icon({ icon, height = 28, color, className }: IconProps) {
+function Icon({ icon, height = 24, color, className }: IconProps) {
   return (
     <>
       <Iconify

@@ -14,3 +14,11 @@ export function createFontArr(range = 5) {
   }
   return fontSizeArr
 }
+
+export function fontRatio(size: string) {
+  const baseSize = Number(DEFAULT_FONT_SIZE.slice(0, 2)) // 15
+  const mySize = Number(size.slice(0, 2))
+
+  const ratio = (mySize / baseSize).toFixed(1)
+  return +ratio
+}
