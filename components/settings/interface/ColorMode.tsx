@@ -30,10 +30,10 @@ function Mode({ mode, icon }: ModeProps) {
   }, [themeMode])
   return (
     <div
-      className="flex px-4 py-2 border border-base flex-center hover:cursor-pointer"
+      className={cn('colorMode flex-wrap')}
       onClick={clickHandle}
     >
-      <div className={cn('flex', mode === activeMode ? 'text-primary' : 'text-base')}>
+      <div className={cn('flex', mode === activeMode ? 'text-primary' : 'text-secondary hover:text-secondary-light')}>
         <Icon icon={icon} />
         <p className='flex ml-1 flex-center'>{t(`${mode}_mode`)}</p>
       </div>

@@ -1,10 +1,14 @@
 'use client'
 import { NavLinks } from './data'
 import SideBarLink from './SideBarLink'
+import useThemeMode from '@/hooks/useThemeMode'
 import useI18n from '@/hooks/useI18n'
+import useThemeColors from '@/hooks/useThemeColors'
 
 function SideBar() {
   const t = useI18n('nav')
+  useThemeColors()
+  useThemeMode()
   return (
     <div className=''>
       <div className='sticky top-0 h-[100vh] w-8 xl:w-full'>
