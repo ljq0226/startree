@@ -1,4 +1,5 @@
 :root {
+  --font-size:16px;
   --theme-color-name: #cc7d24;
   --c-primary: rgb(var(--rgb-primary));
   --c-primary-active: #b16605;
