@@ -36,7 +36,7 @@ export default async function LocaleLayout({
     <html lang={locale} className='dark'>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <div className="flex justify-center w-full h-screen gap-0 xl:gap-3">
+          <div className="flex justify-center w-full h-screen gap-0 bg-base text-bs xl:gap-3">
             <Sidebar />
             <div className="min-w-[900px] flex ">
               {children}
