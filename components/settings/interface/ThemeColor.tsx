@@ -10,7 +10,7 @@ function ThemeColor() {
   const { themeColor, setThemeColor } = useThemeColors()
 
   return (
-    <div className=''>
+    <div>
       <p className="font-medium">{t('theme_color')}</p>
       <div className="flex flex-wrap gap-4 p-2">
         {themes.map(([key]) => (

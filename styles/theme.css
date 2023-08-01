@@ -44,7 +44,7 @@
   --c-error: #F56C6C;
 }
 
-.dark {
+.dark{
   --c-primary: var(--c-dark-primary);
   --c-primary-active: var(--c-dark-primary-active);
   --c-primary-light: var(--c-dark-primary-light);
