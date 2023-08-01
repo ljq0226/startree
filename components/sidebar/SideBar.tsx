@@ -1,9 +1,9 @@
 'use client'
 import { NavLinks } from './data'
 import SideBarLink from './SideBarLink'
-import useThemeMode from '@/hooks/useThemeMode'
-import useI18n from '@/hooks/useI18n'
-import useThemeColors from '@/hooks/useThemeColors'
+import useThemeMode from '@/hooks/theme/useThemeMode'
+import useI18n from '@/hooks/theme/useI18n'
+import useThemeColors from '@/hooks/theme/useThemeColors'
 
 function SideBar() {
   const t = useI18n('nav')

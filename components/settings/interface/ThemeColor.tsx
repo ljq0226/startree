@@ -1,8 +1,8 @@
 'use client'
 
 import cn from 'clsx'
-import useI18n from '@/hooks/useI18n'
-import useThemeColors from '@/hooks/useThemeColors'
+import useI18n from '@/hooks/theme/useI18n'
+import useThemeColors from '@/hooks/theme/useThemeColors'
 import themes from '@/constants/themes'
 
 function ThemeColor() {

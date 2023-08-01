@@ -6,7 +6,7 @@ import cn from 'clsx'
 
 import type { NavLink } from './data'
 import Icon from '@/components/ui/Icon'
-import useI18n from '@/hooks/useI18n'
+import useI18n from '@/hooks/theme/useI18n'
 
 type SidebarLinkProps = NavLink & {
   username?: string

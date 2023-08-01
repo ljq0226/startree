@@ -1,7 +1,7 @@
 'use client'
 import cn from 'clsx'
 import useFontSize from '@/hooks/theme/useFontSize'
-import useI18n from '@/hooks/useI18n'
+import useI18n from '@/hooks/theme/useI18n'
 import { createFontArr } from '@/lib'
 
 function FontSize() {

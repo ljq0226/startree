@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import Icon from '@/components/ui/Icon'
-import useI18n from '@/hooks/useI18n'
+import useI18n from '@/hooks/theme/useI18n'
 
 function SettingImage() {
   const t = useI18n('settings')

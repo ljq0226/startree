@@ -1,5 +1,5 @@
 'use client'
-import useI18n from '@/hooks/useI18n'
+import useI18n from '@/hooks/theme/useI18n'
 import LocaleSwitcher from '@/components/settings/language/LocaleSwitcher'
 
 function page() {

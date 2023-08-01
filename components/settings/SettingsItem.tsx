@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation'
 import cn from 'clsx'
 import Link from 'next/link'
-import useI18n from '@/hooks/useI18n'
+import useI18n from '@/hooks/theme/useI18n'
 import Icon from '@/components/ui/Icon'
 
 interface Props {

@@ -1,9 +1,9 @@
 'use client'
 import cn from 'clsx'
 import { useEffect, useState } from 'react'
-import useI18n from '@/hooks/useI18n'
+import useI18n from '@/hooks/theme/useI18n'
 import Icon from '@/components/ui/Icon'
-import useThemeMode from '@/hooks/useThemeMode'
+import useThemeMode from '@/hooks/theme/useThemeMode'
 import type { ThemeMode } from '@/types/theme'
 import { checkIsDarkMode } from '@/lib/check'
 
