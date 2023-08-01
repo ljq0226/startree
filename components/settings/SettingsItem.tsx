@@ -14,7 +14,7 @@ interface Props {
 
 function SettingsItem({ linkName, icon, href }: Props) {
   const asPath = usePathname()
-  const pathName = asPath.split('/').pop()
+  const isActive = asPath.split('/').includes(linkName)
   const t = useI18n('settings')
 
   return (
@@ -23,7 +23,7 @@ function SettingsItem({ linkName, icon, href }: Props) {
         className='flex w-full'
         href={`/settings/${href}`}
       >
-        <div className={cn('flex flex-1', linkName === pathName ? 'text-primary' : '')} >
+        <div className={cn('flex flex-1', isActive ? 'text-primary' : '')} >
           <div>
             {icon && <Icon icon={icon} />}
           </div>
