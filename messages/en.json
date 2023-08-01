@@ -13,7 +13,7 @@
     "blocked_users": "Blocked users",
     "blocking": "Blocked",
     "bot": "BOT",
-    "favourites": "Favorites",
+    "favorites": "Favorites",
     "follow": "Follow",
     "follow_back": "Follow back",
     "follow_requested": "Requested",
@@ -58,9 +58,9 @@
     "done": "Done",
     "edit": "Edit",
     "enter_app": "Enter App",
-    "favourite": "Favorite",
-    "favourite_count": "{0}",
-    "favourited": "Favorited",
+    "favorite": "Favorite",
+    "favorite_count": "{0}",
+    "favorited": "Favorited",
     "more": "More",
     "next": "Next",
     "prev": "Prev",
@@ -100,7 +100,7 @@
     "fetching": "Fetching...",
     "in": "in",
     "no_bookmarks": "No bookmarked posts yet",
-    "no_favourites": "No liked posts yet",
+    "no_favorites": "No liked posts yet",
     "not_found": "404 Not Found",
     "offline_desc": "Seems like you are offline. Please check your network connection."
   },
@@ -210,7 +210,7 @@
         "boost": "Boost",
         "command_mode": "Command mode",
         "compose": "Compose",
-        "favourite": "Favourite",
+        "favorite": "favorite",
         "title": "Actions"
       },
       "media": {
@@ -246,7 +246,7 @@
     "remove_personal_note": "Remove personal note from {0}",
     "report_account": "Report {0}",
     "share_post": "Share this post",
-    "show_favourited_and_boosted_by": "Show who favorited and boosted",
+    "show_favorited_and_boosted_by": "Show who favorited and boosted",
     "show_reblogs": "Show boosts from {0}",
     "show_untranslated": "Show untranslated",
     "toggle_theme": {
@@ -273,7 +273,7 @@
     "compose": "Compose",
     "conversations": "Conversations",
     "explore": "Explore",
-    "favourites": "Favorites",
+    "favorites": "Favorites",
     "federated": "Federated",
     "home": "Home",
     "list": "List",
@@ -293,7 +293,7 @@
     "zen_mode": "Zen Mode"
   },
   "notification": {
-    "favourited_post": "favorited your post",
+    "favorited_post": "favorited your post",
     "followed_you": "followed you",
     "followed_you_count": "{0} people followed you|{0} person followed you|{0} people followed you",
     "missing_type": "MISSING notification.type:",
@@ -443,7 +443,7 @@
       },
       "push_notifications": {
         "alerts": {
-          "favourite": "Favorites",
+          "favorite": "Favorites",
           "follow": "New followers",
           "mention": "Mentions",
           "poll": "Polls",
@@ -568,7 +568,7 @@
     },
     "boosted_by": "Boosted By",
     "edited": "Edited {0}",
-    "favourited_by": "Favorited By",
+    "favorited_by": "Favorited By",
     "filter_hidden_phrase": "Filtered by",
     "filter_removed_phrase": "Removed by filter",
     "filter_show_anyway": "Show anyway",

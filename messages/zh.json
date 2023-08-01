@@ -13,7 +13,7 @@
     "blocked_users": "已拉黑的用户",
     "blocking": "已拉黑",
     "bot": "机器人",
-    "favourites": "喜欢的帖文",
+    "favorites": "喜欢的帖文",
     "follow": "关注",
     "follow_back": "回关",
     "follow_requested": "已申请关注",
@@ -56,9 +56,9 @@
     "confirm": "确认",
     "edit": "编辑",
     "enter_app": "进入应用",
-    "favourite": "喜欢",
-    "favourite_count": "{0}",
-    "favourited": "已喜欢",
+    "favorite": "喜欢",
+    "favorite_count": "{0}",
+    "favorited": "已喜欢",
     "more": "更多",
     "next": "下一个",
     "prev": "上一个",
@@ -206,7 +206,7 @@
         "boost": "转发",
         "command_mode": "命令面板",
         "compose": "撰写",
-        "favourite": "喜欢",
+        "favorite": "喜欢",
         "title": "操作",
         "zen_mode": "禅模式"
       },
@@ -240,7 +240,7 @@
     "open_in_original_site": "从源站打开",
     "pin_on_profile": "置顶在个人资料上",
     "share_post": "分享这条帖文",
-    "show_favourited_and_boosted_by": "展示谁喜欢和转发了",
+    "show_favorited_and_boosted_by": "展示谁喜欢和转发了",
     "show_reblogs": "显示来自 {0} 的转发",
     "show_untranslated": "显示原文",
     "toggle_theme": {
@@ -266,7 +266,7 @@
     "compose": "撰写",
     "conversations": "私信",
     "explore": "探索",
-    "favourites": "喜欢",
+    "favorites": "喜欢",
     "federated": "跨站",
     "home": "主页",
     "list": "列表",
@@ -286,7 +286,7 @@
     "zen_mode": "禅模式"
   },
   "notification": {
-    "favourited_post": "点赞了你的帖文",
+    "favorited_post": "点赞了你的帖文",
     "followed_you": "关注了你",
     "followed_you_count": "{n} 人关注了你",
     "missing_type": "未知的通知类型：",
@@ -383,7 +383,7 @@
       },
       "push_notifications": {
         "alerts": {
-          "favourite": "喜欢的",
+          "favorite": "喜欢的",
           "follow": "新的关注者",
           "mention": "提及",
           "poll": "投票",
@@ -498,7 +498,7 @@
   "status": {
     "boosted_by": "被转发",
     "edited": "在 {0} 编辑了",
-    "favourited_by": "被喜欢",
+    "favorited_by": "被喜欢",
     "filter_hidden_phrase": "筛选依据",
     "filter_removed_phrase": "从筛选中移除",
     "filter_show_anyway": "仍然展示",
