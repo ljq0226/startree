@@ -393,6 +393,7 @@
     "whats_wrong_post": "Tell us what's wrong with this post"
   },
   "search": {
+    "label": "Search",
     "search_desc": "Search for people & hashtags",
     "search_empty": "Could not find anything for these search terms"
   },
