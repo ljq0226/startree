@@ -58,7 +58,7 @@
     @apply justify-center items-center
   }
   .hover-animation {
-    @apply transition-colors duration-200;
+    @apply transition-colors duration-200 hover:bg-active
   }
   .main-container{
     @apply min-w-[600px]
@@ -67,12 +67,12 @@
     @apply  xl:min-w-[520px]
   }
   .navLink{
-    @apply flex h-[42px] w-[52px] xl:w-[260px] rounded-xl px-4 my-2 py-2 hover-animation hover:bg-active
+    @apply flex h-[42px] w-[52px] xl:w-[260px] rounded-xl px-4 my-2 py-2 hover-animation 
   }
   .settingsItem{
-    @apply flex h-[42px] min-w-[285px] rounded-xl px-4 my-2 py-2 hover-animation hover:bg-active
+    @apply flex h-[42px] min-w-[285px] rounded-xl px-4 my-2 py-2 hover-animation 
   }
   .colorMode{
-    @apply flex xl:w-1/3 h-[50px] px-4 py-2 border border-base flex-center hover:cursor-pointer 
+    @apply flex xl:w-1/3 h-[50px] px-4 py-2 border border-base flex-center cursor-pointer 
   }
 }
