@@ -25,7 +25,7 @@ export const NavLinks: Readonly<NavLink[]> = [
   },
   {
     href: '/favorites',
-    linkName: 'favourites',
+    linkName: 'favorites',
     iconName: 'ri:star-line',
   },
   {
