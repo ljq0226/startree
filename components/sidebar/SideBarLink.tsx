@@ -7,6 +7,7 @@ import cn from 'clsx'
 import type { NavLink } from './data'
 import Icon from '@/components/ui/Icon'
 import useI18n from '@/hooks/theme/useI18n'
+import { isActiveNav } from '@/lib/check'
 
 type SidebarLinkProps = NavLink & {
   username?: string
@@ -21,7 +22,7 @@ function SideBarLink({
 }: SidebarLinkProps) {
   const asPath = usePathname()
   const t = useI18n('nav')
-  const isActive = asPath.split('/').includes(linkName)
+  const isActive = isActiveNav(1, linkName, asPath)
 
   return (
     <div className={cn('navLink', addPadding && 'my-4')} key={href}>

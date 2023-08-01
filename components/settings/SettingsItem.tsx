@@ -5,6 +5,7 @@ import cn from 'clsx'
 import Link from 'next/link'
 import useI18n from '@/hooks/theme/useI18n'
 import Icon from '@/components/ui/Icon'
+import { isActiveNav } from '@/lib/check'
 
 interface Props {
   href: string
@@ -14,7 +15,7 @@ interface Props {
 
 function SettingsItem({ linkName, icon, href }: Props) {
   const asPath = usePathname()
-  const isActive = asPath.split('/').includes(linkName)
+  const isActive = isActiveNav(2, linkName, asPath)
   const t = useI18n('settings')
 
   return (
