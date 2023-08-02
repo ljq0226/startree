@@ -29,6 +29,9 @@
   .bg-dm{
     @apply bg-bg-dm
   }
+  .bg-btn-disabled{
+    @apply bg-bg-btn-disabled
+  }
   .text-bs{
     @apply text-text-bs
   }
@@ -80,5 +83,14 @@
   }
   .tooltip-arrow{
     @apply w-[10px] h-[10px] border-t border-l bg-base border-base
+  }
+  .editPost-texterea{
+    @apply w-full border-b resize-none outline-none bg-base whitespace-break-spaces border-base
+  }
+  .editPost-button{
+    @apply w-20 h-8 p-2 leading-4  rounded-xl text-sm
+  }
+  .editPost-icon{
+    @apply flex w-8 h-8 rounded-full flex-center hover:bg-selection
   }
 }

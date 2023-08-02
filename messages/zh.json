@@ -585,6 +585,7 @@
     "local_timeline": "本地时间线"
   },
   "tooltip": {
+    "add_tag": "添加话题",
     "add_content_warning": "添加内容警告标识",
     "add_emojis": "添加表情符号",
     "add_media": "添加图片、视频或者音频文件",

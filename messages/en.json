@@ -656,6 +656,7 @@
     "local_timeline": "Local Timeline"
   },
   "tooltip": {
+    "add_tag": "Add tags",
     "add_content_warning": "Add content warning",
     "add_emojis": "Add emojis",
     "add_media": "Add images, a video or an audio file",
