@@ -25,7 +25,7 @@ function EditPost() {
   }, [content])
   return (
     <div className="flex w-full p-2">
-      <Avatar className='mx-4 max-h-12' src='/avatar/user.png' height={12} />
+      <Avatar className='mx-4 max-h-12' src='/avatar/user.png' />
       <div className="flex flex-col flex-[0.9]">
         <textarea
           ref={textareaRef}

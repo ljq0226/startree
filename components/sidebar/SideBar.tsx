@@ -40,7 +40,7 @@ function SideBar() {
         </div>
         <div className="flex-1"></div>
         <footer className='flex py-6 cursor-pointer'>
-          <Avatar src='/avatar/user.png' />
+          <Avatar src='/avatar/user.png' height={15} />
           <div className="flex flex-col justify-center flex-1 px-2 rounded-xl hover-animation" >
             <p className="text-primary">
               userName

@@ -1,6 +1,11 @@
+import Avatar from '../ui/Avatar'
+
 function Post() {
   return (
-    <div>Post</div>
+    <div className="flex py-2 border-t border-base ">
+      <Avatar className="" round src="/avatar/user.png" />
+
+    </div>
   )
 }
 
