@@ -1,7 +1,6 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import cn from 'clsx'
 
 type direction = 'top' | 'bottom' | 'left' | 'right'
 interface TooltipProps {
@@ -86,10 +85,8 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, position = 'bottom' }
           <div className="absolute" style={{ left: style.arrowLeft, top: style.arrowTop }}>
             <div
               style={{ rotate: style.rotate }}
-              className={
-                cn(
-                  'w-[10px] h-[10px] border-t border-l bg-base border-base',
-                )}></div>
+              className='tooltip-arrow'>
+            </div>
           </div>
         </motion.div>
       }

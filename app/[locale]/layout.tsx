@@ -37,13 +37,13 @@ export default async function LocaleLayout({
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <div
-            className="flex justify-center w-full h-screen gap-0 bg-base text-bs xl:gap-3"
+            className="flex justify-center w-screen h-screen gap-0 overflow-x-hidden overflow-y-auto bg-base text-bs xl:gap-3"
             style={{
               fontSize: 'var(--font-size)',
             }}
           >
             <Sidebar />
-            <div className="min-w-[900px] flex ">
+            <div className="xl:min-w-[900px] flex ">
               {children}
             </div>
           </div>
