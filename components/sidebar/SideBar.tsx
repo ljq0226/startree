@@ -1,6 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import Avatar from '../ui/Avatar'
+import Tooltip from '../ui/Tooltip'
 import { NavLinks } from './data'
 import SideBarLink from './SideBarLink'
 import useThemeMode from '@/hooks/theme/useThemeMode'
@@ -16,15 +17,16 @@ function SideBar() {
   useThemeMode()
   return (
     <div className=''>
-      <div className='sticky top-0 h-[100vh] w-8 xl:w-full flex flex-col'>
+      <div className='sticky top-0 h-[100vh] w-8 sm:w-min-[70px] xl:w-full flex flex-col'>
         <header className="flex">
           header
-          <div className='cursor-pointer' onClick={() => {
-            router.back()
-          }}>
-            <Icon icon='uil:arrow-left' className='text-primary' />
-          </div>
-
+          <Tooltip text={t('back')}>
+            <div className='cursor-pointer' onClick={() => {
+              router.back()
+            }}>
+              <Icon icon='uil:arrow-left' className='text-primary' />
+            </div>
+          </Tooltip>
         </header>
         <div className="flex flex-col w-full ">
           {
@@ -50,6 +52,7 @@ function SideBar() {
           <div className="flex flex-center">
             <Icon icon='ri:more-2-line'></Icon>
           </div>
+
         </footer>
       </div>
     </div>

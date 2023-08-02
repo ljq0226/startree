@@ -3,7 +3,7 @@ import React from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import cn from 'clsx'
-
+import Tooltip from '../ui/Tooltip'
 import type { NavLink } from './data'
 import Icon from '@/components/ui/Icon'
 import useI18n from '@/hooks/theme/useI18n'
@@ -26,14 +26,16 @@ function SideBarLink({
 
   return (
     <div className={cn('navLink', addPadding && 'my-4')} key={href}>
-      <Link href={href} className='w-full'>
-        <div className={cn('flex', isActive ? 'text-primary' : '')} >
-          <div className='flex flex-center'>
-            <Icon icon={iconName} />
+      <Tooltip text={t(linkName)}>
+        <Link href={href} className='w-full'>
+          <div className={cn('flex', isActive ? 'text-primary' : '')} >
+            <div className='flex flex-center'>
+              <Icon icon={iconName} />
+            </div>
+            <p className='hidden ml-4 xl:flex xl:flex-center'>{t(linkName)}</p>
           </div>
-          <p className='hidden ml-4 xl:flex xl:flex-center'>{t(linkName)}</p>
-        </div>
-      </Link>
+        </Link>
+      </Tooltip>
     </div>
   )
 }
