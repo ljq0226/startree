@@ -10,8 +10,8 @@ interface Props {
 
 function Avatar({ src, height = 12, round = false, className }: Props) {
   return (
-    <div className={cn('overflow-hidden', `w-[${height}] h-[${height}] max-h-[${height}]`, round ? 'rounded-full' : 'rounded-xl', className)}>
-      <Image src={src} height={height * 4} width={height * 4} alt='' />
+    <div className={cn('overflow-hidden', `w-[${height * 4}px] h-[${height * 4}px] h-max-[${height * 4}px]`, className)}>
+      <Image className={round ? 'rounded-full' : 'rounded-xl'} src={src} height={height * 4} width={height * 4} alt='' />
     </div>
   )
 }
