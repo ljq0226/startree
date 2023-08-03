@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from 'next-intl'
 import { notFound } from 'next/navigation'
 import type { ReactNode } from 'react'
 import Sidebar from '@/components/sidebar/SideBar'
+import AuthProvider from '@/context/AuthProvider'
 
 export function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'zh' }]
@@ -35,6 +36,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className='dark'>
       <body>
+      <AuthProvider>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <div
             className="flex justify-center w-screen h-screen gap-0 overflow-x-hidden overflow-y-auto bg-base text-bs xl:gap-3"
@@ -48,6 +50,7 @@ export default async function LocaleLayout({
             </div>
           </div>
         </NextIntlClientProvider>
+        </AuthProvider>
       </body>
     </html>
   )
