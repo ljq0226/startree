@@ -1,10 +1,12 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import cn from 'clsx'
 
 type direction = 'top' | 'bottom' | 'left' | 'right'
 interface TooltipProps {
   text: string
+  className?: string
   position?: direction
   children?: React.ReactNode
 }
@@ -16,7 +18,7 @@ interface TooltipStyle {
   rotate?: string
 }
 const initStyle = { left: '', top: '', arrowLeft: '', arrowTop: '', rotate: '' }
-const Tooltip: React.FC<TooltipProps> = ({ text, children, position = 'bottom' }) => {
+const Tooltip: React.FC<TooltipProps> = ({ text, children, position = 'bottom', className }) => {
   const [showTooltip, setShowTooltip] = useState(false)
   const tooltipRef = useRef<HTMLDivElement>(null)
   const targetRef = useRef<HTMLDivElement>(null)
@@ -70,7 +72,7 @@ const Tooltip: React.FC<TooltipProps> = ({ text, children, position = 'bottom' }
     setShowTooltip(false)
   }
   return (
-    <div className='relative' onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div className={cn('relative', className)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <div ref={targetRef}>{children}</div>
       {
         showTooltip

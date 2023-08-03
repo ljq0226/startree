@@ -26,7 +26,7 @@ function SideBarLink({
 
   return (
     <div className={cn('navLink', addPadding && 'my-4')} key={href}>
-      <Tooltip text={t(linkName)}>
+      <Tooltip text={t(linkName)} className='w-full'>
         <Link href={href} className='w-full'>
           <div className={cn('flex', isActive ? 'text-primary' : '')} >
             <div className='flex flex-center'>
