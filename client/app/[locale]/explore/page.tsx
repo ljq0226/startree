@@ -1,13 +1,26 @@
 'use client'
+import { signIn, signOut, useSession } from 'next-auth/react'
+import UserStore from '@/store/user'
+
 // import Aside from '@/components/aside/Aside'
-import { useSession } from 'next-auth/react'
 
 export default function App() {
   const { data: session, status } = useSession()
-  if (status === 'authenticated')
-    return <p>Signed in as {session.user?.email}</p>
-
-  return <a href="/api/auth/signin">Sign in</a>
+  const user = UserStore(s => s.user)
+  if (session) {
+    return (
+      <>
+        Signed in as {session.user?.email} <br />
+        <button onClick={() => signOut()}>Sign out</button>
+      </>
+    )
+  }
+  return (
+    <>
+      Not signed in <br />
+      <button onClick={() => signIn()}>Sign in</button>
+    </>
+  )
 
   // return (
   //   <>
