@@ -1,9 +1,9 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import Avatar from '../ui/Avatar'
 import Tooltip from '../ui/Tooltip'
 import { NavLinks } from './data'
 import SideBarLink from './SideBarLink'
+import SideBarFooter from './SideBarFooter'
 import useThemeMode from '@/hooks/theme/useThemeMode'
 import useI18n from '@/hooks/theme/useI18n'
 import useThemeColors from '@/hooks/theme/useThemeColors'
@@ -39,21 +39,7 @@ function SideBar() {
 
         </div>
         <div className="flex-1"></div>
-        <footer className='flex py-6 cursor-pointer'>
-          <Avatar src='/avatar/user.png' height={15} />
-          <div className="flex flex-col justify-center flex-1 px-2 rounded-xl hover-animation" >
-            <p className="text-primary">
-              userName
-            </p>
-            <p className='text-border-dark'>
-              @userNickName
-            </p>
-          </div>
-          <div className="flex flex-center">
-            <Icon icon='ri:more-2-line'></Icon>
-          </div>
-
-        </footer>
+        <SideBarFooter />
       </div>
     </div>
 
