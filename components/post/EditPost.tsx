@@ -36,7 +36,7 @@ function EditPost() {
         />
         <div className="flex mt-4">
           <div className="flex space-x-2">
-            <Tooltip text={t('add_emoji')} position='top'>
+            <Tooltip text={t('add_emojis')} position='top'>
               <button className='editPost-icon' >
                 <Icon icon='mingcute:emoji-line' />
               </button>
