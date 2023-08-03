@@ -28,7 +28,7 @@ function SideBar() {
             </div>
           </Tooltip>
         </header>
-        <div className="flex flex-col w-full ">
+        <div className="flex flex-col w-full cursor-pointer">
           {
             NavLinks.map((nav) => {
               return (

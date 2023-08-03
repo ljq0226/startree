@@ -16,7 +16,6 @@ export default function PostIcon({ icon, tooltip, color }: PostIconProps) {
   const t = useI18n('action')
   const btnRef = useRef(null)
   const hover = `hover:text-[${color}]`
-  console.log(' ', hover)
   return (
     <div ref={btnRef} className={'relative cursor-pointer'}>
       <Tooltip text={t(tooltip)}>
