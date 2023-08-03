@@ -1,11 +1,5 @@
 import { create } from 'zustand'
-
-export interface UserAuth {
-  name: string
-  image: string
-  email: string
-
-}
+import type { UserAuth } from '@/types/user'
 
 interface UserState {
   user: UserAuth
