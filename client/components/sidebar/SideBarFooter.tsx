@@ -1,6 +1,7 @@
 'use client'
 import { signIn, useSession } from 'next-auth/react'
 import { useEffect } from 'react'
+import { redirect } from 'next/navigation'
 import Avatar from '../ui/Avatar'
 import LogOutModal from '../modal/LogOutModal'
 import type { UserAuth } from '@/types/user'
@@ -15,6 +16,7 @@ export default function SideBarFooter() {
   const user = UserStore(s => s.user)
   const handleSignIn = () => {
     signIn()
+    redirect('/expore')
   }
 
   useEffect(() => {

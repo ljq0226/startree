@@ -70,7 +70,7 @@
     @apply  xl:min-w-[520px]
   }
   .navLink{
-    @apply flex h-[42px] w-[52px] xl:w-[260px] rounded-xl px-4 my-2 py-2 hover-animation cursor-pointer
+    @apply flex h-[42px] w-[52px] xl:w-[260px] rounded-xl px-4 my-2 py-2 hover-animation 
   }
   .settingsItem{
     @apply flex h-[42px] min-w-[285px] rounded-xl px-4 my-2 py-2 hover-animation 

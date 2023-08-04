@@ -1,7 +1,7 @@
 'use client'
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
-import type { UserAuth } from '@/store/user'
+import type { UserAuth } from '@/types/user'
 import UserStore from '@/store/user'
 
 export default function IndexPage() {
@@ -10,7 +10,9 @@ export default function IndexPage() {
   if (session) {
     const user = session.user as UserAuth
     setUser(user)
+    redirect('/home')
   }
-
-  redirect('/home')
+  else {
+    redirect('/explore')
+  }
 }

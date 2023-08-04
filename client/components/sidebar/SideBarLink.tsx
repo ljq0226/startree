@@ -8,6 +8,7 @@ import type { NavLink } from './data'
 import Icon from '@/components/ui/Icon'
 import useI18n from '@/hooks/theme/useI18n'
 import { isActiveNav } from '@/lib/check'
+import UserStore from '@/store/user'
 
 type SidebarLinkProps = NavLink & {
   username?: string
@@ -17,17 +18,18 @@ function SideBarLink({
   iconName,
   linkName,
   disabled,
-  canBeHidden,
   addPadding,
 }: SidebarLinkProps) {
   const asPath = usePathname()
   const t = useI18n('nav')
   const isActive = isActiveNav(1, linkName, asPath)
+  const { name } = UserStore(s => s.user)
+  const isDisabled = disabled && !name
 
   return (
-    <div className={cn('navLink', addPadding && 'my-4')} key={href}>
+    <div className={cn('navLink', addPadding && 'my-4', isDisabled && 'cursor-not-allowed')} key={href}>
       <Tooltip text={t(linkName)} className='w-full'>
-        <Link href={href} className='w-full'>
+        <Link aria-disabled href={href} className={cn(isDisabled && 'pointer-events-none text-secondary-light')}>
           <div className={cn('flex', isActive ? 'text-primary' : '')} >
             <div className='flex flex-center'>
               <Icon icon={iconName} />
