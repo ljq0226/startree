@@ -1,5 +1,4 @@
 /* eslint-disable n/prefer-global/process */
-import NextAuth from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
@@ -40,6 +39,3 @@ export const authOptions = {
     }),
   ],
 }
-const handler = NextAuth(authOptions)
-
-export { handler as GET, handler as POST }
