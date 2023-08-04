@@ -2,10 +2,6 @@
 /dist
 /node_modules
 
-# prisma
-
-/prisma
-
 # local env files
 /.env*.local
 /.env
