@@ -72,3 +72,28 @@
   --c-bg-btn-disabled: #2a2a2a;
   --c-text-btn-disabled: #919191;
 }
+* {
+  scrollbar-color: #8885 var(--c-border);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--c-border);
+  border-radius: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8885;
+  border-radius: 1px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8886;
+}

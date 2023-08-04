@@ -64,13 +64,13 @@
     @apply transition-colors duration-200 hover:bg-active
   }
   .main-container{
-    @apply min-w-[600px]
+    @apply min-w-[450px] lg:min-w-[500px] xl:min-w-[600px]
   }
   .settings-container{
     @apply  xl:min-w-[520px]
   }
   .navLink{
-    @apply flex h-[42px] w-[52px] xl:w-[260px] rounded-xl px-4 my-2 py-2 hover-animation 
+    @apply flex h-[42px] w-[52px] xl:w-[240px] rounded-xl px-4 my-2 py-2 hover-animation 
   }
   .settingsItem{
     @apply flex h-[42px] min-w-[285px] rounded-xl px-4 my-2 py-2 hover-animation 

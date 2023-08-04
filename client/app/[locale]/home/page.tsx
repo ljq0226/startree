@@ -4,7 +4,7 @@ import Home from '@/components/home/Home'
 export default function App() {
   return (
     <>
-      <div className="main-container">
+      <div className="flex flex-col main-container">
         <Home />
       </div>
       <Aside />

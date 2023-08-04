@@ -16,31 +16,29 @@ function SideBar() {
   useThemeColors()
   useThemeMode()
   return (
-    <div className=''>
-      <div className='sticky top-0 h-[100vh] w-8 sm:w-min-[70px] xl:w-full flex flex-col'>
-        <header className="flex">
-          header
-          <Tooltip text={t('back')}>
-            <div className='cursor-pointer' onClick={() => {
-              router.back()
-            }}>
-              <Icon icon='uil:arrow-left' className='text-primary' />
-            </div>
-          </Tooltip>
-        </header>
-        <div className="flex flex-col w-full">
-          {
-            NavLinks.map((nav) => {
-              return (
-                <SideBarLink {...nav} key={nav.href} />
-              )
-            })
-          }
+    <div className='sticky top-0 h-[100vh] sm:w-min-[70px] xl:w-min-[300px] flex flex-col'>
+      <header className="flex">
+        header
+        <Tooltip text={t('back')}>
+          <div className='cursor-pointer' onClick={() => {
+            router.back()
+          }}>
+            <Icon icon='uil:arrow-left' className='text-primary' />
+          </div>
+        </Tooltip>
+      </header>
+      <div className="flex flex-col w-full">
+        {
+          NavLinks.map((nav) => {
+            return (
+              <SideBarLink {...nav} key={nav.href} />
+            )
+          })
+        }
 
-        </div>
-        <div className="flex-1"></div>
-        <SideBarFooter />
       </div>
+      <div className="flex-1"></div>
+      <SideBarFooter />
     </div>
 
   )

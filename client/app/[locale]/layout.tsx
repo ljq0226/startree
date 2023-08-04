@@ -36,20 +36,20 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className='dark'>
       <body>
-      <AuthProvider>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <div
-            className="flex justify-center w-screen h-screen gap-0 overflow-x-hidden overflow-y-auto bg-base text-bs xl:gap-3"
-            style={{
-              fontSize: 'var(--font-size)',
-            }}
-          >
-            <Sidebar />
-            <div className="xl:min-w-[900px] flex ">
-              {children}
+        <AuthProvider>
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <div
+              className="flex justify-center w-screen h-screen overflow-x-hidden overflow-y-auto xl:gap-4 bg-base text-bs "
+              style={{
+                fontSize: 'var(--font-size)',
+              }}
+            >
+              <Sidebar />
+              <div className="xl:min-w-[900px] flex">
+                {children}
+              </div>
             </div>
-          </div>
-        </NextIntlClientProvider>
+          </NextIntlClientProvider>
         </AuthProvider>
       </body>
     </html>
