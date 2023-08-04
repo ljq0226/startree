@@ -31,7 +31,7 @@ export default function SideBarFooter() {
         ? <>
           <footer className='relative flex py-6 cursor-pointer'>
             {isShow && <LogOutModal user={user} />}
-            <Avatar src='/avatar/user.png' height={15} />
+            <Avatar src={user.image} height={15} />
             <div className="flex flex-col justify-center flex-1 px-2 rounded-xl hover-animation" >
               <p className="text-primary">
                 {user.name}
