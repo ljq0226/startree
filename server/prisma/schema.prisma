@@ -11,29 +11,81 @@ datasource db {
 }
 
 model User {
-  name      String   @id @unique
-  email     String   @unique
+  name     String  @id @unique
+  email    String  @unique
   //avatar
-  image     String   @unique
+  image    String  @unique
+  nickName String
   //1-n
-  posts     Post[]
+  posts    Post[]
+  replys   Reply[]
+
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Follow {
+  id           Int      @id
+  name         String
+  followedName String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now()) @updatedAt
+}
+
+model Like {
+  id        Int      @id
+  userName  String   @unique
+  postId    Int?
+  replyId   Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Forward {
+  id        Int      @id
+  userName  String   @unique
+  postId    Int?
+  replyId   Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Star {
+  id        Int      @id
+  userName  String   @unique
+  postId    Int?
+  replyId   Int?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model Post {
-  id      Int @id @default(autoincrement())
-  content String @db.LongText
+  id        Int      @id @default(autoincrement())
+  content   String   @db.LongText
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
+  replys    Reply[]
+  tags      Tag[]
+  linkUsers String
   User      User?    @relation(fields: [userName], references: [name])
   userName  String?
 }
 
 model Reply {
-  id Int @id @default(autoincrement())
-  username String
-  parentId Int
+  id        Int      @id @default(autoincrement())
+  userName  String
+  parentId  Int
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now()) @updatedAt
+  Post      Post?    @relation(fields: [postId], references: [id])
+  postId    Int?
+  User      User?    @relation(fields: [userName], references: [name])
+}
+
+model Tag {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  posts     Post[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
