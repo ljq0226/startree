@@ -17,6 +17,7 @@ function Icon({ icon, height = 24, color, className }: IconProps) {
         height={height}
         color={color}
         className={className}
+        aria-label={icon}
       />
     </>
   )
