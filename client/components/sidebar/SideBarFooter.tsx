@@ -1,37 +1,28 @@
 'use client'
-import { signIn, useSession } from 'next-auth/react'
-import { useEffect } from 'react'
+import { signIn } from 'next-auth/react'
 import { redirect } from 'next/navigation'
 import Avatar from '../ui/Avatar'
 import LogOutModal from '../modal/LogOutModal'
-import type { UserAuth } from '@/types/user'
 import UserStore from '@/store/user'
 import Icon from '@/components/ui/Icon'
 import useModal from '@/hooks/useModal'
+import useLogin from '@/hooks/useLogin'
 
 export default function SideBarFooter() {
-  const { data: session, status } = useSession()
   const { isShow, setIsShow } = useModal()
-  const setUser = UserStore(s => s.setUser)
   const user = UserStore(s => s.user)
+  const { session } = useLogin()
   const handleSignIn = () => {
     signIn()
     redirect('/expore')
   }
-
-  useEffect(() => {
-    if (session) {
-      const userInfo = session.user as UserAuth
-      setUser(userInfo)
-    }
-  }, [session])
   return (
     <>
       {session
         ? <>
           <footer className='relative flex py-6 cursor-pointer'>
             {isShow && <LogOutModal user={user} />}
-            <Avatar src={user.image} height={15} />
+            <Avatar src={user.image || '/avatar/user.png'} height={15} />
             <div className="flex flex-col justify-center flex-1 px-2 rounded-xl hover-animation" >
               <p className="text-primary">
                 {user.name}

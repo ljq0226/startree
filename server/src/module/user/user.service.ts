@@ -6,8 +6,16 @@ import { PrismaService } from 'nestjs-prisma';
 @Injectable()
 export class UserService {
   constructor(private prisma:PrismaService){}
-  create(createUserInput: CreateUserInput) {
-    return 'This action adds a new user';
+
+  async create({name,email,image}: CreateUserInput) {
+    return await this.prisma.user.create({
+      data:{
+        name,
+        email,
+        image,
+        nickName:name
+      },
+    });
   }
 
   async findAll() {
@@ -18,8 +26,8 @@ export class UserService {
     })
   }
 
-  findOne(name: string) {
-   const user = this.prisma.user.findUnique({
+  async findOne(name: string) {
+   const user =await this.prisma.user.findUnique({
       where:{
         name:name
       }
