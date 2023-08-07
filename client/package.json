@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.17",
     "@iconify/react": "^4.1.1",
     "@types/node": "20.4.5",
     "@types/react": "18.2.17",
@@ -17,6 +18,8 @@
     "clsx": "^2.0.0",
     "eslint": "8.45.0",
     "framer-motion": "^10.13.1",
+    "graphql": "^16.7.1",
+    "graphql-tag": "^2.12.6",
     "next": "13.4.12",
     "next-auth": "^4.22.3",
     "next-intl": "^2.19.0",

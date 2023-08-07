@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import type { ReactNode } from 'react'
 import Sidebar from '@/components/sidebar/SideBar'
 import AuthProvider from '@/context/AuthProvider'
+import ApolloProvider from '@/context/ApolloProvider'
 
 export function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'zh' }]
@@ -38,17 +39,19 @@ export default async function LocaleLayout({
       <body>
         <AuthProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
-            <div
-              className="flex justify-center w-screen h-screen overflow-x-hidden overflow-y-auto xl:gap-4 bg-base text-bs "
-              style={{
-                fontSize: 'var(--font-size)',
-              }}
-            >
-              <Sidebar />
-              <div className="xl:min-w-[900px] flex">
-                {children}
+            <ApolloProvider >
+              <div
+                className="flex justify-center w-screen h-screen overflow-x-hidden overflow-y-auto xl:gap-4 bg-base text-bs "
+                style={{
+                  fontSize: 'var(--font-size)',
+                }}
+              >
+                <Sidebar />
+                <div className="xl:min-w-[900px] flex">
+                  {children}
+                </div>
               </div>
-            </div>
+            </ApolloProvider>
           </NextIntlClientProvider>
         </AuthProvider>
       </body>
