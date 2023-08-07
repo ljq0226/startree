@@ -1,0 +1,76 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreatePostInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Mutation {
+  createPost(createPostInput: CreatePostInput!): Post!
+  createUser(createUserInput: CreateUserInput!): User!
+  removePost(id: Int!): Post!
+  removeUser(id: Int!): User!
+  updatePost(updatePostInput: UpdatePostInput!): Post!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+}
+
+type Post {
+  User: User
+  content: String!
+  createdAt: DateTime!
+  id: Int!
+  linkUsers: String!
+  updatedAt: DateTime!
+  userName: String
+}
+
+type Query {
+  findAllUser: [User!]!
+  findOne(name: String!): User!
+  post(id: Int!): Post!
+}
+
+input UpdatePostInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input UpdateUserInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+type User {
+  """createdTime"""
+  createdAt: DateTime!
+
+  """user email"""
+  email: String!
+
+  """user image"""
+  image: String!
+
+  """user name"""
+  name: String!
+
+  """user nickname"""
+  nickName: String!
+  posts: [Post!]!
+
+  """updatedTime"""
+  updatedAt: DateTime!
+}
