@@ -20,9 +20,7 @@ function useLogin() {
           const { data } = await createUser({
             variables: {
               createUserInput: {
-                name: session.user?.name,
-                email: session.user?.email,
-                image: session.user?.image,
+                ...session?.user,
               },
             },
           })

@@ -8,7 +8,7 @@ export class UserResolver {
   constructor(private readonly userService: UserService) {}
 
   @Mutation(() => User)
-  createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
+  createUser(@Args('createUserInput') createUserInput: CreateUserInput){
     return this.userService.create(createUserInput);
   }
 
@@ -18,7 +18,7 @@ export class UserResolver {
   }
 
   @Query(() => User, { name: 'findOne' })
-  findOne(@Args('name', { type: () => String }) name:string):any {
+  findOne(@Args('name', { type: () => String }) name:string){
     return this.userService.findOne(name);
   }
 

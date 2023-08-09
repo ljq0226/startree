@@ -8,8 +8,9 @@ input CreatePostInput {
 }
 
 input CreateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  email: String!
+  image: String!
+  name: String!
 }
 
 """
@@ -49,9 +50,10 @@ input UpdatePostInput {
 }
 
 input UpdateUserInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  email: String
   id: Int!
+  image: String
+  name: String
 }
 
 type User {
