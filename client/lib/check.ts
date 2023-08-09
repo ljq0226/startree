@@ -13,3 +13,10 @@ export function isActiveNav(level: number, navName: string, pathName: string) {
     return arr[level + 1] === navName
   return arr[level] === navName
 }
+
+export function hasTextContent(htmlString: string) {
+  const parser = new DOMParser()
+  const doc = parser.parseFromString(htmlString, 'text/html')
+  const rootElement = doc.documentElement
+  return rootElement.textContent ? rootElement.textContent.trim().length > 0 : false
+}
