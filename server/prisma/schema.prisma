@@ -66,9 +66,8 @@ model Post {
   updatedAt DateTime @default(now()) @updatedAt
   replys    Reply[]
   tags      Tag[]
-  linkUsers String
   User      User?    @relation(fields: [userName], references: [name])
-  userName  String?
+  userName  String
 }
 
 model Reply {

@@ -3,8 +3,8 @@
 # ------------------------------------------------------
 
 input CreatePostInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  content: String!
+  userName: String!
 }
 
 input CreateUserInput {
@@ -45,9 +45,9 @@ type Query {
 }
 
 input UpdatePostInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  content: String
   id: Int!
+  userName: String
 }
 
 input UpdateUserInput {
