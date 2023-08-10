@@ -102,4 +102,22 @@
   .at-button {
     @apply outline-none rounded-xl my-1 py-2 border border-blue-500 bg-transparent h-7 leading-7 text-blue-500 cursor-pointer
   }
+  .alert{
+    @apply p-4 rounded-2xl shadow-xl 
+  }
+  .alertDiv{
+    @apply flex space-x-2
+  }
+  .alert-success{
+    @apply bg-success
+  }
+  .alert-error{
+    @apply bg-error
+  }
+  .alert-info{
+    @apply bg-info
+  }
+  .alert-warning{
+    @apply bg-warning
+  }
 }

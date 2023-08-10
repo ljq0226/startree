@@ -40,9 +40,10 @@
   --c-text-btn-disabled-deeper: #a1a1a1;
   --c-text-btn: #232323;
 
-  --c-success: #67C23A;
-  --c-warning: #E6A23C;
-  --c-error: #F56C6C;
+  --c-success: #69cf9d;
+  --c-warning: #f2c141;
+  --c-error: #e97d75;
+  --c-info: #61bcf4
 }
 
 .dark{

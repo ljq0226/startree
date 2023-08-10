@@ -12,6 +12,7 @@ module.exports = {
         'success': 'var(--c-success)',
         'warning': 'var(--c-warning)',
         'error': 'var(--c-error)',
+        'info': 'var(--c-info)',
         'primary': 'var(--c-primary)',
         'primary-active': 'var(--c-primary-active)',
         'primary-light': 'var(--c-primary-light)',
