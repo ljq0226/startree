@@ -96,4 +96,10 @@
   .post-icon{
     @apply flex w-8 h-8 rounded-full flex-center
   }
+  .editor{
+    @apply mx-auto w-[600px] h-[150px] bg-base border border-base rounded-xl text-left p-3 overflow-auto focus:outline-none focus:border-primary
+  }
+  .at-button {
+    @apply outline-none rounded-xl my-1 py-2 border border-blue-500 bg-transparent h-7 leading-7 text-blue-500 cursor-pointer
+  }
 }

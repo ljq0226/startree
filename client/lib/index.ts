@@ -1,8 +1,7 @@
 import { DEFAULT_FONT_SIZE } from '@/constants'
 
-export * from './prosemirror'
-export * from './schema'
 export * from './check'
+export * from './editor'
 export function createFontArr(range = 5) {
   const fontSizeArr = []
   fontSizeArr.push(DEFAULT_FONT_SIZE)

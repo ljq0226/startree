@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import cn from 'clsx'
 import Avatar from '../ui/Avatar'
 import Icon from '../ui/Icon'
@@ -11,29 +11,25 @@ import UserStore from '@/store/user'
 
 function EditPost() {
   const [active, setActive] = useState(false)
-  const [html, setHtml] = useState('')
+  const divRef = useRef<HTMLDivElement>(null)
   const [showEmoji, setShowEmoji] = useState(false)
   const t = useI18n('tooltip')
   const user = UserStore(s => s.user)
 
-  const updateHtml = (v: string) => {
-    setHtml(s => s + v)
-  }
-
   const handlePublish = () => {
+    const target = divRef.current
   }
   return (
     <div className="flex w-full p-2">
       <Avatar className='mx-4 max-h-12' src={user.image || '/avatar/user.png'} />
       <div className="flex flex-col flex-1 ">
-        <Editor html={html} setHtml={setHtml} setActive={setActive} />
+        <Editor divRef={divRef} setActive={setActive} />
         <div className={cn('flex mt-4')}>
           <div className="flex space-x-2">
-
             <Tooltip className='relative' text={t('add_emojis')} position='top'>
               {
                 showEmoji
-                && <EmojiPanel setShowEmoji={setShowEmoji} updateHtml={updateHtml} />
+                && <EmojiPanel setShowEmoji={setShowEmoji} />
               }
               <button
                 className='editPost-icon'
@@ -59,7 +55,7 @@ function EditPost() {
           </div>
           <div className="flex-1"></div>
           <button
-            className={cn('editPost-button', html ? 'bg-primary text-bs' : 'bg-btn-disabled text-btn-disabled ')}
+            className={cn('editPost-button', true ? 'bg-primary text-bs' : 'bg-btn-disabled text-btn-disabled ')}
             onClick={() => handlePublish()}
           >
             Publish

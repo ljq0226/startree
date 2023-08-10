@@ -1,41 +1,59 @@
-import './Editor.css'
-import React, { useEffect, useReducer, useRef } from 'react'
-import { EditorView } from 'prosemirror-view'
-import { createDoc, createPmState, schema } from '@/lib'
+'use client'
+import React, { useState } from 'react'
+import AtDialog from '../modal/AtDialog'
+import { getAtUser, getRangeRect, replaceAtUser, showAt } from '@/lib'
 
 interface Props {
-  html: string
-  setHtml: React.Dispatch<React.SetStateAction<string>>
+  divRef: React.LegacyRef<HTMLDivElement> | undefined
   setActive: (v: boolean) => void
 }
 
-function Editor({ setActive, html, setHtml }: Props) {
-  const [_, forceUpdate] = useReducer(x => x + 1, 0)
-  const elContentRef = useRef<HTMLDivElement | null>(null)
-  const editorViewRef = useRef<EditorView>()
+interface User { name: string; id: string }
 
-  useEffect(() => {
-    const doc = createDoc(html, schema)
-    // 2.创建 prosemirror state
-    const state = createPmState(schema, { doc })
-    // 3.创建 EditorView 视图实例
-    const editorView = new EditorView(elContentRef.current, {
-      state,
-      // 处理编辑器中的事务（transaction），并在每次事务应用后更新编辑器的状态，并调用 onChangeHtml 回调函数通知外部编辑器内容的变化。
-      dispatchTransaction(transaction) {
-        const newState = editorView.state.apply(transaction)
-        editorView.updateState(newState)
-        setHtml(editorView.dom.innerHTML)
-        forceUpdate()
-      },
-    })
-    editorViewRef.current = editorView
-    forceUpdate()
+function Editor({ setActive, divRef }: Props) {
+  const [queryString, setQueryString] = useState('')
+  const [showDialog, setShowDialog] = useState(false)
+  const [position, setPosition] = useState<{ x: number; y: number }>({
+    x: 0,
+    y: 0,
+  })
 
-    return () => {
-      editorView.destroy()
+  const handkeKeyUp = (e: any) => {
+    if (showAt()) {
+      const position = getRangeRect()
+      setPosition(position)
+      const user = getAtUser()
+      setQueryString(user || '')
+      setShowDialog(true)
     }
-  }, [])
+    else {
+      setShowDialog(false)
+    }
+  }
+
+  const handleKeyDown = (e: any) => {
+    if (showDialog) {
+      if (
+        e.code === 'ArrowUp'
+        || e.code === 'ArrowDown'
+        || e.code === 'Enter'
+      )
+        e.preventDefault()
+    }
+  }
+
+  const handlePickUser = (user: User) => {
+    replaceAtUser(user)
+    setShowDialog(false)
+  }
+
+  const handleHide = () => {
+    setShowDialog(false)
+  }
+
+  const handleShow = () => {
+    setShowDialog(true)
+  }
   return (
     <div className="relative min-h-[120px] max-h-[400px] "
       onFocus={() => {
@@ -43,11 +61,21 @@ function Editor({ setActive, html, setHtml }: Props) {
       }}
       onBlur={() => setActive(false)}
     >
-      {/* {editorViewRef.current && (
-        // <EditorMenu editorView={editorViewRef.current} />
-      )} */}
-      {html && <p placeholder='What'></p>}
-      <div ref={elContentRef} />
+      <div
+        ref={divRef}
+        className="editor"
+        contentEditable
+        onKeyUp={handkeKeyUp}
+        onKeyDown={handleKeyDown}
+      />
+      <AtDialog
+        visible={showDialog}
+        position={position}
+        queryString={queryString}
+        onPickUser={handlePickUser}
+        onHide={handleHide}
+        onShow={handleShow}
+      />
     </div>
   )
 }
