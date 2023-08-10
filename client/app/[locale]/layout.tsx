@@ -6,6 +6,7 @@ import type { ReactNode } from 'react'
 import Sidebar from '@/components/sidebar/SideBar'
 import AuthProvider from '@/context/AuthProvider'
 import ApolloProvider from '@/context/ApolloProvider'
+import Alert from '@/components/ui/Alert'
 
 export function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'zh' }]
@@ -51,6 +52,7 @@ export default async function LocaleLayout({
                   {children}
                 </div>
               </div>
+              <Alert />
             </ApolloProvider>
           </NextIntlClientProvider>
         </AuthProvider>
