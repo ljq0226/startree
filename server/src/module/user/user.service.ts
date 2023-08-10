@@ -17,7 +17,27 @@ export class UserService {
       },
     });
   }
-
+  async findByAt(query:string) {
+    return await this.prisma.user.findMany({
+      where:{
+       OR:[
+        {
+          name:{
+            startsWith:query
+          }
+        },
+        {
+          nickName:{
+            startsWith:query
+          }
+        },
+       ]
+      },
+      include:{
+        posts:true
+      }
+    })
+  }
   async findAll() {
     return await this.prisma.user.findMany({
       include:{

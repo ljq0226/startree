@@ -11,29 +11,31 @@ import UserStore from '@/store/user'
 
 function EditPost() {
   const [active, setActive] = useState(false)
-  const divRef = useRef<HTMLDivElement>(null)
+  const editorRef = useRef<HTMLDivElement>(null)
   const [showEmoji, setShowEmoji] = useState(false)
   const t = useI18n('tooltip')
   const user = UserStore(s => s.user)
 
   const handlePublish = () => {
-    const target = divRef.current
+    const target = editorRef.current
   }
   return (
     <div className="flex w-full p-2">
       <Avatar className='mx-4 max-h-12' src={user.image || '/avatar/user.png'} />
       <div className="flex flex-col flex-1 ">
-        <Editor divRef={divRef} setActive={setActive} />
+        <Editor  editorRef={editorRef} setActive={setActive} />
         <div className={cn('flex mt-4')}>
           <div className="flex space-x-2">
             <Tooltip className='relative' text={t('add_emojis')} position='top'>
               {
                 showEmoji
-                && <EmojiPanel setShowEmoji={setShowEmoji} />
+                && <EmojiPanel editorTarget={editorRef.current} setShowEmoji={setShowEmoji} />
               }
               <button
                 className='editPost-icon'
-                onClick={() => { setShowEmoji(true) }}>
+                onClick={() => {
+                  setShowEmoji(true)
+                }}>
                 <Icon icon='mingcute:emoji-line' />
               </button>
             </Tooltip>

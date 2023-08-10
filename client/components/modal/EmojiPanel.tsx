@@ -3,15 +3,18 @@ import Picker from '@emoji-mart/react'
 
 interface Props {
   setShowEmoji: (v: boolean) => void
+  editorTarget: HTMLDivElement | null
   className?: string
 }
 
-function EmojiPanel({ className, setShowEmoji }: Props) {
+function EmojiPanel({ className, editorTarget, setShowEmoji }: Props) {
   return (
     <div className={`absolute z-10 -left-[150px] top-[38px] ${className}`}>
       <Picker data={data}
         onEmojiSelect={(emoji: any) => {
           const spanNode = `<span>${emoji.native}</span>`
+          if (editorTarget)
+            editorTarget.innerHTML += spanNode
         }}
         onClickOutside={() => {
           setShowEmoji(false)

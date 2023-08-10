@@ -12,9 +12,14 @@ export class UserResolver {
     return this.userService.create(createUserInput);
   }
 
-  @Query(() => [User], { name: 'findAllUser' })
+  @Query(() => [User], { name: 'findAll' })
   findAll(){
     return this.userService.findAll();
+  }
+
+  @Query(() => [User])
+  findByAt(@Args('query') query:string){
+    return this.userService.findByAt(query);
   }
 
   @Query(() => User, { name: 'findOne' })

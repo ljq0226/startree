@@ -1,17 +1,35 @@
 'use client'
-import React, { useState } from 'react'
-import AtDialog from '../modal/AtDialog'
+import React, { useEffect, useState } from 'react'
+import { useQuery } from '@apollo/client'
+import FindByAt from '@api/user/FindByAt.gql'
+import AtDialog from './AtDialog'
+import type { AtUser } from '@/types'
 import { getAtUser, getRangeRect, replaceAtUser, showAt } from '@/lib'
 
 interface Props {
-  divRef: React.LegacyRef<HTMLDivElement> | undefined
+  editorRef: React.LegacyRef<HTMLDivElement> | undefined
   setActive: (v: boolean) => void
 }
 
-interface User { name: string; id: string }
+function Editor({ setActive, editorRef }: Props) {
+  const [atUsers, setAtUsers] = useState<AtUser[]>([])
+  const [queryString, setQueryString] = useState('@')
+  const [tags, setTags] = useState<string[]>([])
+  const { loading, data } = useQuery(FindByAt, {
+    variables: {
+      query: queryString,
+    },
+  })
+  useEffect(() => {
+    const getData = async () => {
+      setAtUsers(data.findByAt)
+    }
+    !loading && getData()
+  }, [queryString])
 
-function Editor({ setActive, divRef }: Props) {
-  const [queryString, setQueryString] = useState('')
+  useEffect(() => {
+  }, [tags])
+
   const [showDialog, setShowDialog] = useState(false)
   const [position, setPosition] = useState<{ x: number; y: number }>({
     x: 0,
@@ -22,12 +40,9 @@ function Editor({ setActive, divRef }: Props) {
     if (showAt()) {
       const position = getRangeRect()
       setPosition(position)
-      const user = getAtUser()
-      setQueryString(user || '')
+      const query = getAtUser()
+      setQueryString(query || '')
       setShowDialog(true)
-    }
-    else {
-      setShowDialog(false)
     }
   }
 
@@ -41,12 +56,10 @@ function Editor({ setActive, divRef }: Props) {
         e.preventDefault()
     }
   }
-
-  const handlePickUser = (user: User) => {
+  const handlePickUser = (user: AtUser) => {
     replaceAtUser(user)
     setShowDialog(false)
   }
-
   const handleHide = () => {
     setShowDialog(false)
   }
@@ -62,17 +75,19 @@ function Editor({ setActive, divRef }: Props) {
       onBlur={() => setActive(false)}
     >
       <div
-        ref={divRef}
+        ref={editorRef}
         className="editor"
         contentEditable
         onKeyUp={handkeKeyUp}
         onKeyDown={handleKeyDown}
       />
       <AtDialog
+        onPickUser={handlePickUser}
+        users={atUsers}
         visible={showDialog}
         position={position}
         queryString={queryString}
-        onPickUser={handlePickUser}
+        setQueryString={setQueryString}
         onHide={handleHide}
         onShow={handleShow}
       />

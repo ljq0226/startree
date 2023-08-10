@@ -38,7 +38,8 @@ type Post {
 }
 
 type Query {
-  findAllUser: [User!]!
+  findAll: [User!]!
+  findByAt(query: String!): [User!]!
   findOne(name: String!): User!
   post(id: Int!): Post!
 }
