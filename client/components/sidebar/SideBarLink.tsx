@@ -8,7 +8,7 @@ import type { NavLink } from './data'
 import Icon from '@/components/ui/Icon'
 import useI18n from '@/hooks/theme/useI18n'
 import { isActiveNav } from '@/lib/check'
-import UserStore from '@/store/user'
+import { UserStore } from '@/store'
 
 type SidebarLinkProps = NavLink & {
   username?: string

@@ -1,6 +1,6 @@
 import { shallow } from 'zustand/shallow'
 import { useEffect } from 'react'
-import SettingsStore from '@/store/settings'
+import { SettingsStore } from '@/store'
 import { THEME_MODE } from '@/constants'
 import type { ThemeMode } from '@/types/theme'
 

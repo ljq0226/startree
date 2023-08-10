@@ -1,6 +1,6 @@
 'use client'
 import { signIn, signOut, useSession } from 'next-auth/react'
-import UserStore from '@/store/user'
+import { UserStore } from '@/store'
 
 // import Aside from '@/components/aside/Aside'
 

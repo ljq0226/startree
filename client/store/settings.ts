@@ -17,4 +17,4 @@ const SettingsStore = create<StoreState>(set => ({
   })),
 }))
 
-export default SettingsStore
+export { SettingsStore }

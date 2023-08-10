@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client'
 import { CreateUser } from '@api/user/CreateUser.gql'
 import type { UserAuth } from '@/types/user'
 import { USERINFO } from '@/constants'
-import UserStore from '@/store/user'
+import {UserStore} from '@/store'
 
 function useLogin() {
   const { data: session } = useSession()
