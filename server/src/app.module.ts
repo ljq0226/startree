@@ -9,6 +9,12 @@ import { AppService } from './app.service'
 import { AppController } from './app.controller'
 import { UserModule } from './module/user/user.module';
 import { PostModule } from './module/post/post.module';
+import { FollowModule } from './module/follow/follow.module';
+import { LikeModule } from './module/like/like.module';
+import { ForwardModule } from './module/forward/forward.module';
+import { StarModule } from './module/star/star.module';
+import { ReplyModule } from './module/reply/reply.module';
+import { TagModule } from './module/tag/tag.module';
 
 @Module({
   imports: [
@@ -25,6 +31,12 @@ import { PostModule } from './module/post/post.module';
     }),
     UserModule,
     PostModule,
+    FollowModule,
+    LikeModule,
+    ForwardModule,
+    StarModule,
+    ReplyModule,
+    TagModule,
   ],
   controllers: [AppController],
   providers: [AppService],

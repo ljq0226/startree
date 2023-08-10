@@ -2,9 +2,39 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreateFollowInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateForwardInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateLikeInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 input CreatePostInput {
   content: String!
   userName: String!
+}
+
+input CreateReplyInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateStarInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input CreateTagInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
 }
 
 input CreateUserInput {
@@ -18,12 +48,45 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Follow {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Forward {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Like {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Mutation {
+  createFollow(createFollowInput: CreateFollowInput!): Follow!
+  createForward(createForwardInput: CreateForwardInput!): Forward!
+  createLike(createLikeInput: CreateLikeInput!): Like!
   createPost(createPostInput: CreatePostInput!): Post!
+  createReply(createReplyInput: CreateReplyInput!): Reply!
+  createStar(createStarInput: CreateStarInput!): Star!
+  createTag(createTagInput: CreateTagInput!): Tag!
   createUser(createUserInput: CreateUserInput!): User!
+  removeFollow(id: Int!): Follow!
+  removeForward(id: Int!): Forward!
+  removeLike(id: Int!): Like!
   removePost(id: Int!): Post!
+  removeReply(id: Int!): Reply!
+  removeStar(id: Int!): Star!
+  removeTag(id: Int!): Tag!
   removeUser(id: Int!): User!
+  updateFollow(updateFollowInput: UpdateFollowInput!): Follow!
+  updateForward(updateForwardInput: UpdateForwardInput!): Forward!
+  updateLike(updateLikeInput: UpdateLikeInput!): Like!
   updatePost(updatePostInput: UpdatePostInput!): Post!
+  updateReply(updateReplyInput: UpdateReplyInput!): Reply!
+  updateStar(updateStarInput: UpdateStarInput!): Star!
+  updateTag(updateTagInput: UpdateTagInput!): Tag!
   updateUser(updateUserInput: UpdateUserInput!): User!
 }
 
@@ -38,18 +101,69 @@ type Post {
 }
 
 type Query {
-  findAll: [User!]!
+  findAll: [Tag!]!
   findAllPost: [Post!]!
   findByAt(query: String!): [User!]!
-  findOne(name: String!): User!
+  findOne(id: Int!): Tag!
   findPostByTag(id: Int!): Post!
   findPostByUser(name: String!): [Post!]!
+}
+
+type Reply {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Star {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+type Tag {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateFollowInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input UpdateForwardInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input UpdateLikeInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
 
 input UpdatePostInput {
   content: String
   id: Int!
   userName: String
+}
+
+input UpdateReplyInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input UpdateStarInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input UpdateTagInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
 
 input UpdateUserInput {
