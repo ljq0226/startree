@@ -16,12 +16,25 @@ export class PostService {
     return newPost
   }
 
-  findAll() {
-    return `This action returns all post`;
+  async findAllPost() {
+    return await this.prisma.post.findMany({
+      orderBy:{
+        createdAt:'desc'
+      }
+    })
   }
 
-  findOne(id: number) {
+  findPostByTag(id: number) {
     return `This action returns a #${id} post`;
+  }
+  async findPostByUser(name: string) {
+   const posts = await this.prisma.post.findMany({
+      where:{
+        userName:name
+      },
+    })
+    console.log('posts',posts)
+return posts
   }
 
   update(id: number, updatePostInput: UpdatePostInput) {

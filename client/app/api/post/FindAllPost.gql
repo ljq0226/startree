@@ -1,0 +1,8 @@
+query findAllPost {
+  findAllPost {
+    userName
+    id
+    createdAt
+    content
+  }
+}

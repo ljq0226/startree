@@ -13,14 +13,19 @@ export class PostResolver {
     return this.postService.create(createPostInput);
   }
 
-  @Query(() => [Post], { name: 'post' })
-  findAll() {
-    return this.postService.findAll();
+  @Query(() => [Post] )
+  findAllPost() {
+    return this.postService.findAllPost();
   }
 
-  @Query(() => Post, { name: 'post' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.postService.findOne(id);
+  @Query(() => Post)
+  findPostByTag(@Args('id', { type: () => Int }) id: number) {
+    return this.postService.findPostByTag(id);
+  }
+
+  @Query(() => [Post])
+  findPostByUser(@Args('name') name: string) {
+    return this.postService.findPostByUser(name);
   }
 
   @Mutation(() => Post)

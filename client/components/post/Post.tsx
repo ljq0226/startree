@@ -2,6 +2,7 @@
 import Avatar from '../ui/Avatar'
 import type { PostIconProps } from './PostIcon'
 import PostIcon from './PostIcon'
+import type { PostType } from '@/types'
 
 const PostIcons: PostIconProps[] = [
   {
@@ -26,19 +27,19 @@ const PostIcons: PostIconProps[] = [
   },
 ]
 
-function Post() {
+function Post({ userName, content, createdAt }: PostType) {
   return (
     <div className="flex py-2 border-t border-base ">
       <Avatar className="" round src="/avatar/user.png" />
       <div className="flex flex-col flex-1 px-4">
         <div className='flex items-center text-secondary'>
-          <span className='font-bold text-bs'>ljq0226</span>
-          <span className=''>@ljq0226asd</span>
+          <span className='font-bold text-bs'>{userName}</span>
+          <span className=''>{`@${userName}`}</span>
           <span className='flex-1'></span>
-          <span>20h</span>
+          <span>10h</span>
         </div>
         <div className='flex-1'>
-          as 测试内容
+          {content}
         </div>
         <div className="flex justify-between py-2">
           {

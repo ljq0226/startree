@@ -1,32 +1,36 @@
 'use client'
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { useQuery } from '@apollo/client'
+import FindAllPost from '@api/post/FindAllPost.gql'
+import { useEffect, useState } from 'react'
 import { UserStore } from '@/store'
 
-// import Aside from '@/components/aside/Aside'
+import Aside from '@/components/aside/Aside'
+import PostItem from '@/components/post/Post'
+import type { PostType } from '@/types'
 
 export default function App() {
-  const { data: session, status } = useSession()
+  const { data, loading } = useQuery(FindAllPost)
+
+  const [posts, setPosts] = useState<PostType[]>([])
   const user = UserStore(s => s.user)
-  if (session) {
-    return (
-      <>
-        Signed in as {session.user?.email} <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
-    )
-  }
+
+  useEffect(() => {
+    if (data)
+      setPosts(data.findAllPost)
+  }, [data])
   return (
     <>
-      Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
+      <div className="main-container">
+        {
+          posts.map((post) => {
+            return (
+              <PostItem key={post.id} {...post} />
+            )
+          })
+        }
+      </div>
+      <Aside />
     </>
+
   )
-
-  // return (
-  //   <>
-  //     <div className="main-container">compose</div>
-  //     <Aside />
-  //   </>
-
-  // )
 }
