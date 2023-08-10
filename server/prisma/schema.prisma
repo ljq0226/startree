@@ -25,7 +25,7 @@ model User {
 }
 
 model Follow {
-  id           Int      @id
+  id           Int      @id @default(autoincrement())
   name         String
   followedName String
   createdAt    DateTime @default(now())
@@ -33,7 +33,7 @@ model Follow {
 }
 
 model Like {
-  id        Int      @id
+  id        Int      @id @default(autoincrement())
   userName  String   @unique
   postId    Int?
   replyId   Int?
@@ -42,7 +42,7 @@ model Like {
 }
 
 model Forward {
-  id        Int      @id
+  id        Int      @id @default(autoincrement())
   userName  String   @unique
   postId    Int?
   replyId   Int?
@@ -51,7 +51,7 @@ model Forward {
 }
 
 model Star {
-  id        Int      @id
+  id        Int      @id @default(autoincrement())
   userName  String   @unique
   postId    Int?
   replyId   Int?

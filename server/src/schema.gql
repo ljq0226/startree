@@ -39,9 +39,11 @@ type Post {
 
 type Query {
   findAll: [User!]!
+  findAllPost: [Post!]!
   findByAt(query: String!): [User!]!
   findOne(name: String!): User!
-  post(id: Int!): Post!
+  findPostByTag(id: Int!): Post!
+  findPostByUser(name: String!): [Post!]!
 }
 
 input UpdatePostInput {
