@@ -18,6 +18,9 @@ export class PostService {
 
   async findAllPost() {
     return await this.prisma.post.findMany({
+      include: {
+        User: true,
+      },
       orderBy: {
         createdAt: 'desc',
       },
@@ -34,7 +37,6 @@ export class PostService {
         userName: name,
       },
     })
-    console.log('posts', posts)
     return posts
   }
 
