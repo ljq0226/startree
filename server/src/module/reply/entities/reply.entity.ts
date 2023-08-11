@@ -14,7 +14,7 @@ export class Reply {
   user: User
 
   @Field(() => [Post])
-  tags: Post[]
+  posts: Post[]
 
   @Field()
   postId: number

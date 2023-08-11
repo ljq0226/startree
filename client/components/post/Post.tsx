@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import Avatar from '../ui/Avatar'
 import type { PostIconProps } from './PostIcon'
 import PostIcon from './PostIcon'
@@ -27,14 +28,14 @@ const PostIcons: PostIconProps[] = [
   },
 ]
 
-function Post({ content, createdAt, User }: PostType) {
+function Post({ content, id, createdAt, user }: PostType) {
   return (
-    <div className="flex py-2 border-t border-base ">
-      <Avatar round src={User?.image || '/avatar/user.png'} />
+    <Link href={`/post/${id}`} className="flex py-2 border-t cursor-pointer border-base ">
+      <Avatar round src={user?.image || '/avatar/user.png'} />
       <div className="flex flex-col flex-1 px-4">
         <div className='flex items-center text-secondary'>
-          <span className='font-bold text-bs'>{User?.name}</span>
-          <span className=''>{`@${User?.name}`}</span>
+          <span className='font-bold text-bs'>{user?.name}</span>
+          <span className=''>{`@${user?.name}`}</span>
           <span className='flex-1'></span>
           <span>10h</span>
         </div>
@@ -50,7 +51,7 @@ function Post({ content, createdAt, User }: PostType) {
         </div>
 
       </div>
-    </div>
+    </Link>
   )
 }
 
