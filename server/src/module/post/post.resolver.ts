@@ -18,6 +18,11 @@ export class PostResolver {
     return this.postService.findAllPost()
   }
 
+  @Query(() => [Post])
+  findHomePost(@Args('name') name: string) {
+    return this.postService.findHomePost(name)
+  }
+
   @Query(() => Post)
   findPostByTag(@Args('id', { type: () => Int }) id: number) {
     return this.postService.findPostByTag(id)

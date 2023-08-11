@@ -1,0 +1,12 @@
+query FindHomePost($name: String!) {
+  findHomePost(name: $name) {
+    id
+    content
+    userName
+    User {
+      name
+      nickName
+      image
+    }
+  }
+}

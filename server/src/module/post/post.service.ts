@@ -1,16 +1,26 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from 'nestjs-prisma'
+import { FollowService } from '../follow/follow.service'
 import { CreatePostInput } from './dto/create-post.input'
 import { UpdatePostInput } from './dto/update-post.input'
+import { Post } from './entities/post.entity'
 
 @Injectable()
 export class PostService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private readonly followService: FollowService,
+
+  ) {}
+
   async create({ content, userName }: CreatePostInput) {
     const newPost = await this.prisma.post.create({
       data: {
         content,
         userName,
+      },
+      include: {
+        User: true,
       },
     })
     return newPost
@@ -27,6 +37,16 @@ export class PostService {
     })
   }
 
+  async findHomePost(name: string) {
+    const followedPosts = (await this.followService.findFollowings(name)).map((user) => {
+      return user.posts
+    })
+    const user = await this.prisma.user.findUnique({ where: { name }, include: { posts: { include: { User: true } } } })
+    const userPost = user.posts
+    const homePosts = [...userPost, ...followedPosts.flat(1)] as Post[]
+    return homePosts.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+  }
+
   findPostByTag(id: number) {
     return `This action returns a #${id} post`
   }
@@ -35,6 +55,9 @@ export class PostService {
     const posts = await this.prisma.post.findMany({
       where: {
         userName: name,
+      },
+      include: {
+        User: true,
       },
     })
     return posts

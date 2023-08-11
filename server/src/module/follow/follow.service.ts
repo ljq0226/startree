@@ -24,7 +24,10 @@ export class FollowService {
     })
     const follingsArr = followings.map(follow => follow.followedName)
     const follingsInfoPromises = follingsArr.map(async (item) => {
-      return await this.prisma.user.findUnique({ where: { name: item } })
+      return await this.prisma.user.findUnique({
+        where: { name: item },
+        include: { posts: { include: { User: true } } },
+      })
     })
     const follingsInfo = await Promise.all(follingsInfoPromises)
     return follingsInfo
@@ -38,7 +41,10 @@ export class FollowService {
     })
     const followedArr = followed.map(follow => follow.name)
     const followedInfoPromises = followedArr.map(async (item) => {
-      return await this.prisma.user.findUnique({ where: { name: item } })
+      return await this.prisma.user.findUnique({
+        where: { name: item },
+        include: { posts: true },
+      })
     })
     const followedInfo = await Promise.all(followedInfoPromises)
     return followedInfo
