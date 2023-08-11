@@ -1,26 +1,26 @@
-import { Injectable } from '@nestjs/common';
-import { CreateStarInput } from './dto/create-star.input';
-import { UpdateStarInput } from './dto/update-star.input';
+import { Injectable } from '@nestjs/common'
+import { CreateStarInput } from './dto/create-star.input'
+import { UpdateStarInput } from './dto/update-star.input'
 
 @Injectable()
 export class StarService {
   create(createStarInput: CreateStarInput) {
-    return 'This action adds a new star';
+    return 'This action adds a new star'
   }
 
   findAll() {
-    return `This action returns all star`;
+    return 'This action returns all star'
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} star`;
+    return `This action returns a #${id} star`
   }
 
   update(id: number, updateStarInput: UpdateStarInput) {
-    return `This action updates a #${id} star`;
+    return `This action updates a #${id} star`
   }
 
   remove(id: number) {
-    return `This action removes a #${id} star`;
+    return `This action removes a #${id} star`
   }
 }

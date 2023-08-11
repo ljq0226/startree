@@ -1,8 +1,8 @@
-import { Module } from '@nestjs/common';
-import { FollowService } from './follow.service';
-import { FollowResolver } from './follow.resolver';
+import { Module } from '@nestjs/common'
+import { FollowService } from './follow.service'
+import { FollowResolver } from './follow.resolver'
 
 @Module({
-  providers: [FollowResolver, FollowService]
+  providers: [FollowResolver, FollowService],
 })
 export class FollowModule {}

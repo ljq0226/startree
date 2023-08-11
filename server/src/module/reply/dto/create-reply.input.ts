@@ -1,7 +1,7 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { Field, InputType, Int } from '@nestjs/graphql'
 
 @InputType()
 export class CreateReplyInput {
   @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+  exampleField: number
 }

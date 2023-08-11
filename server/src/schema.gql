@@ -2,15 +2,9 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Count {
-  followed: Float!
-  followings: Float!
-  posts: Float!
-}
-
 input CreateFollowInput {
-  followedName: String!
-  name: String!
+  """Example field (placeholder)"""
+  exampleField: Int!
 }
 
 input CreateForwardInput {
@@ -54,6 +48,11 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Follow {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Forward {
   """Example field (placeholder)"""
   exampleField: Int!
@@ -65,7 +64,7 @@ type Like {
 }
 
 type Mutation {
-  createFollow(createFollowInput: CreateFollowInput!): Boolean!
+  createFollow(createFollowInput: CreateFollowInput!): Follow!
   createForward(createForwardInput: CreateForwardInput!): Forward!
   createLike(createLikeInput: CreateLikeInput!): Like!
   createPost(createPostInput: CreatePostInput!): Post!
@@ -73,7 +72,7 @@ type Mutation {
   createStar(createStarInput: CreateStarInput!): Star!
   createTag(createTagInput: CreateTagInput!): Tag!
   createUser(createUserInput: CreateUserInput!): User!
-  removeFollow(removeFollowInput: CreateFollowInput!): Boolean!
+  removeFollow(id: Int!): Follow!
   removeForward(id: Int!): Forward!
   removeLike(id: Int!): Like!
   removePost(id: Int!): Post!
@@ -81,6 +80,7 @@ type Mutation {
   removeStar(id: Int!): Star!
   removeTag(id: Int!): Tag!
   removeUser(id: Int!): User!
+  updateFollow(updateFollowInput: UpdateFollowInput!): Follow!
   updateForward(updateForwardInput: UpdateForwardInput!): Forward!
   updateLike(updateLikeInput: UpdateLikeInput!): Like!
   updatePost(updatePostInput: UpdatePostInput!): Post!
@@ -104,15 +104,9 @@ type Query {
   findAll: [Tag!]!
   findAllPost: [Post!]!
   findByAt(query: String!): [User!]!
-  findFollowers(followedName: String!): [User!]!
-  findFollowings(name: String!): [User!]!
   findOne(id: Int!): Tag!
   findPostByTag(id: Int!): Post!
   findPostByUser(name: String!): [Post!]!
-  findUser(name: String!): User!
-  followedCount(name: String!): Float!
-  profileCount(name: String!): Count!
-  profileData(name: String!): Count!
 }
 
 type Reply {
@@ -128,6 +122,12 @@ type Star {
 type Tag {
   """Example field (placeholder)"""
   exampleField: Int!
+}
+
+input UpdateFollowInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }
 
 input UpdateForwardInput {

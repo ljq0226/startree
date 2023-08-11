@@ -1,65 +1,67 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserInput } from './dto/create-user.input';
-import { UpdateUserInput } from './dto/update-user.input';
-import { PrismaService } from 'nestjs-prisma';
+import { Injectable } from '@nestjs/common'
+import { PrismaService } from 'nestjs-prisma'
+import { CreateUserInput } from './dto/create-user.input'
+import { UpdateUserInput } from './dto/update-user.input'
 
 @Injectable()
 export class UserService {
-  constructor(private prisma:PrismaService){}
+  constructor(private prisma: PrismaService) {}
 
-  async create({name,email,image}: CreateUserInput) {
+  async create({ name, email, image }: CreateUserInput) {
     return await this.prisma.user.create({
-      data:{
+      data: {
         name,
         email,
         image,
-        nickName:name
+        nickName: name,
       },
-    });
-  }
-  async findByAt(query:string) {
-    return await this.prisma.user.findMany({
-      where:{
-       OR:[
-        {
-          name:{
-            startsWith:query
-          }
-        },
-        {
-          nickName:{
-            startsWith:query
-          }
-        },
-       ]
-      },
-      include:{
-        posts:true
-      }
     })
   }
+
+  async findByAt(query: string) {
+    return await this.prisma.user.findMany({
+      where: {
+        OR: [
+          {
+            name: {
+              startsWith: query,
+            },
+          },
+          {
+            nickName: {
+              startsWith: query,
+            },
+          },
+        ],
+      },
+      include: {
+        posts: true,
+      },
+    })
+  }
+
   async findAll() {
     return await this.prisma.user.findMany({
-      include:{
-        posts:true
-      }
+      include: {
+        posts: true,
+      },
     })
   }
 
   async findOne(name: string) {
-   const user =await this.prisma.user.findUnique({
-      where:{
-        name:name
-      }
+    const user = await this.prisma.user.findUnique({
+      where: {
+        name,
+      },
     })
     return user
   }
 
   update(id: number, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
+    return `This action updates a #${id} user`
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`;
+    return `This action removes a #${id} user`
   }
 }

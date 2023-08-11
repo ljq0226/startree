@@ -1,26 +1,26 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
-import { User } from 'src/module/user/entities/user.entity';
+import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { User } from 'src/module/user/entities/user.entity'
 
 @ObjectType()
 export class Post {
   @Field(() => Int)
-  id: number;
+  id: number
 
   @Field()
-  content: string;
+  content: string
 
   @Field()
-  createdAt: Date;
+  createdAt: Date
 
   @Field()
-  updatedAt: Date;
+  updatedAt: Date
 
   @Field()
-  linkUsers: string;
+  linkUsers: string
 
   @Field(() => User, { nullable: true })
-  User: User;
+  User: User
 
   @Field({ nullable: true })
-  userName: string;
+  userName: string
 }

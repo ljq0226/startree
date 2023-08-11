@@ -1,8 +1,8 @@
-import { CreateStarInput } from './create-star.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { Field, InputType, Int, PartialType } from '@nestjs/graphql'
+import { CreateStarInput } from './create-star.input'
 
 @InputType()
 export class UpdateStarInput extends PartialType(CreateStarInput) {
   @Field(() => Int)
-  id: number;
+  id: number
 }
