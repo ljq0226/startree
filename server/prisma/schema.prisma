@@ -66,7 +66,7 @@ model Post {
   updatedAt DateTime @default(now()) @updatedAt
   replys    Reply[]
   tags      Tag[]
-  User      User?    @relation(fields: [userName], references: [name])
+  user      User?    @relation(fields: [userName], references: [name])
   userName  String
 }
 
@@ -78,7 +78,7 @@ model Reply {
   updatedAt DateTime @default(now()) @updatedAt
   Post      Post?    @relation(fields: [postId], references: [id])
   postId    Int?
-  User      User?    @relation(fields: [userName], references: [name])
+  user      User?    @relation(fields: [userName], references: [name])
 }
 
 model Tag {

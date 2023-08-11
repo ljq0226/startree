@@ -95,7 +95,7 @@ export class UserService {
         userName: name,
       },
       include: {
-        User: true,
+        user: true,
       },
     })
     return { posts, followed, followings }

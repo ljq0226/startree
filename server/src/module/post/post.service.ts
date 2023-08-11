@@ -20,7 +20,7 @@ export class PostService {
         userName,
       },
       include: {
-        User: true,
+        user: true,
       },
     })
     return newPost
@@ -29,7 +29,7 @@ export class PostService {
   async findAllPost() {
     return await this.prisma.post.findMany({
       include: {
-        User: true,
+        user: true,
       },
       orderBy: {
         createdAt: 'desc',
@@ -41,7 +41,7 @@ export class PostService {
     const followedPosts = (await this.followService.findFollowings(name)).map((user) => {
       return user.posts
     })
-    const user = await this.prisma.user.findUnique({ where: { name }, include: { posts: { include: { User: true } } } })
+    const user = await this.prisma.user.findUnique({ where: { name }, include: { posts: { include: { user: true } } } })
     const userPost = user.posts
     const homePosts = [...userPost, ...followedPosts.flat(1)] as Post[]
     return homePosts.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
@@ -51,13 +51,32 @@ export class PostService {
     return `This action returns a #${id} post`
   }
 
+  async getPostById(id: number) {
+    return await this.prisma.post.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        user: true,
+        replys: {
+          include: {
+            user: true,
+            Post: true,
+
+          },
+        },
+        tags: true,
+      },
+    })
+  }
+
   async findPostByUser(name: string) {
     const posts = await this.prisma.post.findMany({
       where: {
         userName: name,
       },
       include: {
-        User: true,
+        user: true,
       },
     })
     return posts

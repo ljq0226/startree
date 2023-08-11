@@ -26,7 +26,7 @@ export class FollowService {
     const follingsInfoPromises = follingsArr.map(async (item) => {
       return await this.prisma.user.findUnique({
         where: { name: item },
-        include: { posts: { include: { User: true } } },
+        include: { posts: { include: { user: true } } },
       })
     })
     const follingsInfo = await Promise.all(follingsInfoPromises)
