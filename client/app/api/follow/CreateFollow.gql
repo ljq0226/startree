@@ -1,0 +1,4 @@
+# return boolean
+mutation CreateFollow($createFollowInput: CreateFollowInput!) {
+  createFollow(createFollowInput: $createFollowInput) 
+}

@@ -1,0 +1,6 @@
+# return boolean
+mutation RemoveFollow($removeFollowInput: CreateFollowInput!) {
+  removeFollow(removeFollowInput: $removeFollowInput)
+
+
+}
