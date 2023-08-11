@@ -1,12 +1,15 @@
-import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql'
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { UserService } from './user.service'
 import { User } from './entities/user.entity'
 import { CreateUserInput } from './dto/create-user.input'
-import { UpdateUserInput } from './dto/update-user.input'
+import { Count } from './dto/count'
+import { ProfileData } from './dto/profileData'
 
 @Resolver(() => User)
 export class UserResolver {
-  constructor(private readonly userService: UserService) {}
+  constructor(
+    private readonly userService: UserService,
+  ) {}
 
   @Mutation(() => User)
   createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
@@ -23,18 +26,18 @@ export class UserResolver {
     return this.userService.findByAt(query)
   }
 
-  @Query(() => User, { name: 'findOne' })
-  findOne(@Args('name', { type: () => String }) name: string) {
+  @Query(() => User)
+  userData(@Args('name') name: string) {
     return this.userService.findOne(name)
   }
 
-  @Mutation(() => User)
-  updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-    return this.userService.update(updateUserInput.id, updateUserInput)
+  @Query(() => Count)
+  profileCount(@Args('name') name: string) {
+    return this.userService.profileCount(name)
   }
 
-  @Mutation(() => User)
-  removeUser(@Args('id', { type: () => Int }) id: number) {
-    return this.userService.remove(id)
+  @Query(() => ProfileData)
+  async profileData(@Args('name') name: string) {
+    return await this.userService.profileData(name)
   }
 }

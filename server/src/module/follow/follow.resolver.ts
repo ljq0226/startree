@@ -1,35 +1,35 @@
-import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql'
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import { User } from '../user/entities/user.entity'
 import { FollowService } from './follow.service'
 import { Follow } from './entities/follow.entity'
 import { CreateFollowInput } from './dto/create-follow.input'
-import { UpdateFollowInput } from './dto/update-follow.input'
 
 @Resolver(() => Follow)
 export class FollowResolver {
   constructor(private readonly followService: FollowService) {}
 
-  @Mutation(() => Follow)
+  @Mutation(() => Boolean)
   createFollow(@Args('createFollowInput') createFollowInput: CreateFollowInput) {
     return this.followService.create(createFollowInput)
   }
 
-  @Query(() => [Follow])
-  findAll() {
-    return this.followService.findAll()
+  @Query(() => [User])
+  findFollowings(@Args('name') name: string) {
+    return this.followService.findFollowings(name)
   }
 
-  @Query(() => Follow)
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.followService.findOne(id)
+  @Query(() => [User])
+  findFollowers(@Args('followedName') followedName: string) {
+    return this.followService.findFollowed(followedName)
   }
 
-  @Mutation(() => Follow)
-  updateFollow(@Args('updateFollowInput') updateFollowInput: UpdateFollowInput) {
-    return this.followService.update(updateFollowInput.id, updateFollowInput)
+  @Query(() => Number)
+  followedCount(@Args('name') name: string) {
+    return this.followService.followedCount(name)
   }
 
-  @Mutation(() => Follow)
-  removeFollow(@Args('id', { type: () => Int }) id: number) {
-    return this.followService.remove(id)
+  @Mutation(() => Boolean)
+  removeFollow(@Args('removeFollowInput') removeFollowInput: CreateFollowInput) {
+    return this.followService.remove(removeFollowInput)
   }
 }

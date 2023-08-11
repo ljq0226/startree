@@ -1,0 +1,38 @@
+query Profile($name: String!) {  
+  userData(name: $name) {
+    name
+    nickName
+    image
+    email
+    createdAt
+  }
+  profileCount(name: $name) {
+    followed
+    followings
+    posts
+  }
+  profileData(name: $name) {
+    followings {
+      name
+      nickName
+      image
+    }
+    posts {
+      id
+      content
+      User {
+        name
+        nickName
+        image
+      }
+      createdAt
+      userName
+    }
+    followed {
+      name
+      nickName
+      image
+    }
+  }
+
+}

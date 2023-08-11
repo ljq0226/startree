@@ -1,11 +1,15 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from 'nestjs-prisma'
+import { FollowService } from '../follow/follow.service'
 import { CreateUserInput } from './dto/create-user.input'
-import { UpdateUserInput } from './dto/update-user.input'
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private readonly followService: FollowService,
+
+  ) {}
 
   async create({ name, email, image }: CreateUserInput) {
     return await this.prisma.user.create({
@@ -57,11 +61,43 @@ export class UserService {
     return user
   }
 
-  update(id: number, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`
+  async profileCount(name: string) {
+    const followings = await this.prisma.follow.count({
+      where: {
+        name,
+      },
+    })
+    const followed = await this.prisma.follow.count({
+      where: {
+        followedName: name,
+      },
+    })
+    const posts = await this.prisma.post.count({
+      where: {
+        userName: name,
+      },
+      orderBy: {
+        id: 'desc',
+      },
+    })
+    return {
+      posts,
+      followings,
+      followed,
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`
+  async profileData(name: string) {
+    const followings = await this.followService.findFollowings(name)
+    const followed = await this.followService.findFollowed(name)
+    const posts = await this.prisma.post.findMany({
+      where: {
+        userName: name,
+      },
+      include: {
+        User: true,
+      },
+    })
+    return { posts, followed, followings }
   }
 }
