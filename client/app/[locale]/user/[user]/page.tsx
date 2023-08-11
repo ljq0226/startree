@@ -1,8 +1,15 @@
 'use client'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import cn from 'clsx'
+import { useQuery } from '@apollo/client'
+import GetProfileData from '@api/user/GetProfileData.gql'
 import Avatar from '../../../../components/ui/Avatar'
+import type { ProfileCount, ProfileData, UserData } from '@/types'
+import Post from '@/components/post/Post'
+import Following from '@/components/user/Following'
+import Followers from '@/components/user/Followers'
+import useI18n from '@/hooks/theme/useI18n'
 
 interface Props {
   params: {
@@ -12,16 +19,60 @@ interface Props {
 type tabs = 'posts' | 'followings' | 'followers'
 
 function page({ params }: Props) {
+  const t = useI18n('account')
   const [tab, setTab] = useState<tabs>('posts')
+  const [profileCount, setProfileCount] = useState<ProfileCount>({
+    followings: 0,
+    followed: 0,
+    posts: 0,
+  })
+  const [profileData, setProfileData] = useState<ProfileData>()
+  const [userData, setUserData] = useState<UserData>()
+  const { data, loading } = useQuery(
+    GetProfileData,
+    {
+      variables: {
+        name: params.user,
+      },
+    },
+  )
+  useEffect(() => {
+    if (!loading) {
+      setUserData(data.userData)
+      setProfileCount(data.profileCount)
+      setProfileData(data.profileData)
+    }
+  }, [data])
 
   const MainContent = () => {
     switch (tab) {
       case 'posts':
-        return (<>posts</>)
+        return (
+          <>
+            {profileData?.posts.map((post) => {
+              return <Post key={post.id} {...post} />
+            },
+            )}
+          </>
+        )
       case 'followings':
-        return (<>followings</>)
+        return (
+          <>
+            {profileData?.followings.map((user) => {
+              return <Following key={user.name} {...user} />
+            },
+            )}
+          </>
+        )
       case 'followers':
-        return (<>followers</>)
+        return (
+          <>
+            {profileData?.followed.map((user) => {
+              return <Followers key={user.name} {...user} />
+            },
+            )}
+          </>
+        )
     }
   }
 
@@ -32,18 +83,30 @@ function page({ params }: Props) {
         className='h-[185px] bg-center bg-no-repeat bg-cover' alt='a' />
       <div className="flex flex-col p-4 border-y border-base ">
         <div className="flex justify-between -mt-16">
-          <Avatar src='/avatar/user.png' height={24} round />
+          <Avatar src={userData?.image || '/avatar/user.png'} height={24} round />
           <div>
             <button>Edit profile</button>
           </div>
         </div>
-        <div className='text-2xl'>大帅</div>
-        <div className='text-secondary'>大帅</div>
-        <div className=''>加入时间</div>
+        <div className='text-2xl'>{userData?.name}</div>
+        <div className='text-secondary'>{`@${userData?.nickName}`}</div>
+        <div className=''>{userData?.createdAt?.toString()}</div>
         <div className="flex space-x-4 cursor-pointer">
-          <span className={cn(tab === 'posts' ? 'text-primary' : '')} onClick={() => setTab('posts')} >Posts</span>
-          <span className={cn(tab === 'followings' ? 'text-primary' : '')} onClick={() => setTab('followings')}>Followings</span>
-          <span className={cn(tab === 'followers' ? 'text-primary' : '')} onClick={() => setTab('followers')}>Followers</span>
+          <span className={cn(tab === 'posts' ? 'text-primary' : '')} onClick={() => setTab('posts')} >
+            {t('posts_count', {
+              count: profileCount.posts,
+            })}
+          </span>
+          <span className={cn(tab === 'followings' ? 'text-primary' : '')} onClick={() => setTab('followings')}>
+            {t('following_count', {
+              count: profileCount.followings,
+            })}
+          </span>
+          <span className={cn(tab === 'followers' ? 'text-primary' : '')} onClick={() => setTab('followers')}>
+            {t('followers_count', {
+              count: profileCount.followed,
+            })}
+          </span>
           <div className="flex-1"></div>
         </div>
       </div>

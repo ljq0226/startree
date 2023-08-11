@@ -27,14 +27,14 @@ const PostIcons: PostIconProps[] = [
   },
 ]
 
-function Post({ userName, content, createdAt }: PostType) {
+function Post({ content, createdAt, User }: PostType) {
   return (
     <div className="flex py-2 border-t border-base ">
-      <Avatar className="" round src="/avatar/user.png" />
+      <Avatar round src={User?.image || '/avatar/user.png'} />
       <div className="flex flex-col flex-1 px-4">
         <div className='flex items-center text-secondary'>
-          <span className='font-bold text-bs'>{userName}</span>
-          <span className=''>{`@${userName}`}</span>
+          <span className='font-bold text-bs'>{User?.name}</span>
+          <span className=''>{`@${User?.name}`}</span>
           <span className='flex-1'></span>
           <span>10h</span>
         </div>
