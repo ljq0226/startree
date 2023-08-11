@@ -3,7 +3,7 @@ query FindHomePost($name: String!) {
     id
     content
     userName
-    User {
+    user {
       name
       nickName
       image

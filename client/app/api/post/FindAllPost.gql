@@ -3,7 +3,7 @@ query findAllPost {
       id
       content
       createdAt
-      User {
+      user {
         email
         image
         name

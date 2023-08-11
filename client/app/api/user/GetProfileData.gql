@@ -20,7 +20,7 @@ query Profile($name: String!) {
     posts {
       id
       content
-      User {
+      user {
         name
         nickName
         image
