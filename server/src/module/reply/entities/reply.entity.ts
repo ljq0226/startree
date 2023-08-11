@@ -10,10 +10,10 @@ export class Reply {
   @Field()
   userName: string
 
-  @Field()
+  @Field(() => User)
   user: User
 
-  @Field()
+  @Field(() => [Post])
   tags: Post[]
 
   @Field()

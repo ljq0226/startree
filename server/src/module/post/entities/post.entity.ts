@@ -17,10 +17,10 @@ export class Post {
   @Field()
   updatedAt: Date
 
-  @Field(() => User, { nullable: true })
+  @Field(() => User)
   user: User
 
-  @Field({ nullable: true })
+  @Field()
   userName: string
 
   @Field(() => [Reply], { nullable: true })

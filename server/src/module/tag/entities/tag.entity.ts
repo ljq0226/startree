@@ -9,7 +9,7 @@ export class Tag {
   @Field()
   name: string
 
-  @Field()
+  @Field(() => [Post])
   posts: Post[]
 
   @Field()

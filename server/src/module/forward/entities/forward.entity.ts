@@ -8,10 +8,10 @@ export class Forward {
   @Field()
   userName: string
 
-  @Field({ nullable: true })
+  @Field()
   postId: number
 
-  @Field({ nullable: true })
+  @Field()
   replyId: number
 
   @Field()

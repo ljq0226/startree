@@ -1,5 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { Post } from 'src/module/post/entities/post.entity'
+import { Reply } from 'src/module/reply/entities/reply.entity'
 
 @ObjectType()
 export class User {
@@ -17,6 +18,9 @@ export class User {
 
   @Field(() => [Post])
   posts: Post[]
+
+  @Field(() => [Reply])
+  replys: Reply[]
 
   @Field(() => Date, { description: 'createdTime' })
   createdAt: Date
