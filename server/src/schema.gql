@@ -55,13 +55,21 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Forward {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  createdAt: DateTime!
+  id: Float!
+  postId: Float!
+  replyId: Float!
+  updatedAt: DateTime!
+  userName: String!
 }
 
 type Like {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  createdAt: DateTime!
+  id: Float!
+  postId: Float!
+  replyId: Float!
+  updatedAt: DateTime!
+  userName: String!
 }
 
 type Mutation {
@@ -89,12 +97,14 @@ type Mutation {
 }
 
 type Post {
-  User: User
   content: String!
   createdAt: DateTime!
   id: Float!
+  replys: [Reply!]
+  tags: [Tag!]
   updatedAt: DateTime!
-  userName: String
+  user: User!
+  userName: String!
 }
 
 type ProfileData {
@@ -109,28 +119,42 @@ type Query {
   findByAt(query: String!): [User!]!
   findFollowers(followedName: String!): [User!]!
   findFollowings(name: String!): [User!]!
+  findHomePost(name: String!): [Post!]!
   findOne(id: Int!): Tag!
-  findPostByTag(id: Int!): Post!
+  findPostByTag(id: Float!): Post!
   findPostByUser(name: String!): [Post!]!
   followedCount(name: String!): Float!
+  getPostById(id: Float!): Post!
   profileCount(name: String!): Count!
   profileData(name: String!): ProfileData!
   userData(name: String!): User!
 }
 
 type Reply {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  createdAt: DateTime!
+  id: Float!
+  postId: Float!
+  posts: [Post!]!
+  updatedAt: DateTime!
+  user: User!
+  userName: String!
 }
 
 type Star {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  createdAt: DateTime!
+  id: Float!
+  postId: Float!
+  replyId: Float!
+  updatedAt: DateTime!
+  userName: String!
 }
 
 type Tag {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  createdAt: DateTime!
+  id: Float!
+  name: String!
+  posts: [Post!]!
+  updatedAt: DateTime!
 }
 
 input UpdateForwardInput {
@@ -185,6 +209,7 @@ type User {
   """user nickname"""
   nickName: String!
   posts: [Post!]!
+  replys: [Reply!]!
 
   """updatedTime"""
   updatedAt: DateTime!
