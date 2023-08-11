@@ -1,7 +1,19 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { Field, ObjectType } from '@nestjs/graphql'
 
 @ObjectType()
 export class Follow {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number
+  @Field()
+  id: number
+
+  @Field()
+  name: string
+
+  @Field()
+  followedName: string
+
+  @Field()
+  createdAt: Date
+
+  @Field()
+  updatedAt: Date
 }

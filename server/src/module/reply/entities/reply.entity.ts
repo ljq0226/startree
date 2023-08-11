@@ -1,7 +1,27 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql'
+import { Field, ObjectType } from '@nestjs/graphql'
+import { Post } from 'src/module/post/entities/post.entity'
+import { User } from 'src/module/user/entities/user.entity'
 
 @ObjectType()
 export class Reply {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number
+  @Field()
+  id: number
+
+  @Field()
+  userName: string
+
+  @Field()
+  user: User
+
+  @Field()
+  tags: Post[]
+
+  @Field()
+  postId: number
+
+  @Field()
+  createdAt: Date
+
+  @Field()
+  updatedAt: Date
 }
