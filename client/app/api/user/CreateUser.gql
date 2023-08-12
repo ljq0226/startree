@@ -3,5 +3,12 @@ mutation CreateUser($createUserInput: CreateUserInput!) {
     name
     image
     email
+    nickName
+    profile {
+      id
+      github
+      bio
+      website
+    }
   }
 }
