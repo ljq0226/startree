@@ -14,6 +14,7 @@ import { ForwardModule } from './module/forward/forward.module'
 import { StarModule } from './module/star/star.module'
 import { ReplyModule } from './module/reply/reply.module'
 import { TagModule } from './module/tag/tag.module'
+import { ProfileModule } from './module/profile/profile.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { TagModule } from './module/tag/tag.module'
     StarModule,
     ReplyModule,
     TagModule,
+    ProfileModule,
   ],
   controllers: [AppController],
   providers: [AppService],

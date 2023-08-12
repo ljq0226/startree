@@ -16,26 +16,26 @@ model User {
   //avatar
   image String @unique
 
-  nickName  String
-  profile   Profile   @relation(fields: [profileId], references: [id])
-  profileId Int
+  nickName String
+  profile  Profile?
   //1-n
-  posts     Post[]
-  replys    Reply[]
-  likes     Like[]
-  stars     Star[]
-  forwards  Forward[]
+  posts    Post[]
+  replys   Reply[]
+  likes    Like[]
+  stars    Star[]
+  forwards Forward[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
 
 model Profile {
-  id      Int     @id() @default(autoincrement())
-  user    User[]
-  bio     String?
-  github  String?
-  website String?
+  id       Int     @id() @default(autoincrement())
+  bio      String? @default("")
+  github   String? @default("")
+  website  String? @default("")
+  user     User    @relation(fields: [userName], references: [name])
+  userName String  @unique
 }
 
 model Follow {
