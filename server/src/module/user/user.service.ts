@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { PrismaService } from 'nestjs-prisma'
 import { FollowService } from '../follow/follow.service'
 import { CreateUserInput } from './dto/create-user.input'
+import { UpdateUserInput } from './dto/update-user.input'
 
 @Injectable()
 export class UserService {
@@ -12,14 +13,26 @@ export class UserService {
   ) {}
 
   async create({ name, email, image }: CreateUserInput) {
-    return await this.prisma.user.create({
+    const profile = await this.prisma.profile.create({
+      data: {
+        bio: '',
+        website: '',
+        github: '',
+      },
+    })
+    const user = await this.prisma.user.create({
       data: {
         name,
         email,
         image,
         nickName: name,
+        profileId: profile.id,
+      },
+      include: {
+        profile: true,
       },
     })
+    return user
   }
 
   async findByAt(query: string) {
@@ -99,5 +112,25 @@ export class UserService {
       },
     })
     return { posts, followed, followings }
+  }
+
+  async updateUserProfile({ name, nickName, profile }: UpdateUserInput) {
+    await this.prisma.profile.update({
+      where: {
+        id: profile.id,
+      },
+      data: {
+        ...profile,
+      },
+    })
+    await this.prisma.user.update({
+      where: {
+        name,
+      },
+      data: {
+        nickName,
+      },
+    })
+    return true
   }
 }

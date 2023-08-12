@@ -104,6 +104,7 @@ type Mutation {
   updateReply(updateReplyInput: UpdateReplyInput!): Reply!
   updateStar(updateStarInput: UpdateStarInput!): Star!
   updateTag(updateTagInput: UpdateTagInput!): Tag!
+  updateUserProfile(updateUserInput: UpdateUserInput!): Boolean!
 }
 
 type Post {
@@ -130,6 +131,13 @@ type ProfileData {
   followed: [User!]!
   followings: [User!]!
   posts: [Post!]!
+}
+
+input ProfileInput {
+  bio: String!
+  github: String!
+  id: Int!
+  website: String!
 }
 
 type Query {
@@ -218,6 +226,14 @@ input UpdateTagInput {
   """Example field (placeholder)"""
   exampleField: Int
   id: Int!
+}
+
+input UpdateUserInput {
+  email: String!
+  image: String!
+  name: String!
+  nickName: String!
+  profile: ProfileInput!
 }
 
 type User {

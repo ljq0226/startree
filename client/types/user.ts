@@ -1,7 +1,15 @@
+export interface Profile {
+  id: number
+  bio: string
+  website: string
+  github: string
+}
 export interface UserAuth {
   name: string
   image: string
   email: string
+  nickName: string
+  profile: Profile
 }
 export interface AtUser {
   name: string

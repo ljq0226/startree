@@ -11,6 +11,13 @@ const UserStore = create<UserState>(set => ({
     name: '',
     image: '',
     email: '',
+    nickName: '',
+    profile: {
+      id: 0,
+      bio: '',
+      github: '',
+      website: '',
+    },
   },
   setUser: v => set(() => ({
     user: v,
