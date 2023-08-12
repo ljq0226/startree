@@ -24,7 +24,12 @@ export class PostResolver {
   }
 
   @Query(() => Post)
-  findPostByTag(@Args('id', { type: () => Int }) id: number) {
+  getPostById(@Args('id')id: number) {
+    return this.postService.getPostById(id)
+  }
+
+  @Query(() => Post)
+  findPostByTag(@Args('id')id: number) {
     return this.postService.findPostByTag(id)
   }
 
