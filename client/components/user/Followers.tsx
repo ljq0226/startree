@@ -17,7 +17,7 @@ function Followers({ name, nickName, image }: Follow) {
       </Link>
       <div className="flex-[0.5]"></div>
       <div className='flex mr-4 flex-center'>
-        <button className='px-4 py-1 border rounded-xl hover:border-primary hover:text-primary'>Following</button>
+        <button className='profile-btn'>Following</button>
       </div>
     </div>
   )

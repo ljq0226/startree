@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react'
 import cn from 'clsx'
 import { useQuery } from '@apollo/client'
 import GetProfileData from '@api/user/GetProfileData.gql'
+import Link from 'next/link'
 import Avatar from '../../../../components/ui/Avatar'
 import type { ProfileCount, ProfileData, UserData } from '@/types'
 import Post from '@/components/post/Post'
 import Following from '@/components/user/Following'
 import Followers from '@/components/user/Followers'
 import useI18n from '@/hooks/theme/useI18n'
+import Icon from '@/components/ui/Icon'
 
 interface Props {
   params: {
@@ -20,6 +22,7 @@ type tabs = 'posts' | 'followings' | 'followers'
 
 function page({ params }: Props) {
   const t = useI18n('account')
+
   const [tab, setTab] = useState<tabs>('posts')
   const [profileCount, setProfileCount] = useState<ProfileCount>({
     followings: 0,
@@ -84,8 +87,14 @@ function page({ params }: Props) {
       <div className="flex flex-col p-4 border-y border-base ">
         <div className="flex justify-between -mt-16">
           <Avatar src={userData?.image || '/avatar/user.png'} height={24} round />
-          <div>
-            <button>Edit profile</button>
+          <div className='flex flex-col'>
+            <div className="flex-1"></div>
+            <div className='flex flex-center'>
+              <button className='flex w-8 h-8 rounded-full flex-center'>
+                <Icon className=' hover:bg-[#b889f7]' icon='mingcute:more-2-line' />
+              </button>
+              <Link href={'/settings/profile'} className='profile-btn'>{t('edit')}</Link>
+            </div>
           </div>
         </div>
         <div className='text-2xl'>{userData?.name}</div>
