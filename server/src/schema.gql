@@ -28,6 +28,11 @@ input CreatePostInput {
   userName: String!
 }
 
+input CreateProfileInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 input CreateReplyInput {
   """Example field (placeholder)"""
   exampleField: Int!
@@ -60,15 +65,17 @@ type Forward {
   postId: Float!
   replyId: Float!
   updatedAt: DateTime!
+  user: User!
   userName: String!
 }
 
 type Like {
   createdAt: DateTime!
   id: Float!
+  post: Post!
   postId: Float!
-  replyId: Float!
   updatedAt: DateTime!
+  user: User!
   userName: String!
 }
 
@@ -77,6 +84,7 @@ type Mutation {
   createForward(createForwardInput: CreateForwardInput!): Forward!
   createLike(createLikeInput: CreateLikeInput!): Like!
   createPost(createPostInput: CreatePostInput!): Post!
+  createProfile(createProfileInput: CreateProfileInput!): Profile!
   createReply(createReplyInput: CreateReplyInput!): Reply!
   createStar(createStarInput: CreateStarInput!): Star!
   createTag(createTagInput: CreateTagInput!): Tag!
@@ -85,12 +93,14 @@ type Mutation {
   removeForward(id: Int!): Forward!
   removeLike(id: Int!): Like!
   removePost(id: Int!): Post!
+  removeProfile(id: Int!): Profile!
   removeReply(id: Int!): Reply!
   removeStar(id: Int!): Star!
   removeTag(id: Int!): Tag!
   updateForward(updateForwardInput: UpdateForwardInput!): Forward!
   updateLike(updateLikeInput: UpdateLikeInput!): Like!
   updatePost(updatePostInput: UpdatePostInput!): Post!
+  updateProfile(updateProfileInput: UpdateProfileInput!): Profile!
   updateReply(updateReplyInput: UpdateReplyInput!): Reply!
   updateStar(updateStarInput: UpdateStarInput!): Star!
   updateTag(updateTagInput: UpdateTagInput!): Tag!
@@ -100,11 +110,20 @@ type Post {
   content: String!
   createdAt: DateTime!
   id: Float!
+  likes: [Like!]!
   replys: [Reply!]
   tags: [Tag!]
   updatedAt: DateTime!
   user: User!
   userName: String!
+}
+
+type Profile {
+  bio: String!
+  github: String!
+  id: Int!
+  user: User!
+  website: String!
 }
 
 type ProfileData {
@@ -125,6 +144,7 @@ type Query {
   findPostByUser(name: String!): [Post!]!
   followedCount(name: String!): Float!
   getPostById(id: Float!): Post!
+  profile(id: Int!): Profile!
   profileCount(name: String!): Count!
   profileData(name: String!): ProfileData!
   userData(name: String!): User!
@@ -146,6 +166,7 @@ type Star {
   postId: Float!
   replyId: Float!
   updatedAt: DateTime!
+  user: User!
   userName: String!
 }
 
@@ -175,6 +196,12 @@ input UpdatePostInput {
   userName: String
 }
 
+input UpdateProfileInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
 input UpdateReplyInput {
   """Example field (placeholder)"""
   exampleField: Int
@@ -202,6 +229,7 @@ type User {
 
   """user image"""
   image: String!
+  likes: [Like!]!
 
   """user name"""
   name: String!
@@ -209,7 +237,9 @@ type User {
   """user nickname"""
   nickName: String!
   posts: [Post!]!
+  profile: Profile!
   replys: [Reply!]!
+  stars: [Star!]!
 
   """updatedTime"""
   updatedAt: DateTime!
