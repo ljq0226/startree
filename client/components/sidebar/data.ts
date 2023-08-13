@@ -29,13 +29,13 @@ export const NavLinks: Readonly<NavLink[]> = [
   {
     href: '/favorites',
     linkName: 'favorites',
-    iconName: 'ri:star-line',
+    iconName: 'icon-park-outline:like',
     disabled: true,
   },
   {
-    href: '/bookmarks',
-    linkName: 'bookmarks',
-    iconName: 'ri:bookmark-line',
+    href: '/stars',
+    linkName: 'stars',
+    iconName: 'tabler:star',
     disabled: true,
   },
   {

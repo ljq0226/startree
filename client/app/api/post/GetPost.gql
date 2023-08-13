@@ -1,0 +1,30 @@
+query GetPost($postid: Float!, $name: String!) {
+  findAllPost {
+    content
+    id
+    createdAt
+    user {
+      image
+      name
+      nickName
+    }
+  }
+  getPostCount(id: $postid, name: $name) {
+    forward
+    isStar
+    like
+    reply
+    isForward
+    isLike
+    isReply
+  }
+  profileCount(name: $name) {
+    followed
+    followings
+    posts
+  }
+  getProfileByName(name: $name) {
+    bio
+  }
+}
+

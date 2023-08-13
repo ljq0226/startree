@@ -1,7 +1,10 @@
-import { Field, InputType, Int } from '@nestjs/graphql'
+import { Field, InputType } from '@nestjs/graphql'
 
 @InputType()
 export class CreateForwardInput {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number
+  @Field()
+  postId: number
+
+  @Field()
+  userName: string
 }

@@ -1,4 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql'
+import { Post } from 'src/module/post/entities/post.entity'
 import { User } from 'src/module/user/entities/user.entity'
 
 @ObjectType()
@@ -12,11 +13,14 @@ export class Forward {
   @Field()
   userName: string
 
+  @Field(() => Post)
+  post: Post
+
   @Field()
   postId: number
 
   @Field()
-  replyId: number
+  forwardPostId: number
 
   @Field()
   createdAt: Date

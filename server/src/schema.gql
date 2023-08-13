@@ -2,35 +2,24 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Count {
-  followed: Float!
-  followings: Float!
-  posts: Float!
-}
-
 input CreateFollowInput {
   followedName: String!
   name: String!
 }
 
 input CreateForwardInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  postId: Float!
+  userName: String!
 }
 
 input CreateLikeInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  postId: Float!
+  userName: String!
 }
 
 input CreatePostInput {
   content: String!
   userName: String!
-}
-
-input CreateProfileInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
 }
 
 input CreateReplyInput {
@@ -39,8 +28,8 @@ input CreateReplyInput {
 }
 
 input CreateStarInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  postId: Float!
+  userName: String!
 }
 
 input CreateTagInput {
@@ -59,11 +48,22 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+input DeleteLikeInput {
+  postId: Float!
+  userName: String!
+}
+
+input DeleteStarInput {
+  postId: Float!
+  userName: String!
+}
+
 type Forward {
   createdAt: DateTime!
+  forwardPostId: Float!
   id: Float!
+  post: Post!
   postId: Float!
-  replyId: Float!
   updatedAt: DateTime!
   user: User!
   userName: String!
@@ -84,25 +84,20 @@ type Mutation {
   createForward(createForwardInput: CreateForwardInput!): Forward!
   createLike(createLikeInput: CreateLikeInput!): Like!
   createPost(createPostInput: CreatePostInput!): Post!
-  createProfile(createProfileInput: CreateProfileInput!): Profile!
   createReply(createReplyInput: CreateReplyInput!): Reply!
   createStar(createStarInput: CreateStarInput!): Star!
   createTag(createTagInput: CreateTagInput!): Tag!
   createUser(createUserInput: CreateUserInput!): User!
+  deleteLike(deleteLikeInput: DeleteLikeInput!): Boolean!
+  deleteStar(deleteStarInput: DeleteStarInput!): Boolean!
   removeFollow(removeFollowInput: CreateFollowInput!): Boolean!
   removeForward(id: Int!): Forward!
-  removeLike(id: Int!): Like!
   removePost(id: Int!): Post!
-  removeProfile(id: Int!): Profile!
   removeReply(id: Int!): Reply!
-  removeStar(id: Int!): Star!
   removeTag(id: Int!): Tag!
   updateForward(updateForwardInput: UpdateForwardInput!): Forward!
-  updateLike(updateLikeInput: UpdateLikeInput!): Like!
   updatePost(updatePostInput: UpdatePostInput!): Post!
-  updateProfile(updateProfileInput: UpdateProfileInput!): Profile!
   updateReply(updateReplyInput: UpdateReplyInput!): Reply!
-  updateStar(updateStarInput: UpdateStarInput!): Star!
   updateTag(updateTagInput: UpdateTagInput!): Tag!
   updateUserProfile(updateUserInput: UpdateUserInput!): User!
 }
@@ -119,12 +114,37 @@ type Post {
   userName: String!
 }
 
+type PostCount {
+  forward: Float!
+  isForward: Boolean!
+  isLike: Boolean!
+  isReply: Boolean!
+  isStar: Boolean!
+  like: Float!
+  reply: Float!
+}
+
+type PostInfo {
+  content: String!
+  createdAt: DateTime!
+  id: Float!
+  postCount: PostCount!
+  profileCount: ProfileCount!
+  user: UserInfo!
+}
+
 type Profile {
   bio: String!
   github: String!
   id: Int!
   user: User!
   website: String!
+}
+
+type ProfileCount {
+  followed: Float!
+  followings: Float!
+  posts: Float!
 }
 
 type ProfileData {
@@ -142,7 +162,7 @@ input ProfileInput {
 
 type Query {
   findAll: [Tag!]!
-  findAllPost: [Post!]!
+  findAllPost: [PostInfo!]!
   findByAt(query: String!): [User!]!
   findFollowers(followedName: String!): [User!]!
   findFollowings(name: String!): [User!]!
@@ -152,8 +172,9 @@ type Query {
   findPostByUser(name: String!): [Post!]!
   followedCount(name: String!): Float!
   getPostById(id: Float!): Post!
-  profile(id: Int!): Profile!
-  profileCount(name: String!): Count!
+  getPostCount(id: Float!, name: String!): PostCount!
+  getProfileByName(name: String!): Profile!
+  profileCount(name: String!): ProfileCount!
   profileData(name: String!): ProfileData!
   userData(name: String!): User!
 }
@@ -161,8 +182,9 @@ type Query {
 type Reply {
   createdAt: DateTime!
   id: Float!
+  parentId: Float!
+  post: Post!
   postId: Float!
-  posts: [Post!]!
   updatedAt: DateTime!
   user: User!
   userName: String!
@@ -171,8 +193,8 @@ type Reply {
 type Star {
   createdAt: DateTime!
   id: Float!
+  post: Post!
   postId: Float!
-  replyId: Float!
   updatedAt: DateTime!
   user: User!
   userName: String!
@@ -187,15 +209,9 @@ type Tag {
 }
 
 input UpdateForwardInput {
-  """Example field (placeholder)"""
-  exampleField: Int
   id: Int!
-}
-
-input UpdateLikeInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
+  postId: Float
+  userName: String
 }
 
 input UpdatePostInput {
@@ -204,19 +220,7 @@ input UpdatePostInput {
   userName: String
 }
 
-input UpdateProfileInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
-}
-
 input UpdateReplyInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
-}
-
-input UpdateStarInput {
   """Example field (placeholder)"""
   exampleField: Int
   id: Int!
@@ -260,4 +264,10 @@ type User {
 
   """updatedTime"""
   updatedAt: DateTime!
+}
+
+type UserInfo {
+  image: String!
+  name: String!
+  nickName: String!
 }

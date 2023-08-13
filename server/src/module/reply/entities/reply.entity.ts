@@ -13,8 +13,11 @@ export class Reply {
   @Field(() => User)
   user: User
 
-  @Field(() => [Post])
-  posts: Post[]
+  @Field()
+  parentId: number
+
+  @Field(() => Post)
+  post: Post
 
   @Field()
   postId: number

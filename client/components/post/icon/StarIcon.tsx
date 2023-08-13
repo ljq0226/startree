@@ -64,7 +64,7 @@ export default function StarIcon({ postId, isStar }: Props) {
       className={'relative cursor-pointer hover:text-[#f4ce3f]'}
       onClick={handleClick}
     >
-      <Tooltip text={t('favorite')}>
+      <Tooltip text={t('star')}>
         <button className={cn('post-icon')} >
           {RenderIcon()}
         </button>

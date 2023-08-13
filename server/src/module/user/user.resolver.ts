@@ -2,7 +2,7 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { UserService } from './user.service'
 import { User } from './entities/user.entity'
 import { CreateUserInput } from './dto/create-user.input'
-import { Count } from './dto/count'
+import { ProfileCount } from './dto/profileCount'
 import { ProfileData } from './dto/profileData'
 import { UpdateUserInput } from './dto/update-user.input'
 
@@ -32,7 +32,7 @@ export class UserResolver {
     return this.userService.findOne(name)
   }
 
-  @Query(() => Count)
+  @Query(() => ProfileCount)
   profileCount(@Args('name') name: string) {
     return this.userService.profileCount(name)
   }
