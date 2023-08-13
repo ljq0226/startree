@@ -104,7 +104,7 @@ type Mutation {
   updateReply(updateReplyInput: UpdateReplyInput!): Reply!
   updateStar(updateStarInput: UpdateStarInput!): Star!
   updateTag(updateTagInput: UpdateTagInput!): Tag!
-  updateUserProfile(updateUserInput: UpdateUserInput!): Boolean!
+  updateUserProfile(updateUserInput: UpdateUserInput!): User!
 }
 
 type Post {
@@ -254,6 +254,7 @@ type User {
   nickName: String!
   posts: [Post!]!
   profile: Profile!
+  profileId: Float!
   replys: [Reply!]!
   stars: [Star!]!
 
