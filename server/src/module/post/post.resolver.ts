@@ -3,6 +3,8 @@ import { PostService } from './post.service'
 import { Post } from './entities/post.entity'
 import { CreatePostInput } from './dto/create-post.input'
 import { UpdatePostInput } from './dto/update-post.input'
+import { PostCount } from './dto/count'
+import { PostInfo } from './dto/postInfo'
 
 @Resolver(() => Post)
 export class PostResolver {
@@ -13,9 +15,14 @@ export class PostResolver {
     return this.postService.create(createPostInput)
   }
 
-  @Query(() => [Post])
+  @Query(() => [PostInfo])
   findAllPost() {
     return this.postService.findAllPost()
+  }
+
+  @Query(() => PostCount)
+  getPostCount(@Args('id') id: number, @Args('name') name: string) {
+    return this.postService.postCount(id, name)
   }
 
   @Query(() => [Post])

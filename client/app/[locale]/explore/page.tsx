@@ -18,7 +18,8 @@ export default function App() {
   }, [data])
   return (
     <>
-      <div className="main-container">
+      <div className="flex flex-col main-container">
+        <div className="hidden h-6 xl:block"></div>
         {
           posts.map((post) => {
             return (

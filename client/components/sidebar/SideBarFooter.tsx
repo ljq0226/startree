@@ -16,7 +16,9 @@ export default function SideBarFooter() {
   const { session } = useLogin()
   const handleSignIn = () => {
     signIn()
-    redirect('/expore')
+    setTimeout(() => {
+      redirect('/expore')
+    }, 300)
   }
   return (
     <>

@@ -1,13 +1,26 @@
-query findAllPost {
+query FindAllPost {
   findAllPost {
-      id
-      content
-      createdAt
-      user {
-        email
-        image
-        name
-        nickName
-      }
+    content
+    createdAt
+    id
+    postCount {
+      forward
+      isForward
+      isLike
+      isReply
+      isStar
+      like
+      reply
+    }
+    profileCount {
+      followed
+      followings
+      posts
+    }
+    user {
+      image
+      name
+      nickName
+    }
   }
 }
