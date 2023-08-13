@@ -1,7 +1,7 @@
 import { Field, InputType } from '@nestjs/graphql'
 
 @InputType()
-export class CreateLikeInput {
+export class DeleteLikeInput {
   @Field()
   postId: number
 

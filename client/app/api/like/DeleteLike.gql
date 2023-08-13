@@ -1,0 +1,3 @@
+mutation DeleteLike($deleteLikeInput: DeleteLikeInput!) {
+  deleteLike(deleteLikeInput: $deleteLikeInput)
+}

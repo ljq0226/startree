@@ -1,26 +1,33 @@
 import { Injectable } from '@nestjs/common'
+import { PrismaService } from 'nestjs-prisma'
 import { CreateLikeInput } from './dto/create-like.input'
-import { UpdateLikeInput } from './dto/update-like.input'
+import { DeleteLikeInput } from './dto/delete-like.input'
 
 @Injectable()
 export class LikeService {
-  create(createLikeInput: CreateLikeInput) {
-    return 'This action adds a new like'
+  constructor(
+    private prisma: PrismaService,
+  ) {}
+
+  async create({ postId, userName }: CreateLikeInput) {
+    return await this.prisma.like.create({
+      data: {
+        userName,
+        postId,
+      },
+    })
   }
 
-  findAll() {
-    return 'This action returns all like'
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} like`
-  }
-
-  update(id: number, updateLikeInput: UpdateLikeInput) {
-    return `This action updates a #${id} like`
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} like`
+  async delete({ postId, userName }: DeleteLikeInput) {
+    const like = await this.prisma.like.findFirst({
+      where: {
+        userName,
+        postId,
+      },
+    })
+    await this.prisma.like.delete({
+      where: { id: like.id },
+    })
+    return true
   }
 }
