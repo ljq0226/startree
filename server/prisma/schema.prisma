@@ -17,7 +17,7 @@ model User {
   image String @unique
 
   nickName String
-  profile  Profile?
+  profile  Profile   @relation(fields: [profileId], references: [id])
   //1-n
   posts    Post[]
   replys   Reply[]
@@ -27,15 +27,15 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
+  profileId Int
 }
 
 model Profile {
-  id       Int     @id() @default(autoincrement())
-  bio      String? @default("")
-  github   String? @default("")
-  website  String? @default("")
-  user     User    @relation(fields: [userName], references: [name])
-  userName String  @unique
+  id      Int     @id() @default(autoincrement())
+  bio     String? @default("")
+  github  String? @default("")
+  website String? @default("")
+  User    User[]
 }
 
 model Follow {
@@ -57,13 +57,14 @@ model Like {
 }
 
 model Forward {
-  id        Int      @id @default(autoincrement())
-  userName  String   @unique
-  postId    Int?
-  replyId   Int?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-  user      User     @relation(fields: [userName], references: [name])
+  id            Int      @id @default(autoincrement())
+  userName      String   @unique
+  postId        Int?
+  forwardPostId Int?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now()) @updatedAt
+  user          User     @relation(fields: [userName], references: [name])
+  Post          Post?    @relation(fields: [forwardPostId], references: [id])
 }
 
 model Star {
@@ -74,18 +75,21 @@ model Star {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
   user      User     @relation(fields: [userName], references: [name])
+  Post      Post?    @relation(fields: [postId], references: [id])
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
-  content   String   @db.LongText
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  id        Int       @id @default(autoincrement())
+  content   String    @db.LongText
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
   replys    Reply[]
   tags      Tag[]
-  user      User?    @relation(fields: [userName], references: [name])
+  user      User?     @relation(fields: [userName], references: [name])
   userName  String
   likes     Like[]
+  stars     Star[]
+  forwards  Forward[]
 }
 
 model Reply {

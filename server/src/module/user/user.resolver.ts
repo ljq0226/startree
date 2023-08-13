@@ -42,7 +42,7 @@ export class UserResolver {
     return await this.userService.profileData(name)
   }
 
-  @Mutation(() => Boolean)
+  @Mutation(() => User)
   updateUserProfile(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
     return this.userService.updateUserProfile(updateUserInput)
   }

@@ -22,6 +22,9 @@ export class User {
   @Field(() => Profile)
   profile: Profile
 
+  @Field()
+  profileId: number
+
   @Field(() => [Post])
   posts: Post[]
 

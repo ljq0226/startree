@@ -13,26 +13,27 @@ export class UserService {
   ) {}
 
   async create({ name, email, image }: CreateUserInput) {
-    const profile = await this.prisma.profile.create({
-      data: {
-        bio: '',
-        website: '',
-        github: '',
-      },
-    })
-    const user = await this.prisma.user.create({
-      data: {
-        name,
-        email,
-        image,
-        nickName: name,
-        profileId: profile.id,
-      },
-      include: {
-        profile: true,
-      },
-    })
-    return user
+    const user = await this.prisma.user.findUnique({ where: { name }, include: { profile: true } })
+    if (!user) {
+      return await this.prisma.user.create({
+        data: {
+          name,
+          email,
+          image,
+          nickName: name,
+          profile: {
+            create: {
+              bio: '',
+              website: '',
+              github: '',
+            },
+          },
+        },
+      })
+    }
+    else {
+      return user
+    }
   }
 
   async findByAt(query: string) {
@@ -123,14 +124,17 @@ export class UserService {
         ...profile,
       },
     })
-    await this.prisma.user.update({
+    const user = await this.prisma.user.update({
       where: {
         name,
       },
       data: {
         nickName,
       },
+      include: {
+        profile: true,
+      },
     })
-    return true
+    return user
   }
 }

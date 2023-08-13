@@ -8,14 +8,19 @@ import Avatar from '@/components/ui/Avatar'
 import useI18n from '@/hooks/theme/useI18n'
 import { AlertStore, UserStore } from '@/store'
 import type { UserAuth } from '@/types'
+import { USERINFO } from '@/constants'
 
-function page() {
+const page = React.memo(() => {
   const t = useI18n('settings.profile.appearance')
   const t2 = useI18n('action')
   const user = UserStore(s => s.user)
+  const setUser = UserStore(s => s.setUser)
   const [data, setData] = useState<UserAuth>({
     ...user,
   })
+  useEffect(() => {
+    setData(JSON.parse(localStorage.getItem(USERINFO) as string))
+  }, [])
   useEffect(() => {
     if (user.name)
       setData(user)
@@ -41,12 +46,19 @@ function page() {
         },
       },
     })
-    res
-      ? useAlert('success', '保存成功')
-      : useAlert('warning', '保存失败')
+    if (res.data) {
+      setUser({
+        ...res.data.updateUserProfile,
+      })
+      localStorage.setItem(USERINFO, JSON.stringify(user))
+      useAlert('success', '保存成功')
+    }
+    else {
+      useAlert('warning', '保存失败')
+    }
   }
   const handleReset = () => {
-    setData({ ...user })
+    setData({ ...JSON.parse(localStorage.getItem(USERINFO) as string) })
   }
 
   return (
@@ -87,6 +99,7 @@ function page() {
             className='profile-input'
             type="text"
             placeholder={user.profile?.github}
+            value={data.profile.github}
             onChange={(e) => {
               const profile = data.profile
               profile.github = e.target.value
@@ -101,6 +114,7 @@ function page() {
             className='profile-input'
             type="text"
             placeholder={user.profile?.website}
+            value={data.profile.website}
             onChange={(e) => {
               const profile = data.profile
               profile.website = e.target.value
@@ -133,6 +147,6 @@ function page() {
 
     </div>
   )
-}
-
+},
+)
 export default page

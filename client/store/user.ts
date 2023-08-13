@@ -1,3 +1,4 @@
+'use client'
 import { create } from 'zustand'
 import type { UserAuth } from '@/types/user'
 
@@ -6,22 +7,27 @@ interface UserState {
   setUser: (v: UserAuth) => void
 }
 
-const UserStore = create<UserState>(set => ({
-  user: {
-    name: '',
-    image: '',
-    email: '',
-    nickName: '',
-    profile: {
-      id: 0,
-      bio: '',
-      github: '',
-      website: '',
-    },
+export const userInit = {
+  name: '',
+  image: '',
+  email: '',
+  nickName: '',
+  profile: {
+    id: 0,
+    bio: '',
+    github: '',
+    website: '',
   },
-  setUser: v => set(() => ({
-    user: v,
-  })),
+}
+
+const UserStore = create<UserState>(set => ({
+  user: userInit,
+  setUser: (v) => {
+    set(() => ({
+      user: v,
+    }))
+  },
+
 }))
 
 export { UserStore }
