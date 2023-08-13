@@ -52,7 +52,7 @@ function Post({ content, id, createdAt, user, postCount }: PostType) {
           <CommentIcon />
           <BoostIcon />
           <LikeIcon postId={id} count={postCount.like} isLike={postCount.isLike} />
-          <StarIcon />
+          <StarIcon postId={id} isStar={postCount.isStar} />
         </div>
       </div>
 

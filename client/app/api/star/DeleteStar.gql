@@ -1,0 +1,3 @@
+mutation DeleteStar($deleteStarInput: DeleteStarInput!) {
+  deleteStar(deleteStarInput: $deleteStarInput)
+}

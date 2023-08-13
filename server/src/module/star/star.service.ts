@@ -1,26 +1,33 @@
 import { Injectable } from '@nestjs/common'
+import { PrismaService } from 'nestjs-prisma'
 import { CreateStarInput } from './dto/create-star.input'
-import { UpdateStarInput } from './dto/update-star.input'
+import { DeleteStarInput } from './dto/delete-star.input'
 
 @Injectable()
 export class StarService {
-  create(createStarInput: CreateStarInput) {
-    return 'This action adds a new star'
+  constructor(
+    private prisma: PrismaService,
+  ) {}
+
+  async create({ postId, userName }: CreateStarInput) {
+    return await this.prisma.star.create({
+      data: {
+        userName,
+        postId,
+      },
+    })
   }
 
-  findAll() {
-    return 'This action returns all star'
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} star`
-  }
-
-  update(id: number, updateStarInput: UpdateStarInput) {
-    return `This action updates a #${id} star`
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} star`
+  async delete({ postId, userName }: DeleteStarInput) {
+    const star = await this.prisma.star.findFirst({
+      where: {
+        userName,
+        postId,
+      },
+    })
+    await this.prisma.star.delete({
+      where: { id: star.id },
+    })
+    return true
   }
 }
