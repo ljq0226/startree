@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from 'nestjs-prisma'
+import { PostService } from '../post/post.service'
 import { CreateLikeInput } from './dto/create-like.input'
 import { DeleteLikeInput } from './dto/delete-like.input'
 
@@ -7,6 +8,7 @@ import { DeleteLikeInput } from './dto/delete-like.input'
 export class LikeService {
   constructor(
     private prisma: PrismaService,
+    private readonly postService: PostService,
   ) {}
 
   async findFirst(postId: number, userName: string) {
@@ -48,5 +50,18 @@ export class LikeService {
       return true
     }
     return false
+  }
+
+  async getLikePost(userName: string) {
+    const likes = await this.prisma.like.findMany({
+      where: {
+        userName,
+      },
+      select: {
+        postId: true,
+      },
+    })
+    const postIds = likes.map(item => item.postId)
+    return this.postService.getPostInfoByIds(postIds, userName)
   }
 }

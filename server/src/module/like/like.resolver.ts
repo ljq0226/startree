@@ -1,4 +1,5 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql'
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import { PostInfo } from '../post/dto/postInfo'
 import { LikeService } from './like.service'
 import { Like } from './entities/like.entity'
 import { CreateLikeInput } from './dto/create-like.input'
@@ -16,5 +17,10 @@ export class LikeResolver {
   @Mutation(() => Boolean)
   deleteLike(@Args('deleteLikeInput') deleteLikeInput: DeleteLikeInput) {
     return this.likeService.delete(deleteLikeInput)
+  }
+
+  @Query(() => [PostInfo])
+  getLikePost(@Args('userName') userName: string) {
+    return this.likeService.getLikePost(userName)
   }
 }
