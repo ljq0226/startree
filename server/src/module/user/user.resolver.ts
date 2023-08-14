@@ -3,7 +3,6 @@ import { UserService } from './user.service'
 import { User } from './entities/user.entity'
 import { CreateUserInput } from './dto/create-user.input'
 import { ProfileCount } from './dto/profileCount'
-import { ProfileData } from './dto/profileData'
 import { UpdateUserInput } from './dto/update-user.input'
 
 @Resolver(() => User)
@@ -35,11 +34,6 @@ export class UserResolver {
   @Query(() => ProfileCount)
   profileCount(@Args('name') name: string) {
     return this.userService.profileCount(name)
-  }
-
-  @Query(() => ProfileData)
-  async profileData(@Args('name') name: string) {
-    return await this.userService.profileData(name)
   }
 
   @Mutation(() => User)

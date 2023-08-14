@@ -156,6 +156,26 @@ export class PostService {
     return homePosts.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
   }
 
+  async profileData(name: string) {
+    const followings = await this.followService.findFollowings(name)
+    const followed = await this.followService.findFollowed(name)
+
+    const postArr = await this.prisma.post.findMany({
+      where: {
+        userName: name,
+      },
+      select: {
+        id: true,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    })
+    const postIds = postArr.map(item => item.id)
+    const posts = this.getPostInfoByIds(postIds, name)
+    return { posts, followed, followings }
+  }
+
   findPostByTag(id: number) {
     return `This action returns a #${id} post`
   }

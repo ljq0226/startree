@@ -11,27 +11,40 @@ query Profile($name: String!) {
     followings
     posts
   }
-  profileData(name: $name) {
+  getProfileData(name: $name) {
+    followed {
+      name
+      nickName
+      image
+    }
     followings {
       name
       nickName
       image
     }
     posts {
-      id
       content
+      createdAt
+      id
+      postCount {
+        forward
+        isForward
+        isLike
+        isReply
+        isStar
+        like
+        reply
+      }
+      profileCount {
+        followed
+        followings
+        posts
+      }
       user {
+        image
         name
         nickName
-        image
       }
-      createdAt
-      userName
-    }
-    followed {
-      name
-      nickName
-      image
     }
   }
 

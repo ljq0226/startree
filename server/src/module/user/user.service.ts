@@ -9,6 +9,7 @@ export class UserService {
   constructor(
     private prisma: PrismaService,
     private readonly followService: FollowService,
+    // private readonly postService: PostService,
 
   ) {}
 
@@ -99,20 +100,6 @@ export class UserService {
       followings,
       followed,
     }
-  }
-
-  async profileData(name: string) {
-    const followings = await this.followService.findFollowings(name)
-    const followed = await this.followService.findFollowed(name)
-    const posts = await this.prisma.post.findMany({
-      where: {
-        userName: name,
-      },
-      include: {
-        user: true,
-      },
-    })
-    return { posts, followed, followings }
   }
 
   async updateUserProfile({ name, nickName, profile }: UpdateUserInput) {

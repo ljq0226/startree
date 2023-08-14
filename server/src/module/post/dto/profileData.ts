@@ -1,11 +1,11 @@
 import { Field, ObjectType } from '@nestjs/graphql'
-import { Post } from 'src/module/post/entities/post.entity'
-import { User } from '../entities/user.entity'
+import { PostInfo } from 'src/module/post/dto/postInfo'
+import { User } from '../../user/entities/user.entity'
 
 @ObjectType()
 export class ProfileData {
-  @Field(() => [Post])
-  posts: Post[]
+  @Field(() => [PostInfo])
+  posts: PostInfo[]
 
   @Field(() => [User])
   followings: User[]

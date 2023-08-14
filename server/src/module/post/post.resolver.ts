@@ -1,4 +1,5 @@
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql'
+import { ProfileData } from './dto/profileData'
 import { PostService } from './post.service'
 import { Post } from './entities/post.entity'
 import { CreatePostInput } from './dto/create-post.input'
@@ -43,6 +44,11 @@ export class PostResolver {
   @Query(() => [Post])
   findPostByUser(@Args('name') name: string) {
     return this.postService.findPostByUser(name)
+  }
+
+  @Query(() => ProfileData)
+  async getProfileData(@Args('name') name: string) {
+    return await this.postService.profileData(name)
   }
 
   @Mutation(() => Post)

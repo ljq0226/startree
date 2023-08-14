@@ -1,3 +1,5 @@
+import type { PostType } from './post'
+
 export interface Profile {
   id: number
   bio: string
@@ -37,16 +39,6 @@ export interface Follow {
 }
 export interface ProfileData {
   followings: Follow[]
-  posts: {
-    id: number
-    content: string
-    User: {
-      name: string
-      nickName: string
-      image: string
-    }
-    createdAt: Date
-    userName: string
-  }[]
+  posts: PostType[]
   followed: Follow[]
 }

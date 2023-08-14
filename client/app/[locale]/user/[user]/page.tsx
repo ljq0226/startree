@@ -43,7 +43,7 @@ function page({ params }: Props) {
     if (!loading) {
       setUserData(data.userData)
       setProfileCount(data.profileCount)
-      setProfileData(data.profileData)
+      setProfileData(data.getProfileData)
     }
   }, [data])
 
