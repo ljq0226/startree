@@ -19,9 +19,9 @@ function UserProfileModal({ user, profileCount, setIsShowPanel }: Props) {
   return (
     <motion.div
       className='userProfileModal'
-      initial={{ x: -50 }}
-      animate={{ x: 0 }}
-      transition={{ duration: 0.5 }}
+      initial={{ y: 10 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.2 }}
       onClick={(e: React.MouseEvent) => { e.stopPropagation() }}
       onMouseLeave={() => setIsShowPanel(false)}
     >

@@ -39,7 +39,14 @@ function Post({ content, id, createdAt, user, postCount, profileCount }: PostTyp
                 onClick={(event) => {
                   event.stopPropagation()
                 }}
-                onMouseEnter={() => setIsShowPanel(true)}
+                onMouseEnter={() =>
+                  setIsShowPanel(true)
+                }
+                onMouseLeave={(e: React.MouseEvent) => {
+                  const clientOffset = e.currentTarget.getBoundingClientRect()
+                  if (e.clientX > clientOffset.right - 10 || e.clientX < clientOffset.left + 10 || e.clientY < clientOffset.top)
+                    setIsShowPanel(false)
+                }}
               >
                 {isShowPanel && <UserProfileModal setIsShowPanel={setIsShowPanel} profileCount={profileCount} user={user} />}
                 <span className='font-bold text-bs'>{user?.name}</span>
@@ -68,7 +75,7 @@ function Post({ content, id, createdAt, user, postCount, profileCount }: PostTyp
           }}
         >
           <CommentIcon />
-          <ForwardIcon postId={id} count={postCount.forward} isForward={postCount.isForward}/>
+          <ForwardIcon postId={id} count={postCount.forward} isForward={postCount.isForward} />
           <LikeIcon postId={id} count={postCount.like} isLike={postCount.isLike} />
           <StarIcon postId={id} isStar={postCount.isStar} />
         </div>
