@@ -1,4 +1,5 @@
-import { Args, Mutation, Resolver } from '@nestjs/graphql'
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
+import { PostInfo } from '../post/dto/postInfo'
 import { StarService } from './star.service'
 import { Star } from './entities/star.entity'
 import { CreateStarInput } from './dto/create-star.input'
@@ -16,5 +17,10 @@ export class StarResolver {
   @Mutation(() => Boolean)
   deleteStar(@Args('deleteStarInput') deleteStarInput: DeleteStarInput) {
     return this.starService.delete(deleteStarInput)
+  }
+
+  @Query(() => [PostInfo])
+  getStarPost(@Args('userName') userName: string) {
+    return this.starService.getStarPost(userName)
   }
 }

@@ -1,8 +1,11 @@
 import { Module } from '@nestjs/common'
-import { StarService } from './star.service'
+import { PostService } from '../post/post.service'
+import { FollowService } from '../follow/follow.service'
+import { UserService } from '../user/user.service'
 import { StarResolver } from './star.resolver'
+import { StarService } from './star.service'
 
 @Module({
-  providers: [StarResolver, StarService],
+  providers: [StarResolver, StarService, PostService, FollowService, UserService],
 })
 export class StarModule {}

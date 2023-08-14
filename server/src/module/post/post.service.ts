@@ -96,7 +96,7 @@ export class PostService {
   }
 
   async findAllPost(name: string) {
-    const postIds = await this.prisma.post.findMany({
+    const posts = await this.prisma.post.findMany({
       select: {
         id: true,
       },
@@ -104,9 +104,14 @@ export class PostService {
         createdAt: 'desc',
       },
     })
-    const postPromises = postIds.map(async (id) => {
+    const postIds = posts.map(item => item.id)
+    return this.getPostInfoByIds([...postIds], name)
+  }
+
+  async getPostInfoByIds(postIds: number[], name: string) {
+    return await Promise.all(postIds.map(async (id: any) => {
       const post = await this.prisma.post.findUnique({
-        where: id,
+        where: { id },
         include: { user: true },
       })
       const postId = post.id
@@ -126,9 +131,7 @@ export class PostService {
         profileCount,
       }
       return res
-    })
-    const posts = await Promise.all(postPromises)
-    return posts
+    }))
   }
 
   async findHomePost(name: string) {

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from 'nestjs-prisma'
+import { PostService } from '../post/post.service'
 import { CreateStarInput } from './dto/create-star.input'
 import { DeleteStarInput } from './dto/delete-star.input'
 
@@ -7,6 +8,7 @@ import { DeleteStarInput } from './dto/delete-star.input'
 export class StarService {
   constructor(
     private prisma: PrismaService,
+    private readonly postService: PostService,
   ) {}
 
   async findFirst(postId: number, userName: string) {
@@ -48,5 +50,18 @@ export class StarService {
       return true
     }
     return false
+  }
+
+  async getStarPost(userName: string) {
+    const stars = await this.prisma.star.findMany({
+      where: {
+        userName,
+      },
+      select: {
+        postId: true,
+      },
+    })
+    const postIds = stars.map(item => item.postId)
+    return this.postService.getPostInfoByIds(postIds, userName)
   }
 }
