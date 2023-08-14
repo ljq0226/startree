@@ -8,7 +8,7 @@ import { DeleteStarInput } from './dto/delete-star.input'
 export class StarResolver {
   constructor(private readonly starService: StarService) {}
 
-  @Mutation(() => Star)
+  @Mutation(() => Boolean)
   createStar(@Args('createStarInput') createStarInput: CreateStarInput) {
     return this.starService.create(createStarInput)
   }

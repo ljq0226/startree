@@ -1,5 +1,5 @@
-query FindAllPost {
-  findAllPost {
+query FindAllPost($name: String!) {
+  findAllPost(name: $name) {
     content
     createdAt
     id

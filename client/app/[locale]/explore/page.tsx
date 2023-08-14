@@ -6,9 +6,11 @@ import { useEffect, useState } from 'react'
 import Aside from '@/components/aside/Aside'
 import PostItem from '@/components/post/Post'
 import type { PostType } from '@/types'
+import { UserStore } from '@/store'
 
 export default function App() {
-  const { data, loading } = useQuery(FindAllPost)
+  const { name } = UserStore(s => s.user)
+  const { data, loading } = useQuery(FindAllPost, { variables: { name } })
 
   const [posts, setPosts] = useState<PostType[]>([])
 

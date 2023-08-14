@@ -82,10 +82,10 @@ type Like {
 type Mutation {
   createFollow(createFollowInput: CreateFollowInput!): Boolean!
   createForward(createForwardInput: CreateForwardInput!): Forward!
-  createLike(createLikeInput: CreateLikeInput!): Like!
+  createLike(createLikeInput: CreateLikeInput!): Boolean!
   createPost(createPostInput: CreatePostInput!): Post!
   createReply(createReplyInput: CreateReplyInput!): Reply!
-  createStar(createStarInput: CreateStarInput!): Star!
+  createStar(createStarInput: CreateStarInput!): Boolean!
   createTag(createTagInput: CreateTagInput!): Tag!
   createUser(createUserInput: CreateUserInput!): User!
   deleteLike(deleteLikeInput: DeleteLikeInput!): Boolean!
@@ -162,7 +162,7 @@ input ProfileInput {
 
 type Query {
   findAll: [Tag!]!
-  findAllPost: [PostInfo!]!
+  findAllPost(name: String!): [PostInfo!]!
   findByAt(query: String!): [User!]!
   findFollowers(followedName: String!): [User!]!
   findFollowings(name: String!): [User!]!

@@ -9,25 +9,44 @@ export class LikeService {
     private prisma: PrismaService,
   ) {}
 
-  async create({ postId, userName }: CreateLikeInput) {
-    return await this.prisma.like.create({
-      data: {
-        userName,
-        postId,
+  async findFirst(postId: number, userName: string) {
+    return await this.prisma.like.findFirst({
+      where: {
+        AND: [
+          {
+            userName,
+          },
+          {
+            postId,
+          },
+        ],
+
       },
     })
   }
 
+  async create({ postId, userName }: CreateLikeInput) {
+    const like = await this.findFirst(postId, userName)
+    if (!like) {
+      await this.prisma.like.create({
+        data: {
+          userName,
+          postId,
+        },
+      })
+      return true
+    }
+    return false
+  }
+
   async delete({ postId, userName }: DeleteLikeInput) {
-    const like = await this.prisma.like.findFirst({
-      where: {
-        userName,
-        postId,
-      },
-    })
-    await this.prisma.like.delete({
-      where: { id: like.id },
-    })
-    return true
+    const like = await this.findFirst(postId, userName)
+    if (like) {
+      await this.prisma.like.delete({
+        where: { id: like.id },
+      })
+      return true
+    }
+    return false
   }
 }

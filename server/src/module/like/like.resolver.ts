@@ -8,7 +8,7 @@ import { DeleteLikeInput } from './dto/delete-like.input'
 export class LikeResolver {
   constructor(private readonly likeService: LikeService) {}
 
-  @Mutation(() => Like)
+  @Mutation(() => Boolean)
   createLike(@Args('createLikeInput') createLikeInput: CreateLikeInput) {
     return this.likeService.create(createLikeInput)
   }

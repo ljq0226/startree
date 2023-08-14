@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import cn from 'clsx'
 import CreateStar from '@api/Star/CreateStar.gql'
 import DeleteStar from '@api/Star/DeleteStar.gql'
@@ -20,6 +20,11 @@ export default function StarIcon({ postId, isStar }: Props) {
   const [createStar] = useMutation(CreateStar)
   const [deleteStar] = useMutation(DeleteStar)
   const [state, setState] = useState(isStar)
+
+  useEffect(() => {
+    setState(isStar)
+  }, [isStar])
+
   const handelDelete = async () => {
     await deleteStar({
       variables: {

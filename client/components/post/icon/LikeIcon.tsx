@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import cn from 'clsx'
 import CreateLike from '@api/like/CreateLike.gql'
 import DeleteLike from '@api/like/DeleteLike.gql'
@@ -24,6 +24,13 @@ export default function LikeIcon({ postId, count, isLike }: Props) {
     count,
     isLike,
   })
+
+  useEffect(() => {
+    setState(prevState => ({
+      ...prevState,
+      isLike,
+    }))
+  }, [isLike])
   const handelDelete = async () => {
     await deleteLike({
       variables: {

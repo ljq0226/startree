@@ -1,5 +1,3 @@
 mutation CreateStar($createStarInput: CreateStarInput!) {
-  createStar(createStarInput: $createStarInput) {
-    id
-  }
+  createStar(createStarInput: $createStarInput)
 }

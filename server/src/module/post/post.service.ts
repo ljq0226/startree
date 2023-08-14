@@ -41,26 +41,53 @@ export class PostService {
     })
     const isStar = !!(await this.prisma.star.findFirst({
       where: {
-        userName: name,
-        postId: id,
+        AND: [
+          {
+            userName: name,
+          },
+          {
+            postId: id,
+          },
+        ],
       },
     }))
     const isReply = !!(await this.prisma.reply.findFirst({
       where: {
-        userName: name,
-        postId: id,
+        AND: [
+          {
+            userName: name,
+          },
+          {
+            postId: id,
+          },
+        ],
       },
     }))
-    const isLike = !!(await this.prisma.like.findFirst({
-      where: {
-        userName: name,
-        postId: id,
-      },
-    }))
+    const isLike = !!(
+      await this.prisma.like.findFirst({
+        where: {
+          AND: [
+            {
+              userName: name,
+            },
+            {
+              postId: id,
+            },
+          ],
+        },
+      })
+    )
+
     const isForward = !!(await this.prisma.forward.findFirst({
       where: {
-        userName: name,
-        postId: id,
+        AND: [
+          {
+            userName: name,
+          },
+          {
+            postId: id,
+          },
+        ],
       },
     }))
     return {
@@ -68,7 +95,7 @@ export class PostService {
     }
   }
 
-  async findAllPost() {
+  async findAllPost(name: string) {
     const postIds = await this.prisma.post.findMany({
       select: {
         id: true,
@@ -88,7 +115,7 @@ export class PostService {
         nickName: post.user.nickName,
         image: post.user.image,
       }
-      const postCount = await this.postCount(postId, user.name)
+      const postCount = await this.postCount(postId, name)
       const profileCount = await this.userService.profileCount(user.name)
       const res = {
         id: postId,

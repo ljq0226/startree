@@ -9,25 +9,44 @@ export class StarService {
     private prisma: PrismaService,
   ) {}
 
-  async create({ postId, userName }: CreateStarInput) {
-    return await this.prisma.star.create({
-      data: {
-        userName,
-        postId,
+  async findFirst(postId: number, userName: string) {
+    return await this.prisma.star.findFirst({
+      where: {
+        AND: [
+          {
+            userName,
+          },
+          {
+            postId,
+          },
+        ],
+
       },
     })
   }
 
+  async create({ postId, userName }: CreateStarInput) {
+    const star = await this.findFirst(postId, userName)
+    if (!star) {
+      await this.prisma.star.create({
+        data: {
+          userName,
+          postId,
+        },
+      })
+      return true
+    }
+    return false
+  }
+
   async delete({ postId, userName }: DeleteStarInput) {
-    const star = await this.prisma.star.findFirst({
-      where: {
-        userName,
-        postId,
-      },
-    })
-    await this.prisma.star.delete({
-      where: { id: star.id },
-    })
-    return true
+    const star = await this.findFirst(postId, userName)
+    if (star) {
+      await this.prisma.star.delete({
+        where: { id: star.id },
+      })
+      return true
+    }
+    return false
   }
 }

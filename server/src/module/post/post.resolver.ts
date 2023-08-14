@@ -16,8 +16,8 @@ export class PostResolver {
   }
 
   @Query(() => [PostInfo])
-  findAllPost() {
-    return this.postService.findAllPost()
+  findAllPost(@Args('name') name: string) {
+    return this.postService.findAllPost(name)
   }
 
   @Query(() => PostCount)

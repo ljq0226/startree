@@ -1,5 +1,3 @@
 mutation CreateLike($createLikeInput: CreateLikeInput!) {
-  createLike(createLikeInput: $createLikeInput) {
-    id
-  }
+  createLike(createLikeInput: $createLikeInput)
 }
