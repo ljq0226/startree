@@ -13,6 +13,11 @@ export class FollowResolver {
     return this.followService.create(createFollowInput)
   }
 
+  @Query(() => Boolean)
+  findIsFollowing(@Args('name')name: string, @Args('userName') userName: string) {
+    return this.followService.findIsFollowing(name, userName)
+  }
+
   @Query(() => [User])
   findFollowings(@Args('name') name: string) {
     return this.followService.findFollowings(name)

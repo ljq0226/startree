@@ -6,14 +6,33 @@ import { CreateFollowInput } from './dto/create-follow.input'
 export class FollowService {
   constructor(private prisma: PrismaService) {}
 
-  async create({ name, followedName }: CreateFollowInput) {
-    await this.prisma.follow.create({
-      data: {
-        name,
-        followedName,
+  async findFirst(name: string, followedName: string) {
+    return await this.prisma.follow.findFirst({
+      where: {
+        AND: [
+          {
+            name,
+          },
+          {
+            followedName,
+          },
+        ],
       },
     })
-    return true
+  }
+
+  async create({ name, followedName }: CreateFollowInput) {
+    const follow = await this.findFirst(name, followedName)
+    if (!follow) {
+      await this.prisma.follow.create({
+        data: {
+          name,
+          followedName,
+        },
+      })
+      return true
+    }
+    return false
   }
 
   async findFollowings(name: string) {
@@ -58,20 +77,27 @@ export class FollowService {
     })
   }
 
-  async remove({ name, followedName }: CreateFollowInput) {
-    const follow = await this.prisma.follow.findFirst({
+  async findIsFollowing(name: string, userName: string) {
+    return !!(await this.prisma.follow.findFirst({
       where: {
         AND: [
           { name },
-          { followedName },
+          { followedName: userName },
         ],
       },
-    })
-    await this.prisma.follow.delete({
-      where: {
-        id: follow.id,
-      },
-    })
-    return true
+    }))
+  }
+
+  async remove({ name, followedName }: CreateFollowInput) {
+    const follow = await this.findFirst(name, followedName)
+    if (follow) {
+      await this.prisma.follow.delete({
+        where: {
+          id: follow.id,
+        },
+      })
+      return true
+    }
+    return false
   }
 }

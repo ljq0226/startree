@@ -5,6 +5,11 @@ query Profile($name: String!) {
     image
     email
     createdAt
+    profile {
+      bio
+      github
+      website
+    }
   }
   profileCount(name: $name) {
     followed

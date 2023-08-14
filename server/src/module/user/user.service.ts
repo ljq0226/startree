@@ -72,6 +72,9 @@ export class UserService {
       where: {
         name,
       },
+      include: {
+        profile: true,
+      },
     })
     return user
   }

@@ -1,7 +1,7 @@
 import type { PostType } from './post'
 
 export interface Profile {
-  id: number
+  id?: number
   bio: string
   website: string
   github: string
@@ -25,6 +25,7 @@ export interface UserData {
   image: string
   email: string
   createdAt: Date
+  profile: Profile
 }
 
 export interface ProfileCount {

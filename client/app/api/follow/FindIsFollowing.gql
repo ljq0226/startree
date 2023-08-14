@@ -1,0 +1,3 @@
+query FindIsFollowing($name: String!, $userName: String!) {
+  findIsFollowing(name: $name, userName: $userName)
+}
