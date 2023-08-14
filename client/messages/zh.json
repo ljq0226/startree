@@ -47,9 +47,9 @@
     "apply": "应用",
     "star": "星标",
     "stared": "已星标",
-    "boost": "转发",
-    "boost_count": "{0}",
-    "boosted": "已转发",
+    "forward": "转发",
+    "forward_count": "{0}",
+    "forwarded": "已转发",
     "clear_publish_failed": "清除发布失败信息",
     "clear_upload_failed": "清除上传失败信息",
     "close": "关闭",
@@ -204,7 +204,7 @@
     "dialog_header": "快捷键",
     "groups": {
       "actions": {
-        "boost": "转发",
+        "forward": "转发",
         "command_mode": "命令面板",
         "compose": "撰写",
         "favorite": "喜欢",
@@ -241,7 +241,7 @@
     "open_in_original_site": "从源站打开",
     "pin_on_profile": "置顶在个人资料上",
     "share_post": "分享这条帖文",
-    "show_favorited_and_boosted_by": "展示谁喜欢和转发了",
+    "show_favorited_and_forwarded_by": "展示谁喜欢和转发了",
     "show_reblogs": "显示来自 {0} 的转发",
     "show_untranslated": "显示原文",
     "toggle_theme": {
@@ -442,7 +442,7 @@
       "grayscale_mode": "灰色模式",
       "hide_account_hover_card": "隐藏用户悬浮卡",
       "hide_alt_indi_on_posts": "隐藏帖文上的描述按钮",
-      "hide_boost_count": "隐藏转发数",
+      "hide_forward_count": "隐藏转发数",
       "hide_favorite_count": "隐藏收藏数",
       "hide_follower_count": "隐藏关注者数",
       "hide_news": "隐藏新闻页",
@@ -498,7 +498,7 @@
     "uploading": "上传中..."
   },
   "status": {
-    "boosted_by": "被转发",
+    "forwarded_by": "被转发",
     "edited": "在 {0} 编辑了",
     "favorited_by": "被喜欢",
     "filter_hidden_phrase": "筛选依据",
@@ -547,11 +547,19 @@
     "unfollow_label": "取消关注 {0} 标签"
   },
   "time_ago_options": {
+    "just_now": "刚刚",
+    "minutes": "{data}分钟",
+    "hours": "{data}小时",
+    "days": "{data}天",
+    "weeks": "{data}周",
+    "months": "{data}月",
+    "years": "{data}年",
+
     "day_future": "现在|明天|{n} 天后",
     "day_past": "现在|昨天|{n} 天前",
     "hour_future": "现在|1 小时后|{n} 小时后",
     "hour_past": "现在|1 小时前|{n} 小时前",
-    "just_now": "刚刚",
+
     "minute_future": "现在|1 分钟后|{n} 分钟后",
     "minute_past": "现在|1 分钟前|{n} 分钟前",
     "month_future": "现在|下个月|{n} 个月后",

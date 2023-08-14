@@ -10,12 +10,12 @@ import { UserStore } from '@/store'
 function Home() {
   const user = UserStore(s => s.user)
   const [homePost, setHomePost] = useState<PostType[] | []>([])
-  const { data, loading } = useQuery(
-    FindHomePost, { variables: { name: user.name } })
-  useEffect(() => {
-    if (data)
-      setHomePost(data.findHomePost)
-  }, [data])
+  // const { data, loading } = useQuery(
+  //   FindHomePost, { variables: { name: user.name } })
+  // useEffect(() => {
+  //   if (data)
+  //     // setHomePost(data.findHomePost)
+  // }, [data])
 
   return (
     <div className="flex flex-col w-full h-full">

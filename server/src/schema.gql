@@ -48,6 +48,11 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+input DeleteForwardInput {
+  postId: Float!
+  userName: String!
+}
+
 input DeleteLikeInput {
   postId: Float!
   userName: String!
@@ -81,21 +86,20 @@ type Like {
 
 type Mutation {
   createFollow(createFollowInput: CreateFollowInput!): Boolean!
-  createForward(createForwardInput: CreateForwardInput!): Forward!
+  createForward(createForwardInput: CreateForwardInput!): Boolean!
   createLike(createLikeInput: CreateLikeInput!): Boolean!
   createPost(createPostInput: CreatePostInput!): Post!
   createReply(createReplyInput: CreateReplyInput!): Reply!
   createStar(createStarInput: CreateStarInput!): Boolean!
   createTag(createTagInput: CreateTagInput!): Tag!
   createUser(createUserInput: CreateUserInput!): User!
+  deleteForward(deleteForwardInput: DeleteForwardInput!): Boolean!
   deleteLike(deleteLikeInput: DeleteLikeInput!): Boolean!
   deleteStar(deleteStarInput: DeleteStarInput!): Boolean!
   removeFollow(removeFollowInput: CreateFollowInput!): Boolean!
-  removeForward(id: Int!): Forward!
   removePost(id: Int!): Post!
   removeReply(id: Int!): Reply!
   removeTag(id: Int!): Tag!
-  updateForward(updateForwardInput: UpdateForwardInput!): Forward!
   updatePost(updatePostInput: UpdatePostInput!): Post!
   updateReply(updateReplyInput: UpdateReplyInput!): Reply!
   updateTag(updateTagInput: UpdateTagInput!): Tag!
@@ -105,6 +109,7 @@ type Mutation {
 type Post {
   content: String!
   createdAt: DateTime!
+  forwards: [Forward!]!
   id: Float!
   likes: [Like!]!
   replys: [Reply!]
@@ -150,7 +155,7 @@ type ProfileCount {
 type ProfileData {
   followed: [User!]!
   followings: [User!]!
-  posts: [Post!]!
+  posts: [PostInfo!]!
 }
 
 input ProfileInput {
@@ -167,15 +172,18 @@ type Query {
   findFollowers(followedName: String!): [User!]!
   findFollowings(name: String!): [User!]!
   findHomePost(name: String!): [Post!]!
+  findIsFollowing(name: String!, userName: String!): Boolean!
   findOne(id: Int!): Tag!
   findPostByTag(id: Float!): Post!
   findPostByUser(name: String!): [Post!]!
   followedCount(name: String!): Float!
+  getLikePost(userName: String!): [PostInfo!]!
   getPostById(id: Float!): Post!
   getPostCount(id: Float!, name: String!): PostCount!
   getProfileByName(name: String!): Profile!
+  getProfileData(name: String!): ProfileData!
+  getStarPost(userName: String!): [PostInfo!]!
   profileCount(name: String!): ProfileCount!
-  profileData(name: String!): ProfileData!
   userData(name: String!): User!
 }
 
@@ -206,12 +214,6 @@ type Tag {
   name: String!
   posts: [Post!]!
   updatedAt: DateTime!
-}
-
-input UpdateForwardInput {
-  id: Int!
-  postId: Float
-  userName: String
 }
 
 input UpdatePostInput {
@@ -267,6 +269,7 @@ type User {
 }
 
 type UserInfo {
+  bio: String!
   image: String!
   name: String!
   nickName: String!

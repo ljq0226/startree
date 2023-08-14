@@ -48,9 +48,9 @@
     "apply": "Apply",
     "star": "Star",
     "stared": "Stared",
-    "boost": "Boost",
-    "boost_count": "{0}",
-    "boosted": "Boosted",
+    "forward": "Forward",
+    "forward_count": "{0}",
+    "forwarded": "Forwarded",
     "clear_publish_failed": "Clear publish errors",
     "clear_upload_failed": "Clear file upload errors",
     "close": "Close",
@@ -142,7 +142,7 @@
     "show_reblogs": {
       "cancel": "Cancel",
       "confirm": "Show",
-      "title": "Are you sure you want to show boosts from {0}？"
+      "title": "Are you sure you want to show forwards from {0}？"
     },
     "unfollow": {
       "cancel": "Cancel",
@@ -178,7 +178,7 @@
     "desc_highlight": "Expect some bugs and missing features here and there.",
     "desc_para1": "Thanks for your interest in trying out Elk, our work-in-progress Mastodon web client!",
     "desc_para2": "we are working hard on the development and improving it over time.",
-    "desc_para3": "To boost development, you can sponsor the Team through GitHub Sponsors. We hope you enjoy Elk!",
+    "desc_para3": "To forward development, you can sponsor the Team through GitHub Sponsors. We hope you enjoy Elk!",
     "desc_para4": "Elk is Open Source. If you'd like to help with testing, giving feedback, or contributing,",
     "desc_para5": "reach out to us on GitHub",
     "desc_para6": "and get involved.",
@@ -208,7 +208,7 @@
     "dialog_header": "Keyboard shortcuts",
     "groups": {
       "actions": {
-        "boost": "Boost",
+        "forward": "Forward",
         "command_mode": "Command mode",
         "compose": "Compose",
         "favorite": "favorite",
@@ -238,7 +238,7 @@
     "delete_and_redraft": "Delete & re-draft",
     "direct_message_account": "Direct message {0}",
     "edit": "Edit",
-    "hide_reblogs": "Hide boosts from {0}",
+    "hide_reblogs": "Hide forwards from {0}",
     "mention_account": "Mention {0}",
     "mute_account": "Mute {0}",
     "mute_conversation": "Mute this post",
@@ -247,8 +247,8 @@
     "remove_personal_note": "Remove personal note from {0}",
     "report_account": "Report {0}",
     "share_post": "Share this post",
-    "show_favorited_and_boosted_by": "Show who favorited and boosted",
-    "show_reblogs": "Show boosts from {0}",
+    "show_favorited_and_forwarded_by": "Show who favorited and forwarded",
+    "show_reblogs": "Show forwards from {0}",
     "show_untranslated": "Show untranslated",
     "toggle_theme": {
       "dark": "Toggle dark mode",
@@ -298,7 +298,7 @@
     "followed_you": "followed you",
     "followed_you_count": "{0} people followed you|{0} person followed you|{0} people followed you",
     "missing_type": "MISSING notification.type:",
-    "reblogged_post": "boosted your post",
+    "reblogged_post": "forwarded your post",
     "reported": "{0} reported {1}",
     "request_to_follow": "requested to follow you",
     "signed_up": "signed up",
@@ -503,7 +503,7 @@
       "grayscale_mode": "Grayscale mode",
       "hide_account_hover_card": "Hide account hover card",
       "hide_alt_indi_on_posts": "Hide alt indicator on posts",
-      "hide_boost_count": "Hide boost count",
+      "hide_forward_count": "Hide forward count",
       "hide_favorite_count": "Hide favorite count",
       "hide_follower_count": "Hide following/follower count",
       "hide_news": "Hide news",
@@ -568,7 +568,7 @@
       "suspended_message": "The account of this status has been suspended.",
       "suspended_show": "Show content anyways?"
     },
-    "boosted_by": "Boosted By",
+    "forwarded_by": "Forwarded By",
     "edited": "Edited {0}",
     "favorited_by": "Favorited By",
     "filter_hidden_phrase": "Filtered by",
@@ -618,11 +618,18 @@
     "unfollow_label": "Unfollow {0} tag"
   },
   "time_ago_options": {
+    "just_now": "just now",
+
+    "minutes": "{data}m",
+    "hours": "{data}h",
+    "days": "{data}d",
+    "weeks": "{data}w",
+    "months": "{data}m",
+    "years": "{data}y",
     "day_future": "in 0 days|tomorrow|in {n} days",
     "day_past": "0 days ago|yesterday|{n} days ago",
     "hour_future": "in 0 hours|in 1 hour|in {n} hours",
     "hour_past": "0 hours ago|1 hour ago|{n} hours ago",
-    "just_now": "just now",
     "minute_future": "in 0 minutes|in 1 minute|in {n} minutes",
     "minute_past": "0 minutes ago|1 minute ago|{n} minutes ago",
     "month_future": "in 0 months|next month|in {n} months",
