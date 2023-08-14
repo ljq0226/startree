@@ -129,4 +129,7 @@
   .profile-input{
     @apply w-3/5 p-1 border outline-none bg-base border-base
   }
+  .userProfileModal{
+    @apply absolute top-10 rounded-xl -left-16 z-[10] flex flex-col bg-base min-w-[350px] max-w-[460px] p-4 space-y-4 border border-base 
+  }
 }

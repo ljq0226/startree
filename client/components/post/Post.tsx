@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Avatar from '../ui/Avatar'
 import Tooltip from '../ui/Tooltip'
+import UserProfileModal from '../modal/UserProfileModal'
 import LikeIcon from './icon/LikeIcon'
 import BoostIcon from './icon/BoostIcon'
 import CommentIcon from './icon/CommentIcon'
@@ -12,17 +13,12 @@ import type { PostType } from '@/types'
 import useI18n from '@/hooks/theme/useI18n'
 import { getTimeAgo } from '@/lib'
 
-interface Props extends PostType {
-  params?: {
-    locale: string
-  }
-}
-
-function Post({ content, id, createdAt, user, postCount }: PostType) {
+function Post({ content, id, createdAt, user, postCount, profileCount }: PostType) {
   const router = useRouter()
   const t = useI18n('time_ago_options')
   const date = new Date(createdAt)
   const timeAgo = getTimeAgo(date)
+  const [isShowPanel, setIsShowPanel] = useState(false)
   const [locale, setLocale] = useState('en')
   useEffect(() => {
     setLocale(document.documentElement.lang)
@@ -38,12 +34,15 @@ function Post({ content, id, createdAt, user, postCount }: PostType) {
           <div className="flex flex-col flex-1 px-4">
             <div className='flex items-center text-secondary'>
               <Link
-                className='px-2 py-1 text-base cursor-pointer hover-animation'
+                className='relative px-2 py-1 text-base cursor-pointer hover-animation'
                 href={`/user/${user?.name}`}
                 onClick={(event) => {
                   event.stopPropagation()
                 }}
+                onMouseEnter={() => setIsShowPanel(true)}
+
               >
+                {isShowPanel && <UserProfileModal setIsShowPanel={setIsShowPanel} profileCount={profileCount} user={user} />}
                 <span className='font-bold text-bs'>{user?.name}</span>
                 <span className=''>{`@${user?.name}`}</span>
               </Link>
