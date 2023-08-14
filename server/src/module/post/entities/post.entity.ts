@@ -1,4 +1,5 @@
 import { Field, ObjectType } from '@nestjs/graphql'
+import { Forward } from 'src/module/forward/entities/forward.entity'
 import { Like } from 'src/module/like/entities/like.entity'
 import { Reply } from 'src/module/reply/entities/reply.entity'
 import { Tag } from 'src/module/tag/entities/tag.entity'
@@ -26,6 +27,9 @@ export class Post {
 
   @Field(() => [Reply], { nullable: true })
   replys: Reply[]
+
+  @Field(() => [Forward])
+  forwards: Forward[]
 
   @Field(() => [Tag], { nullable: true })
   tags: Tag[]

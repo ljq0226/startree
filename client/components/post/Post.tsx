@@ -6,7 +6,7 @@ import Avatar from '../ui/Avatar'
 import Tooltip from '../ui/Tooltip'
 import UserProfileModal from '../modal/UserProfileModal'
 import LikeIcon from './icon/LikeIcon'
-import BoostIcon from './icon/BoostIcon'
+import ForwardIcon from './icon/ForwardIcon'
 import CommentIcon from './icon/CommentIcon'
 import StarIcon from './icon/StarIcon'
 import type { PostType } from '@/types'
@@ -40,7 +40,6 @@ function Post({ content, id, createdAt, user, postCount, profileCount }: PostTyp
                   event.stopPropagation()
                 }}
                 onMouseEnter={() => setIsShowPanel(true)}
-
               >
                 {isShowPanel && <UserProfileModal setIsShowPanel={setIsShowPanel} profileCount={profileCount} user={user} />}
                 <span className='font-bold text-bs'>{user?.name}</span>
@@ -69,7 +68,7 @@ function Post({ content, id, createdAt, user, postCount, profileCount }: PostTyp
           }}
         >
           <CommentIcon />
-          <BoostIcon />
+          <ForwardIcon postId={id} count={postCount.forward} isForward={postCount.isForward}/>
           <LikeIcon postId={id} count={postCount.like} isLike={postCount.isLike} />
           <StarIcon postId={id} isStar={postCount.isStar} />
         </div>

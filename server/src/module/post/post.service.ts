@@ -85,7 +85,7 @@ export class PostService {
             userName: name,
           },
           {
-            postId: id,
+            forwardPostId: id,
           },
         ],
       },

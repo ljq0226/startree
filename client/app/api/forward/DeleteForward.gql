@@ -1,0 +1,3 @@
+mutation DeleteForward($deleteForwardInput: DeleteForwardInput!) {
+  deleteForward(deleteForwardInput: $deleteForwardInput)
+}

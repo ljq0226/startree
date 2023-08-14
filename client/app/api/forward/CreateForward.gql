@@ -1,0 +1,3 @@
+mutation CreateForward($createForwardInput: CreateForwardInput!) {
+  createForward(createForwardInput: $createForwardInput)
+}
