@@ -1,4 +1,4 @@
-import type { ProfileCount } from './user'
+import type { ProfileCount, UserProfile } from './user'
 
 export interface Like {
   postId: number
@@ -22,11 +22,7 @@ export interface PostType {
   id: number
   createdAt: Date
   content: string
-  user: {
-    name: string
-    nickName: string
-    image: string
-  }
+  user: UserProfile
   postCount: PostCount
   profileCount: ProfileCount
 

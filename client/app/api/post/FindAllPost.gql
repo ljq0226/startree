@@ -21,6 +21,7 @@ query FindAllPost($name: String!) {
       image
       name
       nickName
+      bio
     }
   }
 }

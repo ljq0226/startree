@@ -115,10 +115,12 @@ export class PostService {
         include: { user: true },
       })
       const postId = post.id
+      const profile = await this.getProfileByName(post.user.name)
       const user = {
         name: post.user.name,
         nickName: post.user.nickName,
         image: post.user.image,
+        bio: profile.bio,
       }
       const postCount = await this.postCount(postId, name)
       const profileCount = await this.userService.profileCount(user.name)
@@ -209,6 +211,18 @@ export class PostService {
       },
     })
     return posts
+  }
+
+  async getProfileByName(name: string) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        name,
+      },
+    })
+    const id = user.profileId
+    return await this.prisma.profile.findUnique({
+      where: { id },
+    })
   }
 
   update(id: number, updatePostInput: UpdatePostInput) {

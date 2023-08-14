@@ -12,6 +12,9 @@ class UserInfo {
 
   @Field(() => String)
   image: string
+
+  @Field(() => String)
+  bio: string
 }
 
 @ObjectType()

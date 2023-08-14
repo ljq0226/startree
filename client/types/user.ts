@@ -18,6 +18,12 @@ export interface AtUser {
   nickName: string
   image: string
 }
+export interface UserProfile {
+  name: string
+  nickName: string
+  image: string
+  bio: string
+}
 
 export interface UserData {
   name: string
