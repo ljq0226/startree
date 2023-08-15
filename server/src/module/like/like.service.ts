@@ -22,7 +22,9 @@ export class LikeService {
             postId,
           },
         ],
-
+      },
+      orderBy: {
+        createdAt: 'desc',
       },
     })
   }

@@ -60,6 +60,9 @@ export class StarService {
       select: {
         postId: true,
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
     })
     const postIds = stars.map(item => item.postId)
     return this.postService.getPostInfoByIds(postIds, userName)
