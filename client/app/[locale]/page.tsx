@@ -5,7 +5,7 @@ import type { UserAuth } from '@/types/user'
 import { UserStore } from '@/store'
 
 export default function IndexPage() {
-  const { data: session, status } = useSession()
+  const { data: session } = useSession()
   const setUser = UserStore(s => s.setUser)
   if (session) {
     const user = session.user as UserAuth

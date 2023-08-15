@@ -59,7 +59,7 @@ function Reply(props: PostReplyType) {
             </div>
             <div
               className='flex-1 px-2 my-2'
-              onClick={(e) => {
+              onClick={() => {
                 router.replace(`/post/${id}`)
               }}
             >
@@ -70,7 +70,7 @@ function Reply(props: PostReplyType) {
         </div>
         <div
           className="flex justify-between py-2 mx-16 ml-[65px]"
-          onClick={(e) => {
+          onClick={() => {
             router.replace(`/post/${id}`)
           }}
         >

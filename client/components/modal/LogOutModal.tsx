@@ -6,14 +6,12 @@ import Icon from '../ui/Icon'
 import useModal from '@/hooks/useModal'
 import type { UserAuth } from '@/types/user'
 import useI18n from '@/hooks/theme/useI18n'
-import { UserStore } from '@/store'
 
 interface Props {
   user: UserAuth
 }
 function LogOutModal({ user }: Props) {
   const { setIsShow } = useModal()
-  const setUser = UserStore(s => s.setUser)
   const t = useI18n('user')
   const handleSignOut = () => {
     signOut()

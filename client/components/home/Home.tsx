@@ -1,7 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
-import FindHomePost from '@api/post/FindHomePost.gql'
-import { useQuery } from '@apollo/client'
+import { useState } from 'react'
 import EditPost from '../editor/EditPost'
 import Post from '../post/Post'
 import type { PostType } from '@/types'

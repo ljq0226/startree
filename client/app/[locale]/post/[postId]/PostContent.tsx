@@ -54,7 +54,7 @@ function PostContent({ content, id, createdAt, user, postCount, profileCount }: 
         </div>
         <div
           className='flex-1 px-2 my-2'
-          onClick={(e) => {
+          onClick={() => {
             router.replace(`/post/${id}`)
           }}
         >
@@ -66,7 +66,7 @@ function PostContent({ content, id, createdAt, user, postCount, profileCount }: 
         </div>
         <div
           className="flex justify-between py-2 border-y border-base"
-          onClick={(e) => {
+          onClick={() => {
             router.replace(`/post/${id}`)
           }}
         >

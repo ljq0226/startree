@@ -14,10 +14,10 @@ const AlertStore = create<alertState>(set => ({
   type: 'success',
   content: '',
   duration: 2,
-  setShow: v => set(s => ({
+  setShow: v => set(() => ({
     show: v,
   })),
-  useAlert: (type, content, duration = 2, show = true) => set(s => ({
+  useAlert: (type, content, duration = 2, show = true) => set(() => ({
     show,
     type,
     content,

@@ -17,7 +17,7 @@ function EditAction({ editorTarget }: Props) {
   const user = UserStore(s => s.user)
   const useAlert = AlertStore(s => s.useAlert)
   const [showEmoji, setShowEmoji] = useState(false)
-  const [addTodo, { loading, error }] = useMutation(CreatePost)
+  const [addTodo, { loading }] = useMutation(CreatePost)
   const handlePublish = async () => {
     await addTodo({
       variables: {

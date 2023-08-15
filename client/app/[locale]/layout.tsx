@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import { NextIntlClientProvider } from 'next-intl'
 import { notFound } from 'next/navigation'
 import type { ReactNode } from 'react'
@@ -12,7 +11,6 @@ export function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'zh' }]
 }
 
-const inter = Inter({ subsets: ['latin'] })
 interface Props {
   children: ReactNode
   params: { locale: string }

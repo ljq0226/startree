@@ -32,4 +32,3 @@ export function getTimeAgo(date: Date): [string, number?] {
   else
     return ['years', years]
 }
-
