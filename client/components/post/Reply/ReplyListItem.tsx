@@ -62,8 +62,8 @@ function ReplyListItem({ content, createdAt, id, user, postCount, profileCount }
             onClick={() => {
               router.replace(`/post/${id}`)
             }}
+            dangerouslySetInnerHTML={{ __html: content }}
           >
-            {content}
           </div>
         </div>
       </div>

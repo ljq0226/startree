@@ -57,8 +57,8 @@ function PostContent({ content, id, createdAt, user, postCount, profileCount }: 
           onClick={() => {
             router.replace(`/post/${id}`)
           }}
+          dangerouslySetInnerHTML={{ __html: content }}
         >
-          {content}
         </div>
         <div className='flex items-center my-4 text-sm text-secondary hover:underline'>
           <span>{realTime}</span>

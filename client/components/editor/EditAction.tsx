@@ -28,6 +28,8 @@ function EditAction({ editorTarget }: Props) {
       },
     })
     !loading && useAlert('success', 'Post Successfully!')
+    if (editorTarget)
+      editorTarget.innerHTML = ''
   }
   return (
     <div className={cn('flex mt-4')}>

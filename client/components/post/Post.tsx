@@ -62,10 +62,9 @@ function Post({ content, id, createdAt, user, postCount, profileCount }: PostTyp
               onClick={() => {
                 router.replace(`/post/${id}`)
               }}
+              dangerouslySetInnerHTML={{ __html: content }}
             >
-              {content}
             </div>
-
           </div>
         </div>
         <div

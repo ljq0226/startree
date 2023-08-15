@@ -62,10 +62,9 @@ function Reply(props: PostReplyType) {
               onClick={() => {
                 router.replace(`/post/${id}`)
               }}
+              dangerouslySetInnerHTML={{ __html: content }}
             >
-              {content}
             </div>
-
           </div>
         </div>
         <div
