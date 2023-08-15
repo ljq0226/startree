@@ -33,11 +33,6 @@ input CreateStarInput {
   userName: String!
 }
 
-input CreateTagInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
-}
-
 input CreateUserInput {
   email: String!
   image: String!
@@ -97,7 +92,7 @@ type Mutation {
   createPost(createPostInput: CreatePostInput!): Post!
   createReply(createReplyInput: CreateReplyInput!): Boolean!
   createStar(createStarInput: CreateStarInput!): Boolean!
-  createTag(createTagInput: CreateTagInput!): Tag!
+  createTag(name: String!): Tag!
   createUser(createUserInput: CreateUserInput!): User!
   deleteForward(deleteForwardInput: DeleteForwardInput!): Boolean!
   deleteLike(deleteLikeInput: DeleteLikeInput!): Boolean!
@@ -105,9 +100,7 @@ type Mutation {
   deleteStar(deleteStarInput: DeleteStarInput!): Boolean!
   removeFollow(removeFollowInput: CreateFollowInput!): Boolean!
   removePost(id: Int!): Post!
-  removeTag(id: Int!): Tag!
   updatePost(updatePostInput: UpdatePostInput!): Post!
-  updateTag(updateTagInput: UpdateTagInput!): Tag!
   updateUserProfile(updateUserInput: UpdateUserInput!): User!
 }
 
@@ -181,14 +174,14 @@ input ProfileInput {
 }
 
 type Query {
-  findAll: [Tag!]!
+  findAll: [User!]!
   findAllPost(name: String!): [PostInfo!]!
   findByAt(query: String!): [User!]!
+  findByHashTag(query: String!): [Tag!]!
   findFollowers(followedName: String!): [User!]!
   findFollowings(name: String!): [User!]!
   findHomePost(name: String!): [Post!]!
   findIsFollowing(name: String!, userName: String!): Boolean!
-  findOne(id: Int!): Tag!
   findPostByTag(id: Float!): Post!
   findPostByUser(name: String!): [Post!]!
   followedCount(name: String!): Float!
@@ -236,12 +229,6 @@ input UpdatePostInput {
   content: String
   id: Int!
   userName: String
-}
-
-input UpdateTagInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
 }
 
 input UpdateUserInput {

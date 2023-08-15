@@ -1,0 +1,6 @@
+query FindByHashTag($query: String!) {
+  findByHashTag(query: $query) {
+    id
+    name
+  }
+}
