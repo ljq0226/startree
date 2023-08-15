@@ -1,20 +1,27 @@
-query GetPostById($id: Float!) {
-  getPostById(id: $id) {
+query GetPostById($name: String!, $id: Float!) {
+  getPostById(name: $name, id: $id) {
+    id
     content
     createdAt
-    id
+    postCount {
+      forward
+      isForward
+      isLike
+      isReply
+      isStar
+      like
+      reply
+    }
+    profileCount {
+      followed
+      followings
+      posts
+    }
     user {
+      bio
+      image
       name
       nickName
-      image
-    }
-    replys {
-      id
-      postId
-    }
-    tags {
-      id
-      name
     }
   }
 }

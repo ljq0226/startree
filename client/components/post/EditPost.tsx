@@ -34,7 +34,7 @@ function EditPost() {
   }
 
   return (
-    <div className="flex w-full p-2">
+    <div className="flex w-full">
       <Avatar className='mx-4 max-h-12' src={user.image || '/avatar/user.png'} />
       <div className="flex flex-col flex-1 ">
         <Editor editorRef={editorRef} setActive={setActive} />

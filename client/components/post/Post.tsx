@@ -74,7 +74,7 @@ function Post({ content, id, createdAt, user, postCount, profileCount }: PostTyp
             router.replace(`/post/${id}`)
           }}
         >
-          <CommentIcon />
+          <CommentIcon count={postCount.reply} />
           <ForwardIcon postId={id} count={postCount.forward} isForward={postCount.isForward} />
           <LikeIcon postId={id} count={postCount.like} isLike={postCount.isLike} />
           <StarIcon postId={id} isStar={postCount.isStar} />

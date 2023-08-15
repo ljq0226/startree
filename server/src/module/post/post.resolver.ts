@@ -5,7 +5,7 @@ import { Post } from './entities/post.entity'
 import { CreatePostInput } from './dto/create-post.input'
 import { UpdatePostInput } from './dto/update-post.input'
 import { PostCount } from './dto/count'
-import { PostInfo } from './dto/postInfo'
+import { PostInfo, PostReplyInfo } from './dto/postInfo'
 
 @Resolver(() => Post)
 export class PostResolver {
@@ -31,9 +31,9 @@ export class PostResolver {
     return this.postService.findHomePost(name)
   }
 
-  @Query(() => Post)
-  getPostById(@Args('id')id: number) {
-    return this.postService.getPostById(id)
+  @Query(() => [PostInfo])
+  getPostById(@Args('id')id: number, @Args('name') name: string) {
+    return this.postService.getParentPostReply(id, name)
   }
 
   @Query(() => Post)
@@ -49,6 +49,11 @@ export class PostResolver {
   @Query(() => ProfileData)
   async getProfileData(@Args('name') name: string) {
     return await this.postService.profileData(name)
+  }
+
+  @Query(() => [PostReplyInfo])
+  getPostReply(@Args('postId') postId: number, @Args('name') name: string) {
+    return this.postService.getPostReply(postId, name)
   }
 
   @Mutation(() => Post)

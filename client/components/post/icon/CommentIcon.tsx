@@ -5,8 +5,15 @@ import useI18n from '@/hooks/theme/useI18n'
 import Tooltip from '@/components/ui/Tooltip'
 import Icon from '@/components/ui/Icon'
 
-export default function CommentIcon() {
+interface Props {
+  count: number
+}
+
+export default function CommentIcon({ count }: Props) {
   const t = useI18n('action')
+  const RenderCount = () => {
+    return count ? <span>{count}</span> : <></>
+  }
   return (
     <div className={'relative cursor-pointer hover:text-[#4799ec]'}>
       <Tooltip text={t('reply')}>
@@ -15,7 +22,7 @@ export default function CommentIcon() {
         </button>
       </Tooltip>
       <div className='absolute top-1 left-8'>
-        <span >12</span>
+        {RenderCount()}
       </div>
 
     </div>

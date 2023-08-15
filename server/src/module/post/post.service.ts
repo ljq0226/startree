@@ -109,30 +109,8 @@ export class PostService {
   }
 
   async getPostInfoByIds(postIds: number[], name: string) {
-    return await Promise.all(postIds.map(async (id: any) => {
-      const post = await this.prisma.post.findUnique({
-        where: { id },
-        include: { user: true },
-      })
-      const postId = post.id
-      const profile = await this.getProfileByName(post.user.name)
-      const user = {
-        name: post.user.name,
-        nickName: post.user.nickName,
-        image: post.user.image,
-        bio: profile.bio,
-      }
-      const postCount = await this.postCount(postId, name)
-      const profileCount = await this.userService.profileCount(user.name)
-      const res = {
-        id: postId,
-        content: post.content,
-        createdAt: post.createdAt,
-        user,
-        postCount,
-        profileCount,
-      }
-      return res
+    return await Promise.all(postIds.map(async (id: number) => {
+      return await this.getPostById(id, name)
     }))
   }
 
@@ -182,23 +160,53 @@ export class PostService {
     return `This action returns a #${id} post`
   }
 
-  async getPostById(id: number) {
-    return await this.prisma.post.findUnique({
+  async getParentPostReply(postId: number, name: string) {
+    const idArr = [postId]
+    const p1 = await this.prisma.reply.findFirst({
       where: {
-        id,
-      },
-      include: {
-        user: true,
-        replys: {
-          include: {
-            user: true,
-            post: true,
-
-          },
-        },
-        tags: true,
+        postId,
       },
     })
+    if (p1) {
+      idArr.unshift(p1.parentId)
+      const p2 = await this.prisma.reply.findFirst({
+        where: {
+          postId: p1.parentId,
+        },
+      })
+      if (p2)
+        idArr.unshift(p2.parentId)
+    }
+
+    return Promise.all(idArr.map(async (id) => {
+      return await this.getPostById(id, name)
+    }))
+  }
+
+  async getPostById(id: number, name: string) {
+    const post = await this.prisma.post.findUnique({
+      where: { id },
+      include: { user: true, replys: true },
+    })
+    const postId = post.id
+    const profile = await this.getProfileByName(post.user.name)
+    const user = {
+      name: post.user.name,
+      nickName: post.user.nickName,
+      image: post.user.image,
+      bio: profile.bio,
+    }
+    const postCount = await this.postCount(postId, name)
+    const profileCount = await this.userService.profileCount(user.name)
+    const res = {
+      id: postId,
+      content: post.content,
+      createdAt: post.createdAt,
+      user,
+      postCount,
+      profileCount,
+    }
+    return res
   }
 
   async findPostByUser(name: string) {
@@ -223,6 +231,33 @@ export class PostService {
     return await this.prisma.profile.findUnique({
       where: { id },
     })
+  }
+
+  async getPostReply(postId: number, name: string) {
+    const replys = await this.prisma.reply.findMany({
+      where: {
+        parentId: postId,
+      },
+      include: {
+        post: {
+          include: {
+            replys: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    })
+    const res = await Promise.all(replys.map(async (reply) => {
+      const post = await this.getPostById(reply.postId, name)
+      const child = await this.getPostReply(post.id, name)
+      return {
+        ...post,
+        replys: child,
+      }
+    }))
+    return res
   }
 
   update(id: number, updatePostInput: UpdatePostInput) {
