@@ -64,7 +64,7 @@
     @apply transition-colors duration-200 hover:bg-active
   }
   .main-container{
-    @apply min-w-[450px] lg:min-w-[500px] xl:min-w-[600px]
+    @apply min-w-[450px] w-[600px] xl:max-w-[600px]
   }
   .settings-container{
     @apply  xl:min-w-[520px]
@@ -97,7 +97,7 @@
     @apply flex w-8 h-8 rounded-full flex-center
   }
   .editor{
-    @apply mx-auto w-[600px] h-[150px] bg-base border border-base rounded-xl text-left p-3 overflow-auto focus:outline-none focus:border-primary
+    @apply  w-[500px] h-[150px] bg-base border border-base rounded-xl text-left p-3 overflow-auto focus:outline-none focus:border-primary
   }
   .at-button {
     @apply outline-none rounded-xl my-1 py-2 border border-blue-500 bg-transparent h-7 leading-7 text-blue-500 cursor-pointer

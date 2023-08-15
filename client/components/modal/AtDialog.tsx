@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import AtUserInfo from './AtUserInfo'
+import AtUserInfo from '../post/AtUserInfo'
 import type { AtUser } from '@/types'
 
 interface User { name: string; id: string }

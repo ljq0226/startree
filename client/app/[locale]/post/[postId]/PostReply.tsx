@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client'
 import GetPostReply from '@api/post/GetPostReply.gql'
 import type { PostReplyType } from '@/types'
 import Reply from '@/components/post/Reply/Reply'
-import EditPost from '@/components/post/EditPost'
+import EditPost from '@/components/editor/EditPost'
 
 interface Props {
   name: string

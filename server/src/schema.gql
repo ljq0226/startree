@@ -23,8 +23,9 @@ input CreatePostInput {
 }
 
 input CreateReplyInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  content: String!
+  parentId: Float!
+  userName: String!
 }
 
 input CreateStarInput {
@@ -58,6 +59,11 @@ input DeleteLikeInput {
   userName: String!
 }
 
+input DeleteReplyInput {
+  parentId: Float!
+  postId: Float!
+}
+
 input DeleteStarInput {
   postId: Float!
   userName: String!
@@ -89,19 +95,18 @@ type Mutation {
   createForward(createForwardInput: CreateForwardInput!): Boolean!
   createLike(createLikeInput: CreateLikeInput!): Boolean!
   createPost(createPostInput: CreatePostInput!): Post!
-  createReply(createReplyInput: CreateReplyInput!): Reply!
+  createReply(createReplyInput: CreateReplyInput!): Boolean!
   createStar(createStarInput: CreateStarInput!): Boolean!
   createTag(createTagInput: CreateTagInput!): Tag!
   createUser(createUserInput: CreateUserInput!): User!
   deleteForward(deleteForwardInput: DeleteForwardInput!): Boolean!
   deleteLike(deleteLikeInput: DeleteLikeInput!): Boolean!
+  deleteReply(deleteReplyInput: DeleteReplyInput!): Boolean!
   deleteStar(deleteStarInput: DeleteStarInput!): Boolean!
   removeFollow(removeFollowInput: CreateFollowInput!): Boolean!
   removePost(id: Int!): Post!
-  removeReply(id: Int!): Reply!
   removeTag(id: Int!): Tag!
   updatePost(updatePostInput: UpdatePostInput!): Post!
-  updateReply(updateReplyInput: UpdateReplyInput!): Reply!
   updateTag(updateTagInput: UpdateTagInput!): Tag!
   updateUserProfile(updateUserInput: UpdateUserInput!): User!
 }
@@ -135,6 +140,16 @@ type PostInfo {
   id: Float!
   postCount: PostCount!
   profileCount: ProfileCount!
+  user: UserInfo!
+}
+
+type PostReplyInfo {
+  content: String!
+  createdAt: DateTime!
+  id: Float!
+  postCount: PostCount!
+  profileCount: ProfileCount!
+  replys: [PostReplyInfo!]!
   user: UserInfo!
 }
 
@@ -178,8 +193,9 @@ type Query {
   findPostByUser(name: String!): [Post!]!
   followedCount(name: String!): Float!
   getLikePost(userName: String!): [PostInfo!]!
-  getPostById(id: Float!): Post!
+  getPostById(id: Float!, name: String!): [PostInfo!]!
   getPostCount(id: Float!, name: String!): PostCount!
+  getPostReply(name: String!, postId: Float!): [PostReplyInfo!]!
   getProfileByName(name: String!): Profile!
   getProfileData(name: String!): ProfileData!
   getStarPost(userName: String!): [PostInfo!]!
@@ -220,12 +236,6 @@ input UpdatePostInput {
   content: String
   id: Int!
   userName: String
-}
-
-input UpdateReplyInput {
-  """Example field (placeholder)"""
-  exampleField: Int
-  id: Int!
 }
 
 input UpdateTagInput {

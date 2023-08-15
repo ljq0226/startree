@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import FindByAt from '@api/user/FindByAt.gql'
-import AtDialog from './AtDialog'
+import AtDialog from '../post/AtDialog'
 import type { AtUser } from '@/types'
 import { getAtUser, getRangeRect, replaceAtUser, showAt } from '@/lib'
 
