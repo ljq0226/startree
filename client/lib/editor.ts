@@ -1,4 +1,4 @@
-import type { AtUser } from '@/types'
+import type { AtUser, Tag } from '@/types'
 
 // @ 检测
 // @ 选择弹窗
@@ -35,7 +35,7 @@ export function showAt() {
   const content = node.textContent || ''
   const regx = /@([^@\s]*)$/
   const match = regx.exec(content.slice(0, getCursorIndex()))
-  return match && match.length === 2
+  return match && match.length === 2 && match[1] !== ''
 }
 
 // 获取 @ 用户
@@ -55,7 +55,7 @@ export function showHash() {
   const content = node.textContent || ''
   const regx = /#([^#\s]*)$/
   const match = regx.exec(content.slice(0, getCursorIndex()))
-  return match && match.length === 2
+  return match && match.length === 2 && match[1] !== ''
 }
 
 // 获取 # 后 tag 名
@@ -71,7 +71,6 @@ export function getTag() {
 export function createAtButton(user: AtUser) {
   const btn = document.createElement('span')
   btn.style.display = 'inline-block'
-  btn.dataset.user = JSON.stringify(user)
   btn.className = 'at-button'
   btn.contentEditable = 'false'
   btn.textContent = `@${user.name}`
@@ -124,4 +123,59 @@ export function replaceAtUser(user: AtUser) {
     selection?.removeAllRanges()
     selection?.addRange(range)
   }
+}
+export function replaceHashString(raw: string, replacer: string) {
+  return raw.replace(/#([^#\s]*)$/, replacer)
+}
+export function replaceHashTags(tag: Tag) {
+  const node = getRangeNode()
+  if (node) {
+    const content = node?.textContent || ''
+    const endIndex = getCursorIndex()
+    const preSlice = replaceHashString(content.slice(0, endIndex), '')
+    const restSlice = content.slice(endIndex)
+    const parentNode = node?.parentNode as ParentNode
+    const nextNode = node?.nextSibling
+    const previousTextNode = new Text(preSlice)
+    const nextTextNode = new Text(`\u200B${restSlice}`)
+    const atButton = createHashTags(tag)
+    parentNode.removeChild(node)
+    if (nextNode) {
+      parentNode.insertBefore(previousTextNode, nextNode)
+      parentNode.insertBefore(atButton, nextNode)
+      parentNode.insertBefore(nextTextNode, nextNode)
+    }
+    else {
+      parentNode.appendChild(previousTextNode)
+      parentNode.appendChild(atButton)
+      parentNode.appendChild(nextTextNode)
+    }
+    const range = new Range()
+    range.setStart(nextTextNode, 0)
+    range.setEnd(nextTextNode, 0)
+    const selection = window.getSelection()
+    selection?.removeAllRanges()
+    selection?.addRange(range)
+  }
+}
+export function createHashTags(tag: Tag) {
+  const btn = document.createElement('span')
+  btn.style.display = 'inline-block'
+  btn.dataset.user = JSON.stringify(tag)
+  btn.className = 'tag-button'
+  btn.contentEditable = 'false'
+  btn.textContent = `#${tag.name}`
+  const wrapper = document.createElement('span')
+  wrapper.style.display = 'inline-block'
+  wrapper.classList.add('text-primary')
+  wrapper.contentEditable = 'false'
+  const spaceElem = document.createElement('span')
+  spaceElem.style.whiteSpace = 'pre'
+  spaceElem.textContent = '\u200B'
+  spaceElem.contentEditable = 'false'
+  const clonedSpaceElem = spaceElem.cloneNode(true)
+  wrapper.appendChild(spaceElem)
+  wrapper.appendChild(btn)
+  wrapper.appendChild(clonedSpaceElem)
+  return wrapper
 }

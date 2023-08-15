@@ -1,85 +1,114 @@
 'use client'
-import React, { useRef, useState } from 'react'
-import cn from 'clsx'
-import { useMutation } from '@apollo/client'
-import CreatePost from '@api/post/CreatePost.gql'
+import React, { useEffect, useRef, useState } from 'react'
+import FindByAt from '@api/user/FindByAt.gql'
+import FindByHashTag from '@api/tag/FindByHashTag.gql'
+import { useQuery } from '@apollo/client'
 import Avatar from '../ui/Avatar'
-import Icon from '../ui/Icon'
-import Tooltip from '../ui/Tooltip'
-import EmojiPanel from '../modal/EmojiPanel'
-import Editor from './Editor'
-import useI18n from '@/hooks/theme/useI18n'
-import { AlertStore, UserStore } from '@/store'
+import EditAction from './EditAction'
+import AtUserModal from './modal/AtUserModal'
+import Fetching from './modal/Fetching'
+import HashTagModal from './modal/HashTagModal'
+import { UserStore } from '@/store'
+import { getAtUser, getRangeRect, getTag, replaceAtUser, replaceHashTags, showAt, showHash } from '@/lib'
+import type { AtUser, Tag } from '@/types'
 
 function EditPost() {
-  const [active, setActive] = useState(false)
   const editorRef = useRef<HTMLDivElement>(null)
-  const [showEmoji, setShowEmoji] = useState(false)
-  const useAlert = AlertStore(s => s.useAlert)
-  const t = useI18n('tooltip')
   const user = UserStore(s => s.user)
-  const [addTodo, { loading, error }] = useMutation(CreatePost)
-
-  const handlePublish = async () => {
-    const target = editorRef.current
-    await addTodo({
-      variables: {
-        createPostInput: {
-          content: target?.innerHTML,
-          userName: user.name,
-        },
-      },
-    })
-    !loading && useAlert('success', 'Post Successfully!')
+  const [users, setUsers] = useState<AtUser[]>([])
+  const [tags, setTags] = useState<Tag[]>([])
+  const [userQuery, setUserQuery] = useState('')
+  const [tagQuery, setTagQuery] = useState('')
+  const [showAtModal, setShowAtModal] = useState(false)
+  const [showTagModal, setShowTagModal] = useState(false)
+  const [showFetching, setShowFetching] = useState(false)
+  const [position, setPosition] = useState<{ x: number; y: number }>({
+    x: 0,
+    y: 0,
+  })
+  const { data: userData, loading: userLoading } = useQuery(FindByAt, { variables: { query: userQuery } })
+  const { data: tagData, loading: tagLoading } = useQuery(FindByHashTag, { variables: { query: tagQuery } })
+  useEffect(() => {
+    if (!userLoading)
+      setUsers(userData.findByAt)
+  }, [userData])
+  useEffect(() => {
+    if (!tagLoading)
+      setTags(tagData.findByHashTag)
+  }, [tagData])
+  const handleKeyUp = () => {
+    if (showAt()) {
+      const position = getRangeRect()
+      setPosition(position)
+      const user = getAtUser()
+      setShowFetching(true)
+      setUserQuery(user || '')
+      setTimeout(() => {
+        setShowFetching(false)
+        setShowAtModal(true)
+      }, 800)
+    }
+    else {
+      setShowAtModal(false)
+    }
+    if (showHash()) {
+      const position = getRangeRect()
+      setPosition(position)
+      const tag = getTag()
+      setShowFetching(true)
+      setTagQuery(tag || '')
+      setTimeout(() => {
+        setShowFetching(false)
+        setShowTagModal(true)
+      }, 800)
+    }
+    else {
+      setShowTagModal(false)
+    }
   }
-
+  const handleKeyDown = (e: any) => {
+    if (showAtModal || showTagModal) {
+      if (
+        e.code === 'ArrowUp'
+        || e.code === 'ArrowDown'
+        || e.code === 'Enter'
+      )
+        e.preventDefault()
+    }
+  }
+  const handlePickUser = (user: AtUser) => {
+    replaceAtUser(user)
+    setShowAtModal(false)
+  }
+  const handlePickTag = (tag: Tag) => {
+    replaceHashTags(tag)
+    setShowTagModal(false)
+  }
   return (
-    <div className="flex w-full">
+    <div className="flex">
       <Avatar className='mx-4 max-h-12' src={user.image || '/avatar/user.png'} />
       <div className="flex flex-col flex-1 ">
-        <Editor editorRef={editorRef} setActive={setActive} />
-        <div className={cn('flex mt-4')}>
-          <div className="flex space-x-2">
-            <Tooltip className='relative' text={t('add_emojis')} position='top'>
-              {
-                showEmoji
-                && <EmojiPanel editorTarget={editorRef.current} setShowEmoji={setShowEmoji} />
-              }
-              <button
-                className='editPost-icon'
-                onClick={() => {
-                  setShowEmoji(true)
-                }}>
-                <Icon icon='mingcute:emoji-line' />
-              </button>
-            </Tooltip>
-            <Tooltip text={t('add_media')} position='top'>
-              <button className='editPost-icon' >
-                <Icon icon='ph:image' />
-              </button>
-            </Tooltip>
-            <Tooltip text={t('add_tag')} position='top'>
-              <button className='editPost-icon' >
-                <Icon icon='lucide:hash' />
-              </button>
-            </Tooltip>
-            <Tooltip text={t('emoji')} position='top'>
-              <button className='editPost-icon' >
-                <Icon icon='mingcute:emoji-line' />
-              </button>
-            </Tooltip>
-          </div>
-          <div className="flex-1"></div>
-          <button
-            className={cn('editPost-button', true ? 'bg-primary text-bs' : 'bg-btn-disabled text-btn-disabled ')}
-            onClick={() => handlePublish()}
-          >
-            Publish
-          </button>
+        <div className="relative">
+          {showFetching && <Fetching position={position} />}
+          {
+            showAtModal
+            && <AtUserModal showAtModal={showAtModal} setShowAtModal={setShowAtModal}
+              handlePickUser={handlePickUser} users={users} position={position}
+            />}
+          {showTagModal
+            && <HashTagModal showTagModal={showTagModal} setShowTagModal={setShowTagModal}
+              handlePickTag={handlePickTag} tags={tags} position={position}
+            />}
+          <div
+            ref={editorRef}
+            className="editor"
+            contentEditable
+            onKeyUp={handleKeyUp}
+            onKeyDown={handleKeyDown}
+          />
         </div>
-
+        <EditAction editorTarget={editorRef.current} />
       </div>
-
     </div>
   )
 }
