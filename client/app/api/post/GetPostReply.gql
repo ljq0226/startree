@@ -1,0 +1,52 @@
+query GetPostReply($name: String!, $postId: Float!) {
+  getPostReply(name: $name, postId: $postId) {
+    id
+    content
+    createdAt
+    postCount {
+      forward
+      isForward
+      isLike
+      isReply
+      isStar
+      like
+      reply
+    }
+    profileCount {
+      followed
+      followings
+      posts
+    }
+    user {
+      bio
+      image
+      name
+      nickName
+    }
+    replys {
+      content
+      createdAt
+      id
+      user {
+        bio
+        image
+        name
+        nickName
+      }
+      postCount {
+        forward
+        isForward
+        isLike
+        isReply
+        isStar
+        like
+        reply
+      }
+      profileCount {
+        followed
+        followings
+        posts
+      }
+    }
+  }
+}

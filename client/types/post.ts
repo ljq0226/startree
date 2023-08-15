@@ -20,10 +20,18 @@ export interface PostCount {
 
 export interface PostType {
   id: number
-  createdAt: Date
+  createdAt: Date | string
   content: string
   user: UserProfile
   postCount: PostCount
   profileCount: ProfileCount
-
+}
+export interface PostReplyType {
+  id: number
+  createdAt: Date | string
+  content: string
+  replys: PostReplyType[]
+  user: UserProfile
+  postCount: PostCount
+  profileCount: ProfileCount
 }
