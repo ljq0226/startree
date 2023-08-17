@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 import Avatar from '../ui/Avatar'
 import Tooltip from '../ui/Tooltip'
 import UserProfileModal from '../modal/UserProfileModal'
+import usePostEditModal from '../modal/hooks/usePostEditModal'
+import PostEditModal from '../modal/PostEditModal'
 import LikeIcon from './icon/LikeIcon'
 import ForwardIcon from './icon/ForwardIcon'
 import CommentIcon from './icon/CommentIcon'
@@ -12,13 +14,17 @@ import StarIcon from './icon/StarIcon'
 import type { PostType } from '@/types'
 import useI18n from '@/hooks/theme/useI18n'
 import { getTimeAgo } from '@/lib'
+import Icon from '@/components/ui/Icon'
+import { UserStore } from '@/store'
 
 function Post({ content, id, createdAt, user, postCount, profileCount }: PostType) {
   const router = useRouter()
   const t = useI18n('time_ago_options')
   const date = new Date(createdAt)
   const timeAgo = getTimeAgo(date)
+  const { name } = UserStore(s => s.user)
   const [isShowPanel, setIsShowPanel] = useState(false)
+  const { isShow, setIsShow } = usePostEditModal()
   const [locale, setLocale] = useState('en')
   useEffect(() => {
     setLocale(document.documentElement.lang)
@@ -56,6 +62,10 @@ function Post({ content, id, createdAt, user, postCount, profileCount }: PostTyp
               <Tooltip text={realTime} position='top'>
                 <span className='text-sm hover:underline'>{t(timeAgo[0], { data: timeAgo[1] })}</span>
               </Tooltip>
+              <div className='relative ml-2' onClick={() => setIsShow(true)}>
+                {isShow && <PostEditModal isSelf={user.name === name} postId={id}/>}
+                <Icon icon='ri:more-line' />
+              </div>
             </div>
             <div
               className='flex-1 px-2 my-2'
