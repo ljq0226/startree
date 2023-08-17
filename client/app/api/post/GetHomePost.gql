@@ -1,5 +1,5 @@
-query GetHomePost($name: String!) {
-  getHomePost(name: $name) {
+query GetHomePost($name: String!, $pageIndex: Float!) {
+  getHomePost(name: $name, pageIndex: $pageIndex) {
     content
     createdAt
     id

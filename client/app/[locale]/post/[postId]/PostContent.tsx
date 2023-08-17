@@ -10,11 +10,15 @@ import LikeIcon from '@/components/post/icon/LikeIcon'
 import StarIcon from '@/components/post/icon/StarIcon'
 import Avatar from '@/components/ui/Avatar'
 import Icon from '@/components/ui/Icon'
+import usePostEditModal from '@/components/modal/hooks/usePostEditModal'
+import { UserStore } from '@/store'
 
 function PostContent({ content, id, createdAt, user, postCount, profileCount }: PostType) {
   const router = useRouter()
   const date = new Date(createdAt)
   const [isShowPanel, setIsShowPanel] = useState(false)
+  const { isShow, setIsShow } = usePostEditModal()
+  const { name } = UserStore(s => s.user)
   const [locale, setLocale] = useState('en')
   useEffect(() => {
     setLocale(document.documentElement.lang)
@@ -48,7 +52,10 @@ function PostContent({ content, id, createdAt, user, postCount, profileCount }: 
                 <span className=''>{`@${user?.name}`}</span>
               </Link>
               <span className='flex-1'></span>
-              <Icon icon='ri:more-line' />
+              <div className='relative ml-2' onClick={() => setIsShow(true)}>
+                {/* {isShow && <PostEditModal isSelf={user.name === name} postId={id} />} */}
+                <Icon icon='ri:more-line' />
+              </div>
             </div>
           </div>
         </div>

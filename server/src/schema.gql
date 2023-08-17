@@ -174,7 +174,7 @@ input ProfileInput {
 
 type Query {
   findAll: [User!]!
-  findAllPost(name: String!): [PostInfo!]!
+  findAllPost(name: String!, pageIndex: Float!): [PostInfo!]!
   findByAt(query: String!): [User!]!
   findByHashTag(query: String!): [Tag!]!
   findFollowers(followedName: String!): [User!]!
@@ -183,7 +183,7 @@ type Query {
   findPostByTag(id: Float!): Post!
   findPostByUser(name: String!): [Post!]!
   followedCount(name: String!): Float!
-  getHomePost(name: String!): [PostInfo!]!
+  getHomePost(name: String!, pageIndex: Float!): [PostInfo!]!
   getLikePost(userName: String!): [PostInfo!]!
   getPostById(id: Float!, name: String!): [PostInfo!]!
   getPostCount(id: Float!, name: String!): PostCount!

@@ -16,8 +16,8 @@ export class PostResolver {
   }
 
   @Query(() => [PostInfo])
-  findAllPost(@Args('name') name: string) {
-    return this.postService.findAllPost(name)
+  findAllPost(@Args('name') name: string, @Args('pageIndex') pageIndex: number) {
+    return this.postService.findAllPost(name, pageIndex)
   }
 
   @Query(() => PostCount)
@@ -26,8 +26,8 @@ export class PostResolver {
   }
 
   @Query(() => [PostInfo])
-  getHomePost(@Args('name') name: string) {
-    return this.postService.getHomePost(name)
+  getHomePost(@Args('name') name: string, @Args('pageIndex') pageIndex: number) {
+    return this.postService.getHomePost(name, pageIndex)
   }
 
   @Query(() => [PostInfo])

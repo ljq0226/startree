@@ -4,6 +4,7 @@ import { FollowService } from '../follow/follow.service'
 import { UserService } from '../user/user.service'
 import { CreatePostInput } from './dto/create-post.input'
 
+const PAGE_SIZE = 20
 @Injectable()
 export class PostService {
   constructor(
@@ -94,7 +95,7 @@ export class PostService {
     }
   }
 
-  async findAllPost(name: string) {
+  async findAllPost(name: string, pageIndex: number) {
     const posts = await this.prisma.post.findMany({
       select: {
         id: true,
@@ -102,6 +103,8 @@ export class PostService {
       orderBy: {
         createdAt: 'desc',
       },
+      skip: PAGE_SIZE * (pageIndex - 1),
+      take: PAGE_SIZE,
     })
     const postIds = posts.map(item => item.id)
     return this.getPostInfoByIds([...postIds], name)
@@ -113,7 +116,7 @@ export class PostService {
     }))
   }
 
-  async getHomePost(name: string) {
+  async getHomePost(name: string, pageIndex: number) {
     const followingUsers = await this.prisma.follow.findMany({
       where: {
         name,
@@ -137,6 +140,8 @@ export class PostService {
       orderBy: {
         createdAt: 'desc',
       },
+      skip: PAGE_SIZE * (pageIndex - 1),
+      take: PAGE_SIZE,
     })
     const postIds = posts.map(item => item.id)
     return this.getPostInfoByIds([...postIds], name)

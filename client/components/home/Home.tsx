@@ -12,12 +12,15 @@ function Home() {
   const [homePost, setHomePost] = useState<PostType[]>([])
   const newPost = PostStore(s => s.newPost)
   const deletePostId = PostStore(s => s.deletePostId)
+  const [pageIndex, setPageIndex] = useState(1)
   const { data, loading } = useQuery(
-    GetHomePost, { variables: { name: user.name } })
+    GetHomePost, { variables: { name: user.name, pageIndex } })
+
   useEffect(() => {
     if (!loading)
-      setHomePost(data.getHomePost)
+      setHomePost([...homePost, ...data.getHomePost])
   }, [data])
+
   useEffect(() => {
     setHomePost([newPost, ...homePost])
   }, [newPost])
@@ -26,8 +29,11 @@ function Home() {
     const newPosts = homePost.filter(post => post.id !== deletePostId)
     setHomePost(newPosts)
   }, [deletePostId])
+
   return (
-    <>
+    <div
+      className='flex flex-col main-container'
+    >
       <div className="h-6"></div>
       <EditPost />
       <div className="flex flex-col">
@@ -39,7 +45,7 @@ function Home() {
           })
         }
       </div>
-    </>
+    </div>
   )
 }
 
