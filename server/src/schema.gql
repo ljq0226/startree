@@ -89,18 +89,17 @@ type Mutation {
   createFollow(createFollowInput: CreateFollowInput!): Boolean!
   createForward(createForwardInput: CreateForwardInput!): Boolean!
   createLike(createLikeInput: CreateLikeInput!): Boolean!
-  createPost(createPostInput: CreatePostInput!): Post!
+  createPost(createPostInput: CreatePostInput!): PostInfo!
   createReply(createReplyInput: CreateReplyInput!): Boolean!
   createStar(createStarInput: CreateStarInput!): Boolean!
   createTag(name: String!): Tag!
   createUser(createUserInput: CreateUserInput!): User!
   deleteForward(deleteForwardInput: DeleteForwardInput!): Boolean!
   deleteLike(deleteLikeInput: DeleteLikeInput!): Boolean!
+  deletePost(id: Float!): Boolean!
   deleteReply(deleteReplyInput: DeleteReplyInput!): Boolean!
   deleteStar(deleteStarInput: DeleteStarInput!): Boolean!
   removeFollow(removeFollowInput: CreateFollowInput!): Boolean!
-  removePost(id: Int!): Post!
-  updatePost(updatePostInput: UpdatePostInput!): Post!
   updateUserProfile(updateUserInput: UpdateUserInput!): User!
 }
 
@@ -180,11 +179,11 @@ type Query {
   findByHashTag(query: String!): [Tag!]!
   findFollowers(followedName: String!): [User!]!
   findFollowings(name: String!): [User!]!
-  findHomePost(name: String!): [Post!]!
   findIsFollowing(name: String!, userName: String!): Boolean!
   findPostByTag(id: Float!): Post!
   findPostByUser(name: String!): [Post!]!
   followedCount(name: String!): Float!
+  getHomePost(name: String!): [PostInfo!]!
   getLikePost(userName: String!): [PostInfo!]!
   getPostById(id: Float!, name: String!): [PostInfo!]!
   getPostCount(id: Float!, name: String!): PostCount!
@@ -223,12 +222,6 @@ type Tag {
   name: String!
   posts: [Post!]!
   updatedAt: DateTime!
-}
-
-input UpdatePostInput {
-  content: String
-  id: Int!
-  userName: String
 }
 
 input UpdateUserInput {

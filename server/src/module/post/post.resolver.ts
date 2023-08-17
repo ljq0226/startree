@@ -1,9 +1,8 @@
-import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql'
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
 import { ProfileData } from './dto/profileData'
 import { PostService } from './post.service'
 import { Post } from './entities/post.entity'
 import { CreatePostInput } from './dto/create-post.input'
-import { UpdatePostInput } from './dto/update-post.input'
 import { PostCount } from './dto/count'
 import { PostInfo, PostReplyInfo } from './dto/postInfo'
 
@@ -11,7 +10,7 @@ import { PostInfo, PostReplyInfo } from './dto/postInfo'
 export class PostResolver {
   constructor(private readonly postService: PostService) {}
 
-  @Mutation(() => Post)
+  @Mutation(() => PostInfo)
   createPost(@Args('createPostInput') createPostInput: CreatePostInput) {
     return this.postService.create(createPostInput)
   }
@@ -26,9 +25,9 @@ export class PostResolver {
     return this.postService.postCount(id, name)
   }
 
-  @Query(() => [Post])
-  findHomePost(@Args('name') name: string) {
-    return this.postService.findHomePost(name)
+  @Query(() => [PostInfo])
+  getHomePost(@Args('name') name: string) {
+    return this.postService.getHomePost(name)
   }
 
   @Query(() => [PostInfo])
@@ -56,13 +55,8 @@ export class PostResolver {
     return this.postService.getPostReply(postId, name)
   }
 
-  @Mutation(() => Post)
-  updatePost(@Args('updatePostInput') updatePostInput: UpdatePostInput) {
-    return this.postService.update(updatePostInput.id, updatePostInput)
-  }
-
-  @Mutation(() => Post)
-  removePost(@Args('id', { type: () => Int }) id: number) {
-    return this.postService.remove(id)
+  @Mutation(() => Boolean)
+  deletePost(@Args('id') id: number) {
+    return this.postService.delete(id)
   }
 }

@@ -6,7 +6,7 @@ import EmojiPanel from '../modal/EmojiPanel'
 import Icon from '../ui/Icon'
 import Tooltip from '../ui/Tooltip'
 import useI18n from '@/hooks/theme/useI18n'
-import { AlertStore, UserStore } from '@/store'
+import { AlertStore, PostStore, UserStore } from '@/store'
 
 interface Props {
   editorTarget: HTMLDivElement | null
@@ -16,10 +16,11 @@ function EditAction({ editorTarget }: Props) {
   const t = useI18n('tooltip')
   const user = UserStore(s => s.user)
   const useAlert = AlertStore(s => s.useAlert)
+  const setNewPost = PostStore(s => s.setNewPost)
   const [showEmoji, setShowEmoji] = useState(false)
   const [addTodo, { loading }] = useMutation(CreatePost)
   const handlePublish = async () => {
-    await addTodo({
+    const { data } = await addTodo({
       variables: {
         createPostInput: {
           content: editorTarget?.innerHTML,
@@ -27,9 +28,12 @@ function EditAction({ editorTarget }: Props) {
         },
       },
     })
-    !loading && useAlert('success', 'Post Successfully!')
-    if (editorTarget)
-      editorTarget.innerHTML = ''
+    if (!loading) {
+      if (editorTarget)
+        editorTarget.innerHTML = ''
+      useAlert('success', 'Post Successfully!')
+      setNewPost(data.createPost)
+    }
   }
   return (
     <div className={cn('flex mt-4')}>

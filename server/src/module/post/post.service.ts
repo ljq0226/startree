@@ -3,7 +3,6 @@ import { PrismaService } from 'nestjs-prisma'
 import { FollowService } from '../follow/follow.service'
 import { UserService } from '../user/user.service'
 import { CreatePostInput } from './dto/create-post.input'
-import { UpdatePostInput } from './dto/update-post.input'
 
 @Injectable()
 export class PostService {
@@ -20,7 +19,7 @@ export class PostService {
         userName,
       },
     })
-    return newPost
+    return this.getPostById(newPost.id, userName)
   }
 
   async postCount(id: number, name: string) {
@@ -114,26 +113,33 @@ export class PostService {
     }))
   }
 
-  async findHomePost(name: string) {
-    const followedPosts = (await this.followService.findFollowings(name)).map((user) => {
-      return user.posts
-    })
-    const user = await this.prisma.user.findUnique({
-      where: { name },
-      include: {
-        posts: {
-          include: {
-            user: true,
-            replys: true,
-            tags: true,
-            likes: true,
-          },
-        },
+  async getHomePost(name: string) {
+    const followingUsers = await this.prisma.follow.findMany({
+      where: {
+        name,
+      },
+      select: {
+        followedName: true,
       },
     })
-    const userPost = user.posts
-    const homePosts = [...userPost, ...followedPosts.flat(1)]
-    return homePosts.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+    const arr = followingUsers.map(item => item.followedName)
+    const usersName = [...arr, name]
+    const posts = await this.prisma.post.findMany({
+      where: {
+        userName: {
+          in: usersName,
+        },
+      },
+      select: {
+        id: true,
+        createdAt: true,
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    })
+    const postIds = posts.map(item => item.id)
+    return this.getPostInfoByIds([...postIds], name)
   }
 
   async profileData(name: string) {
@@ -260,11 +266,12 @@ export class PostService {
     return res
   }
 
-  update(id: number, updatePostInput: UpdatePostInput) {
-    return `This action updates a #${id} post`
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} post`
+  async delete(id: number) {
+    await this.prisma.post.delete({
+      where: {
+        id,
+      },
+    })
+    return true
   }
 }
