@@ -6,9 +6,11 @@ import EditPost from '../editor/EditPost'
 import Post from '../post/Post'
 import type { PostType } from '@/types'
 import { PostStore, UserStore } from '@/store'
+import useI18n from '@/hooks/theme/useI18n'
 
-function Home() {
+function Home({ homeRef }: { homeRef: React.RefObject<HTMLDivElement> }) {
   const user = UserStore(s => s.user)
+  const t = useI18n('common')
   const [homePost, setHomePost] = useState<PostType[]>([])
   const newPost = PostStore(s => s.newPost)
   const deletePostId = PostStore(s => s.deletePostId)
@@ -18,7 +20,7 @@ function Home() {
 
   useEffect(() => {
     if (!loading)
-      setHomePost(data.getHomePost)
+      setHomePost([...homePost, ...data.getHomePost])
   }, [data])
 
   useEffect(() => {
@@ -29,14 +31,31 @@ function Home() {
     const newPosts = homePost.filter(post => post.id !== deletePostId)
     setHomePost(newPosts)
   }, [deletePostId])
+  useEffect(() => {
+    const handleScroll = () => {
+      const element = homeRef?.current
+      if (element) {
+        const { scrollTop, scrollHeight, clientHeight } = element
+        if (scrollTop + clientHeight === scrollHeight)
+          setPageIndex(pre => pre + 1)
+      }
+    }
+    const element = homeRef?.current
+    if (element) {
+      element.addEventListener('scroll', handleScroll)
 
+      return () => {
+        element.removeEventListener('scroll', handleScroll)
+      }
+    }
+  }, [])
   return (
     <div
       className='flex flex-col main-container'
     >
-      <div className="h-6"></div>
+      <div className='min-h-[30px]'></div>
       <EditPost />
-      <div className="flex flex-col">
+      <div className="flex flex-col mt-8">
         {
           homePost.map((post) => {
             return (
@@ -45,6 +64,7 @@ function Home() {
           })
         }
       </div>
+      <div className='min-h-[50px] text-center '>{t('end_of_list')}</div>
     </div>
   )
 }
