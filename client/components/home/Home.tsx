@@ -18,7 +18,7 @@ function Home() {
 
   useEffect(() => {
     if (!loading)
-      setHomePost([...homePost, ...data.getHomePost])
+      setHomePost(data.getHomePost)
   }, [data])
 
   useEffect(() => {
