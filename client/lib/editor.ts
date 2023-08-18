@@ -74,10 +74,11 @@ export function createAtButton(user: AtUser) {
   btn.className = 'at-button'
   btn.contentEditable = 'false'
   btn.textContent = `@${user.name}`
-  const wrapper = document.createElement('span')
+  const wrapper = document.createElement('a')
   wrapper.style.display = 'inline-block'
   wrapper.classList.add('text-primary')
   wrapper.contentEditable = 'false'
+  wrapper.href = `/user/${user.name}`
   const spaceElem = document.createElement('span')
   spaceElem.style.whiteSpace = 'pre'
   spaceElem.textContent = '\u200B'
@@ -161,14 +162,15 @@ export function replaceHashTags(tag: Tag) {
 export function createHashTags(tag: Tag) {
   const btn = document.createElement('span')
   btn.style.display = 'inline-block'
-  btn.dataset.user = JSON.stringify(tag)
   btn.className = 'tag-button'
   btn.contentEditable = 'false'
+  btn.dataset.tag = tag.name
   btn.textContent = `#${tag.name}`
-  const wrapper = document.createElement('span')
+  const wrapper = document.createElement('a')
   wrapper.style.display = 'inline-block'
   wrapper.classList.add('text-primary')
   wrapper.contentEditable = 'false'
+  wrapper.href = `/tag/${tag.name}`
   const spaceElem = document.createElement('span')
   spaceElem.style.whiteSpace = 'pre'
   spaceElem.textContent = '\u200B'

@@ -55,6 +55,11 @@ export class PostResolver {
     return this.postService.getPostReply(postId, name)
   }
 
+  @Query(() => [PostInfo])
+  getPostByTag(@Args('tagName') tagName: string, @Args('name') name: string) {
+    return this.postService.getPostByTag(tagName, name)
+  }
+
   @Mutation(() => Boolean)
   deletePost(@Args('id') id: number) {
     return this.postService.delete(id)

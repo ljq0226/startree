@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { PrismaService } from 'nestjs-prisma'
+import { checkTag, createTag } from 'src/lib'
 import { FollowService } from '../follow/follow.service'
 import { UserService } from '../user/user.service'
 import { CreatePostInput } from './dto/create-post.input'
@@ -14,12 +15,36 @@ export class PostService {
   ) {}
 
   async create({ content, userName }: CreatePostInput) {
+    const [existTags, notExistTags] = checkTag(content)
+    const tagIds = await Promise.all([
+      ...existTags.map(async (item) => {
+        const tag = await this.prisma.tag.findFirst({ where: { name: item } })
+        return tag.id
+      }),
+      ...notExistTags.map(async (item) => {
+        const newTag = await this.prisma.tag.create({ data: { name: item } })
+        return newTag.id
+      }),
+    ])
+
     const newPost = await this.prisma.post.create({
       data: {
-        content,
+        content: createTag(notExistTags, content),
         userName,
       },
     })
+
+    await this.prisma.post.update({
+      where: {
+        id: newPost.id,
+      },
+      data: {
+        tags: {
+          connect: tagIds.map(tagId => ({ id: tagId })),
+        },
+      },
+    })
+
     return this.getPostById(newPost.id, userName)
   }
 
@@ -218,6 +243,12 @@ export class PostService {
       profileCount,
     }
     return res
+  }
+
+  async getPostByTag(tagName: string, name: string) {
+    const tag = await this.prisma.tag.findFirst({ where: { name: tagName }, include: { posts: true } })
+    const postIds = tag.posts.map(item => item.id)
+    return this.getPostInfoByIds([...postIds], name)
   }
 
   async findPostByUser(name: string) {

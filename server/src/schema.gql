@@ -186,13 +186,20 @@ type Query {
   getHomePost(name: String!, pageIndex: Float!): [PostInfo!]!
   getLikePost(userName: String!): [PostInfo!]!
   getPostById(id: Float!, name: String!): [PostInfo!]!
+  getPostByTag(name: String!, tagName: String!): [PostInfo!]!
   getPostCount(id: Float!, name: String!): PostCount!
   getPostReply(name: String!, postId: Float!): [PostReplyInfo!]!
   getProfileByName(name: String!): Profile!
   getProfileData(name: String!): ProfileData!
   getStarPost(userName: String!): [PostInfo!]!
   profileCount(name: String!): ProfileCount!
+  queryInput(query: String!): QueryInput!
   userData(name: String!): User!
+}
+
+type QueryInput {
+  tags: [TagData!]!
+  users: [UserData!]!
 }
 
 type Reply {
@@ -222,6 +229,11 @@ type Tag {
   name: String!
   posts: [Post!]!
   updatedAt: DateTime!
+}
+
+type TagData {
+  id: Float!
+  name: String!
 }
 
 input UpdateUserInput {
@@ -256,6 +268,12 @@ type User {
 
   """updatedTime"""
   updatedAt: DateTime!
+}
+
+type UserData {
+  image: String!
+  name: String!
+  nickName: String!
 }
 
 type UserInfo {

@@ -1,0 +1,27 @@
+query GetPostByTag($name: String!, $tagName: String!) {
+  getPostByTag(name: $name, tagName: $tagName) {
+    content
+    createdAt
+    id
+    postCount {
+      forward
+      isForward
+      isLike
+      isReply
+      isStar
+      like
+      reply
+    }
+    profileCount {
+      followed
+      followings
+      posts
+    }
+    user {
+      bio
+      image
+      name
+      nickName
+    }
+  }
+}
