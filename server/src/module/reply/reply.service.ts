@@ -46,6 +46,7 @@ export class ReplyService {
         postId: newPost.id,
       },
     })
+    return true
   }
 
   async delete({ parentId, postId }: DeleteReplyInput) {

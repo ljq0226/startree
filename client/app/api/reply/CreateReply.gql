@@ -1,0 +1,3 @@
+mutation CreateReply($createReplyInput: CreateReplyInput!) {
+  createReply(createReplyInput: $createReplyInput)
+}

@@ -1,39 +1,45 @@
 import React, { useState } from 'react'
 import cn from 'clsx'
+import type { ApolloQueryResult } from '@apollo/client'
 import { useMutation } from '@apollo/client'
-import CreatePost from '@api/post/CreatePost.gql'
+import CreateReply from '@api/reply/CreateReply.gql'
 import EmojiPanel from '../modal/EmojiPanel'
 import Icon from '../ui/Icon'
 import Tooltip from '../ui/Tooltip'
 import useI18n from '@/hooks/theme/useI18n'
-import { AlertStore, PostStore, UserStore } from '@/store'
+import { AlertStore, UserStore } from '@/store'
 
 interface Props {
   editorTarget: HTMLDivElement | null
+  parentId: number
+  refetch: (variables?: Partial<{
+    postId: number
+    name: string
+  }> | undefined) => Promise<ApolloQueryResult<any>>
 }
 
-function EditAction({ editorTarget }: Props) {
+function ReplyAction({ editorTarget, parentId, refetch }: Props) {
   const t = useI18n('tooltip')
   const t2 = useI18n('action')
   const user = UserStore(s => s.user)
   const useAlert = AlertStore(s => s.useAlert)
-  const setNewPost = PostStore(s => s.setNewPost)
   const [showEmoji, setShowEmoji] = useState(false)
-  const [addTodo, { loading }] = useMutation(CreatePost)
+  const [addReply, { loading }] = useMutation(CreateReply)
   const handlePublish = async () => {
-    const { data } = await addTodo({
+    await addReply({
       variables: {
-        createPostInput: {
+        createReplyInput: {
           content: editorTarget?.innerHTML,
           userName: user.name,
+          parentId,
         },
       },
     })
     if (!loading) {
       if (editorTarget)
         editorTarget.innerHTML = ''
-      useAlert('success', 'Post Successfully!')
-      setNewPost(data.createPost)
+      refetch({ postId: parentId, name: user.name })
+      useAlert('success', 'Reply Successfully!')
     }
   }
   return (
@@ -79,4 +85,4 @@ function EditAction({ editorTarget }: Props) {
   )
 }
 
-export default EditAction
+export default ReplyAction
