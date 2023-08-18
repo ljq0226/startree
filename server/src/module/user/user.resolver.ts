@@ -4,6 +4,7 @@ import { User } from './entities/user.entity'
 import { CreateUserInput } from './dto/create-user.input'
 import { ProfileCount } from './dto/profileCount'
 import { UpdateUserInput } from './dto/update-user.input'
+import { QueryInput } from './dto/queryInput'
 
 @Resolver(() => User)
 export class UserResolver {
@@ -29,6 +30,11 @@ export class UserResolver {
   @Query(() => User)
   userData(@Args('name') name: string) {
     return this.userService.findOne(name)
+  }
+
+  @Query(() => QueryInput)
+  queryInput(@Args('query') query: string) {
+    return this.userService.queryInput(query)
   }
 
   @Query(() => ProfileCount)

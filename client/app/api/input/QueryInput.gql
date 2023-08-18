@@ -1,0 +1,13 @@
+query QueryInput($query: String!) {
+  queryInput(query: $query) {
+    users {
+      image
+      name
+      nickName
+    }
+    tags {
+      id
+      name
+    }
+  }
+}

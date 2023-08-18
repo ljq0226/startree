@@ -127,4 +127,32 @@ export class UserService {
     })
     return user
   }
+
+  async queryInput(query: string) {
+    const tags = await this.prisma.tag.findMany({
+      where: {
+        name: {
+          startsWith: query,
+        },
+      },
+      take: 3,
+    })
+    const users = await this.prisma.user.findMany({
+      where: {
+        OR: [
+          {
+            name: {
+              startsWith: query,
+            },
+          },
+          {
+            nickName: {
+              startsWith: query,
+            },
+          },
+        ],
+      },
+    })
+    return { users, tags }
+  }
 }
