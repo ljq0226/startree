@@ -62,6 +62,9 @@ export class LikeService {
       select: {
         postId: true,
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
     })
     const postIds = likes.map(item => item.postId)
     return this.postService.getPostInfoByIds(postIds, userName)

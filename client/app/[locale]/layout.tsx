@@ -40,13 +40,14 @@ export default async function LocaleLayout({
           <NextIntlClientProvider locale={locale} messages={messages}>
             <ApolloProvider >
               <div
-                className="flex justify-center w-screen h-screen overflow-x-hidden overflow-y-auto xl:gap-4 bg-base text-bs "
+                className="flex justify-center w-screen h-screen bg-base text-bs "
                 style={{
                   fontSize: 'var(--font-size)',
                 }}
               >
+                <div className='flex-[0.2]' />
                 <Sidebar />
-                <div className="xl:min-w-[900px] flex">
+                <div className="flex flex-1">
                   {children}
                 </div>
               </div>

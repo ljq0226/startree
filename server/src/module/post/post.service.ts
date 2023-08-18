@@ -5,7 +5,7 @@ import { FollowService } from '../follow/follow.service'
 import { UserService } from '../user/user.service'
 import { CreatePostInput } from './dto/create-post.input'
 
-const PAGE_SIZE = 20
+const PAGE_SIZE = 10
 @Injectable()
 export class PostService {
   constructor(
