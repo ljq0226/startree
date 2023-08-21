@@ -4,6 +4,7 @@ import GetHomePost from '@api/post/GetHomePost.gql'
 import { useQuery } from '@apollo/client'
 import EditPost from '../editor/EditPost'
 import Post from '../post/Post'
+import Skeleton from '../ui/Skeleton'
 import type { PostType } from '@/types'
 import { PostStore, UserStore } from '@/store'
 import useI18n from '@/hooks/theme/useI18n'
@@ -15,6 +16,8 @@ function Home({ homeRef }: { homeRef: React.RefObject<HTMLDivElement> }) {
   const newPost = PostStore(s => s.newPost)
   const deletePostId = PostStore(s => s.deletePostId)
   const [pageIndex, setPageIndex] = useState(1)
+  const [showData, setShowData] = useState(false)
+
   const { data, loading } = useQuery(
     GetHomePost, { variables: { name: user.name, pageIndex } })
 
@@ -43,28 +46,41 @@ function Home({ homeRef }: { homeRef: React.RefObject<HTMLDivElement> }) {
     const element = homeRef?.current
     if (element) {
       element.addEventListener('scroll', handleScroll)
-
+      const timerId = setTimeout(() => {
+        setShowData(true)
+      }, 1000)
       return () => {
         element.removeEventListener('scroll', handleScroll)
+        clearTimeout(timerId)
       }
     }
   }, [])
+
   return (
     <div
       className='flex flex-col main-container'
     >
       <div className='min-h-[30px]'></div>
       <EditPost />
-      <div className="flex flex-col mt-8">
-        {
-          homePost.map((post) => {
-            return (
-              <Post key={post.id} {...post} />
-            )
-          })
-        }
-      </div>
-      <div className='min-h-[50px] text-center '>{t('end_of_list')}</div>
+      {showData
+        ? <>
+          <div className="flex flex-col mt-8">
+            {
+              homePost.map((post) => {
+                return (
+                  <Post key={post.id} {...post} />
+                )
+              })
+            }
+          </div>
+          <div className='min-h-[50px] text-center '>{t('end_of_list')}</div></>
+        : <>
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+          <Skeleton />
+        </>
+      }
     </div>
   )
 }

@@ -43,6 +43,19 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      keyframes: {
+        'skeleton-loading': {
+          '0%': {
+            'background-color': 'var(--c-border)',
+          },
+          '100%': {
+            'background-color': 'var(--c-border-dark)',
+          },
+        },
+      },
+      animation: {
+        skeleton: 'skeleton-loading 1s linear infinite alternate',
+      },
     },
   },
   plugins: [],
