@@ -62,11 +62,6 @@ function EditAction({ editorTarget }: Props) {
             <Icon icon='lucide:hash' />
           </button>
         </Tooltip>
-        <Tooltip text={t('emoji')} position='top'>
-          <button className='editPost-icon' >
-            <Icon icon='mingcute:emoji-line' />
-          </button>
-        </Tooltip>
       </div>
       <div className="flex-1"></div>
       <button

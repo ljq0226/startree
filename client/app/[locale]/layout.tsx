@@ -45,7 +45,7 @@ export default async function LocaleLayout({
                   fontSize: 'var(--font-size)',
                 }}
               >
-                <div className='flex-[0.2]' />
+                <div className='flex-[0.3]' />
                 <Sidebar />
                 <div className="flex flex-1">
                   {children}

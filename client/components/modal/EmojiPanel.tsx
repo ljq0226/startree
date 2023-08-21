@@ -9,7 +9,7 @@ interface Props {
 
 function EmojiPanel({ className, editorTarget, setShowEmoji }: Props) {
   return (
-    <div className={`absolute z-10 -left-[150px] top-[38px] ${className}`}>
+    <div className={`absolute  z-[20] left-[0px] top-[38px] ${className}`}>
       <Picker data={data}
         onEmojiSelect={(emoji: any) => {
           const spanNode = `<span>${emoji.native}</span>`
