@@ -19,7 +19,7 @@ export default function App() {
       setPosts([...data.findAllPost])
   }, [data])
   return (
-    <>
+    <div className='flex w-full overflow-x-hidden overflow-y-auto'>
       <div className="flex flex-col main-container"
       >
         <div className="hidden h-6 xl:block"></div>
@@ -32,7 +32,6 @@ export default function App() {
         }
       </div>
       <Aside />
-    </>
-
+    </div>
   )
 }

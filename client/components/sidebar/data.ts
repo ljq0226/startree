@@ -50,13 +50,13 @@ export const NavLinks: Readonly<NavLink[]> = [
     linkName: 'explore',
     iconName: 'line-md:hash-small',
     canBeHidden: true,
+    disabled: true,
   },
   {
-    href: '/lists',
-    linkName: 'lists',
-    iconName: 'ri:list-unordered',
+    href: '/intro',
+    linkName: 'intro',
+    iconName: 'material-symbols:article-outline',
     canBeHidden: true,
-    disabled: true,
   },
   {
     href: '/settings',

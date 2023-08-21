@@ -13,6 +13,6 @@ export default function IndexPage() {
     redirect('/home')
   }
   else {
-    redirect('/explore')
+    redirect('/intro')
   }
 }
