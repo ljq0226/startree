@@ -36,6 +36,12 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.8",
-    "eslint": "8.45.0"
+    "eslint": "8.45.0",
+    "raw-loader": "^4.0.2",
+    "rehype-sanitize": "^5.0.1",
+    "rehype-stringify": "^9.0.4",
+    "remark-parse": "^10.0.2",
+    "remark-rehype": "^10.1.0",
+    "unified": "^11.0.2"
   }
 }

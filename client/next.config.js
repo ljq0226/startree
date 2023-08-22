@@ -18,7 +18,11 @@ const nextConfig = {
       exclude: /node_modules/,
       loader: 'graphql-tag/loader',
     })
-
+    config.module.rules.push({
+      test: /\.(md)/,
+      exclude: /node_modules/,
+      loader: 'raw-loader',
+    })
     return config
   },
 }
