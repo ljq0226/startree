@@ -1,16 +1,14 @@
 import { Html } from './mdToHtml'
-import Aside from '@/components/aside/Aside'
 import './index.css'
 
 export default function App() {
   return (
     <>
-      <div className="main-container">
-        <div className='markdown-body' dangerouslySetInnerHTML={{ __html: Html }}></div>
-
+      <div className="flex flex-col flex-1 h-screen overflow-x-hidden overflow-y-scroll ">
+        <div className='markdown-body max-w-[750px]' dangerouslySetInnerHTML={{ __html: Html }}></div>
+        <div className='w-full min-h-[300px] '></div>
       </div>
 
-      <Aside />
     </>
 
   )

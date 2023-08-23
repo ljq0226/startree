@@ -17,13 +17,14 @@ function SideBar() {
   useThemeMode()
   return (
     <div className='sticky top-0 h-[100vh] sm:w-min-[70px] xl:w-min-[300px] flex flex-col'>
-      <header className="flex">
-        header
+      <header className="flex items-center justify-start px-5 py-2">
+        <div className='logofont'>StarTree</div>
+        <div className='flex-[0.5]'></div>
         <Tooltip text={t('back')}>
           <div className='cursor-pointer' onClick={() => {
             router.back()
           }}>
-            <Icon icon='uil:arrow-left' className='text-primary' />
+            <Icon icon='uil:arrow-left' className='text-primary' height={26} />
           </div>
         </Tooltip>
       </header>
