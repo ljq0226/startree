@@ -28,6 +28,7 @@ const page = React.memo(() => {
 
   const [updateUserProfile] = useMutation(UpdateProfile)
   const useAlert = AlertStore(s => s.useAlert)
+
   const handleSave = async () => {
     const profile = data.profile
     const res = await updateUserProfile({
@@ -47,16 +48,20 @@ const page = React.memo(() => {
       },
     })
     if (res.data) {
+      localStorage.setItem(USERINFO, JSON.stringify({
+        ...res.data.updateUserProfile,
+      }))
       setUser({
         ...res.data.updateUserProfile,
       })
-      localStorage.setItem(USERINFO, JSON.stringify(user))
+
       useAlert('success', '保存成功')
     }
     else {
       useAlert('warning', '保存失败')
     }
   }
+
   const handleReset = () => {
     setData({ ...JSON.parse(localStorage.getItem(USERINFO) as string) })
   }
