@@ -6,7 +6,6 @@ export default function App() {
     <>
       <div className="main-container">
         <EditPost />
-
       </div>
       <Aside />
     </>

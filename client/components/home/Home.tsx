@@ -1,16 +1,18 @@
 'use client'
 import { useEffect, useState } from 'react'
 import GetHomePost from '@api/post/GetHomePost.gql'
-import { useQuery } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
+import { shallow } from 'zustand/shallow'
 import EditPost from '../editor/EditPost'
 import Post from '../post/Post'
 import Skeleton from '../ui/Skeleton'
 import type { PostType } from '@/types'
 import { PostStore, UserStore } from '@/store'
 import useI18n from '@/hooks/theme/useI18n'
+import { USERINFO } from '@/constants'
 
 function Home({ homeRef }: { homeRef: React.RefObject<HTMLDivElement> }) {
-  const user = UserStore(s => s.user)
+  const [user, setUser] = UserStore(s => [s.user, s.setUser], shallow)
   const t = useI18n('common')
   const [homePost, setHomePost] = useState<PostType[]>([])
   const newPost = PostStore(s => s.newPost)
@@ -18,13 +20,28 @@ function Home({ homeRef }: { homeRef: React.RefObject<HTMLDivElement> }) {
   const [pageIndex, setPageIndex] = useState(1)
   const [showData, setShowData] = useState(false)
 
-  const { data, loading } = useQuery(
-    GetHomePost, { variables: { name: user.name, pageIndex } })
+  const [getHomePost] = useLazyQuery(GetHomePost)
+
+  const setUserInfo = () => {
+    const info = localStorage.getItem(USERINFO) as string
+    const _info = JSON.parse(info)
+    setUser({
+      ..._info,
+    })
+  }
+
+  const getHomeData = async (name: string) => {
+    const { loading, data } = await getHomePost({ variables: { name, pageIndex } })
+    if (!loading)
+      setHomePost([...homePost, ...data?.getHomePost])
+  }
 
   useEffect(() => {
-    if (!loading)
-      setHomePost([...homePost, ...data.getHomePost])
-  }, [data])
+    const info = localStorage.getItem(USERINFO) as string
+    const _info = JSON.parse(info)
+    !user.name && setUserInfo()
+    getHomeData(_info.name)
+  }, [pageIndex])
 
   useEffect(() => {
     setHomePost([newPost, ...homePost])
