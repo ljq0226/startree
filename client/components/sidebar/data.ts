@@ -21,8 +21,8 @@ export const NavLinks: Readonly<NavLink[]> = [
     disabled: true,
   },
   {
-    href: '/conversations',
-    linkName: 'conversations',
+    href: '/chatroom',
+    linkName: 'chatroom',
     iconName: 'ri:at-line',
     disabled: true,
   },
