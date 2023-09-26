@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import FindByAt from '@api/user/FindByAt.gql'
 import FindByHashTag from '@api/tag/FindByHashTag.gql'
-import { useQuery } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import Avatar from '../ui/Avatar'
 import EditAction from './EditAction'
 import AtUserModal from './modal/AtUserModal'
@@ -17,8 +17,6 @@ function EditPost() {
   const user = UserStore(s => s.user)
   const [users, setUsers] = useState<AtUser[]>([])
   const [tags, setTags] = useState<Tag[]>([])
-  const [userQuery, setUserQuery] = useState('')
-  const [tagQuery, setTagQuery] = useState('')
   const [showAtModal, setShowAtModal] = useState(false)
   const [showTagModal, setShowTagModal] = useState(false)
   const [showFetching, setShowFetching] = useState(false)
@@ -26,23 +24,26 @@ function EditPost() {
     x: 0,
     y: 0,
   })
-  const { data: userData, loading: userLoading } = useQuery(FindByAt, { variables: { query: userQuery } })
-  const { data: tagData, loading: tagLoading } = useQuery(FindByHashTag, { variables: { query: tagQuery } })
+  const [findByAt, { data: userData, loading: userLoading }] = useLazyQuery(FindByAt)
+  const [findByHashTag, { data: tagData, loading: tagLoading }] = useLazyQuery(FindByHashTag)
+
   useEffect(() => {
     if (!userLoading)
-      setUsers(userData.findByAt)
+      setUsers(userData?.findByAt)
   }, [userData])
   useEffect(() => {
     if (!tagLoading)
-      setTags(tagData.findByHashTag)
+      setTags(tagData?.findByHashTag)
   }, [tagData])
+
   const handleKeyUp = () => {
     if (showAt()) {
       const position = getRangeRect()
       setPosition(position)
       const user = getAtUser()
       setShowFetching(true)
-      setUserQuery(user || '')
+      findByAt({ variables: { query: user || '' } })
+
       setTimeout(() => {
         setShowFetching(false)
         setShowAtModal(true)
@@ -56,7 +57,7 @@ function EditPost() {
       setPosition(position)
       const tag = getTag()
       setShowFetching(true)
-      setTagQuery(tag || '')
+      findByHashTag({ variables: { query: tag || '' } })
       setTimeout(() => {
         setShowFetching(false)
         setShowTagModal(true)

@@ -1,31 +1,36 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import cn from 'clsx'
-import { useQuery } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import QueryInput from '@api/input/QueryInput.gql'
 import useQueryInputModal from '../modal/hooks/useQueryInputModal'
 import QueryInputModal from '../modal/QueryInputMadal'
 import Icon from '@/components/ui/Icon'
 import useI18n from '@/hooks/theme/useI18n'
 import type { QueryInputType } from '@/types'
+import { debounce } from '@/lib'
 
 function SearchInput() {
   const [isActive, setIsActive] = useState(false)
   const t = useI18n('search')
-  const [query, setQuery] = useState(' ')
+  const [query, setQuery] = useState('')
   const { isShow, setIsShow } = useQueryInputModal()
   const [queryData, setQueryData] = useState<QueryInputType>({ users: [], tags: [] })
-  const { data, loading } = useQuery(QueryInput, { variables: { query } })
+  const [queryInput, { data, loading }] = useLazyQuery(QueryInput)
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
-    setQuery(value)
+    setQuery(value.trim())
     setTimeout(() => {
       setIsShow(true)
     }, 200)
   }
+
+  useEffect(() => {
+    query !== '' && queryInput({ variables: { query } })
+  }, [query])
   useEffect(() => {
     if (!loading)
-      setQueryData(data.queryInput)
+      setQueryData(data?.queryInput)
   }, [data])
   return (
     <>
@@ -41,7 +46,7 @@ function SearchInput() {
             className='relative w-full border-0 outline-none bg-base'
             onFocus={() => setIsActive(!isActive)}
             onBlur={() => setIsActive(!isActive)}
-            onChange={handleChange}
+            onChange={debounce(handleChange, 500)}
           />
           {isShow && <QueryInputModal {...queryData} />}
         </div>

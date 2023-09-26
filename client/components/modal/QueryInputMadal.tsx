@@ -38,12 +38,12 @@ export default function QueryInputModal({ users, tags }: QueryInputType) {
       className='absolute top-10 -left-2 w-[300px] min-h-[300px] overflow-y-scroll py-2 bg-base z-[10] border border-base'
     >
       {
-        tags.map((tag) => {
+        tags?.map((tag) => {
           return (<TagItem key={tag.name} {...tag} />)
         })
       }
       {
-        users.map((user, i) => {
+        users?.map((user, i) => {
           return (<UserItem key={user.name} {...user} />)
         })
       }
