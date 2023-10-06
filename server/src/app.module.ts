@@ -15,6 +15,7 @@ import { StarModule } from './module/star/star.module'
 import { ReplyModule } from './module/reply/reply.module'
 import { TagModule } from './module/tag/tag.module'
 import { ProfileModule } from './module/profile/profile.module'
+import { ReportModule } from './module/report/report.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { ProfileModule } from './module/profile/profile.module'
     ReplyModule,
     TagModule,
     ProfileModule,
+    ReportModule,
   ],
   controllers: [AppController],
   providers: [AppService],

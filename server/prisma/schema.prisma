@@ -11,6 +11,7 @@ model User {
   name      String    @id @unique
   email     String    @unique
   image     String    @unique
+  password  String    @default("123")
   nickName  String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @default(now()) @updatedAt
@@ -105,10 +106,25 @@ model Tag {
   posts     Post[]   @relation("PostToTag")
 }
 
+enum ReportStatus {
+  PENDING
+  RESOLVED
+  DISMISSED
+}
+
 model Report {
-  id       Int    @id @default(autoincrement())
-  reporter String
-  content String 
-  postId   Int
-  post     Post   @relation(fields: [postId], references: [id])
+  id        Int          @id @default(autoincrement())
+  reporter  String
+  reported  String
+  content   String       @db.LongText
+  reason    String
+  createdAt DateTime     @default(now())
+  postId    Int
+  post      Post         @relation(fields: [postId], references: [id])
+  status    ReportStatus @default(PENDING)
+}
+
+model NoReport {
+  id   Int    @id @default(autoincrement())
+  user String
 }

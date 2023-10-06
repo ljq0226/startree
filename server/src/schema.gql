@@ -28,6 +28,13 @@ input CreateReplyInput {
   userName: String!
 }
 
+input CreateReportInput {
+  content: String!
+  postId: Float!
+  reason: String!
+  reporter: String!
+}
+
 input CreateStarInput {
   postId: Float!
   userName: String!
@@ -91,6 +98,7 @@ type Mutation {
   createLike(createLikeInput: CreateLikeInput!): Boolean!
   createPost(createPostInput: CreatePostInput!): PostInfo!
   createReply(createReplyInput: CreateReplyInput!): Boolean!
+  createReport(createReportInput: CreateReportInput!): Boolean!
   createStar(createStarInput: CreateStarInput!): Boolean!
   createTag(name: String!): Tag!
   createUser(createUserInput: CreateUserInput!): User!
@@ -100,6 +108,8 @@ type Mutation {
   deleteReply(deleteReplyInput: DeleteReplyInput!): Boolean!
   deleteStar(deleteStarInput: DeleteStarInput!): Boolean!
   removeFollow(removeFollowInput: CreateFollowInput!): Boolean!
+  removeReport(id: Int!): Report!
+  updateReport(updateReportInput: UpdateReportInput!): Report!
   updateUserProfile(updateUserInput: UpdateUserInput!): User!
 }
 
@@ -194,6 +204,7 @@ type Query {
   getStarPost(userName: String!): [PostInfo!]!
   profileCount(name: String!): ProfileCount!
   queryInput(query: String!): QueryInput!
+  report(id: Int!): Report!
   userData(name: String!): User!
 }
 
@@ -211,6 +222,18 @@ type Reply {
   updatedAt: DateTime!
   user: User!
   userName: String!
+}
+
+type Report {
+  content: String!
+  createdAt: DateTime!
+  id: Float!
+  post: Post!
+  postId: Float!
+  reason: String!
+  reported: String!
+  reporter: String!
+  status: Float!
 }
 
 type Star {
@@ -234,6 +257,14 @@ type Tag {
 type TagData {
   id: Float!
   name: String!
+}
+
+input UpdateReportInput {
+  content: String
+  id: Int!
+  postId: Float
+  reason: String
+  reporter: String
 }
 
 input UpdateUserInput {

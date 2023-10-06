@@ -33,7 +33,6 @@ export class PostService {
         userName,
       },
     })
-
     await this.prisma.post.update({
       where: {
         id: newPost.id,

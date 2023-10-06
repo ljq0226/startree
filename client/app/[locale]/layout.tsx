@@ -6,6 +6,7 @@ import Sidebar from '@/components/sidebar/SideBar'
 import AuthProvider from '@/context/AuthProvider'
 import ApolloProvider from '@/context/ApolloProvider'
 import Alert from '@/components/ui/Alert'
+import StyledComponentsRegistry from '@/lib/AntdRegistry'
 
 export function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'zh' }]
@@ -38,18 +39,21 @@ export default async function LocaleLayout({
         <AuthProvider>
           <NextIntlClientProvider locale={locale} messages={messages}>
             <ApolloProvider >
-              <div
-                className="flex justify-center w-screen h-screen bg-base text-bs"
-                style={{
-                  fontSize: 'var(--font-size)',
-                }}
-              >
-                <div className='flex-[0.3]' />
-                <Sidebar />
-                <div className="flex flex-1">
-                  {children}
+              <StyledComponentsRegistry>
+                <div
+                  className="flex justify-center w-screen h-screen overflow-auto bg-base text-bs"
+                  style={{
+                    fontSize: 'var(--font-size)',
+                  }}
+                >
+                  <div className='flex-[0.3]' />
+                  <Sidebar />
+                  <div className="flex flex-1">
+                    {children}
+                  </div>
                 </div>
-              </div>
+              </StyledComponentsRegistry>
+
               <Alert />
             </ApolloProvider>
           </NextIntlClientProvider>

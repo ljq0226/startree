@@ -40,7 +40,7 @@ function Home({ homeRef }: { homeRef: React.RefObject<HTMLDivElement> }) {
     const info = localStorage.getItem(USERINFO) as string
     const _info = JSON.parse(info)
     !user.name && setUserInfo()
-    getHomeData(_info.name)
+    getHomeData(_info?.name)
   }, [pageIndex])
 
   useEffect(() => {

@@ -231,6 +231,7 @@
     "copy_link_to_post": "复制这篇帖文的链接",
     "copy_original_link_to_post": "复制这篇贴文的原始链接",
     "delete": "删除",
+    "report": "举报",
     "delete_and_redraft": "删除并重新编辑",
     "direct_message_account": "私信 {0}",
     "edit": "编辑",

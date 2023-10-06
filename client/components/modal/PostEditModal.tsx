@@ -3,11 +3,12 @@ import DeletePost from '@api/post/DeletePost.gql'
 import { useMutation } from '@apollo/client'
 import Icon from '@/components/ui/Icon'
 import useI18n from '@/hooks/theme/useI18n'
-import { PostStore } from '@/store'
+import { PostStore, UserStore } from '@/store'
 
 interface Props {
   isSelf: boolean
   postId: number
+  content: string
 }
 
 interface Item {
@@ -38,7 +39,9 @@ const actionItems: Item[] = [
   // },
 ]
 
-function PostEditModal({ isSelf, postId }: Props) {
+function PostEditModal({ isSelf, postId, content }: Props) {
+  const [setIsOpen, setReportPost] = PostStore(s => [s.setReportModal, s.setReportPost])
+  const { name } = UserStore(s => s.user)
   const t = useI18n('menu')
   const [removePost] = useMutation(DeletePost)
   const setDeletePostId = PostStore(s => s.setDeletePostId)
@@ -46,6 +49,10 @@ function PostEditModal({ isSelf, postId }: Props) {
     const { data } = await removePost({ variables: { id: postId } })
     if (data.deletePost)
       setDeletePostId(postId)
+  }
+  const handleReport = () => {
+    setReportPost(name, postId, content)
+    setIsOpen(true)
   }
   return (
     <div className='absolute z-10 flex w-[300px] max-w-[300px] flex-col p-3 space-y-2 border bg-base top-8 -left-6 border-base'>
@@ -60,15 +67,23 @@ function PostEditModal({ isSelf, postId }: Props) {
         })
       }
       {
-        isSelf && (
-          <div
-            className='flex items-center justify-start p-2 space-x-2 text-error hover-animation'
-            onClick={handleDelete}
-          >
-            <Icon icon='ph:trash-light' height={16} />
-            <span className='text-base'>{t('delete')}</span>
-          </div>
-        )
+        isSelf
+          ? (
+            <div
+              className='flex items-center justify-start p-2 space-x-2 text-error hover-animation'
+              onClick={handleDelete}
+            >
+              <Icon icon='ph:trash-light' height={16} />
+              <span className='text-base'>{t('delete')}</span>
+            </div>)
+          : (
+            <div
+              className='flex items-center justify-start p-2 space-x-2 text-error hover-animation'
+              onClick={handleReport}
+            >
+              <Icon icon='material-symbols:report-outline' height={16} />
+              <span className='text-base'>{t('report')}</span>
+            </div>)
       }
     </div>
 

@@ -63,7 +63,7 @@ function Post({ content, id, createdAt, user, postCount, profileCount }: PostTyp
                 <span className='text-sm hover:underline'>{t(timeAgo[0], { data: timeAgo[1] })}</span>
               </Tooltip>
               <div className='relative ml-2' onClick={() => setIsShow(true)}>
-                {isShow && <PostEditModal isSelf={user.name === name} postId={id}/>}
+                {isShow && <PostEditModal isSelf={user.name === name} postId={id} content={content} />}
                 <Icon icon='ri:more-line' />
               </div>
             </div>

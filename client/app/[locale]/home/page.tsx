@@ -2,6 +2,7 @@
 import { useRef } from 'react'
 import Aside from '@/components/aside/Aside'
 import Home from '@/components/home/Home'
+import ReportModal from '@/components/modal/ReportModal'
 
 export default function App() {
   const homeRef = useRef<HTMLDivElement>(null)
@@ -13,6 +14,7 @@ export default function App() {
       <Home homeRef={homeRef} />
       <Aside />
       <div className='flex-1' />
+      <ReportModal />
     </div>
   )
 }

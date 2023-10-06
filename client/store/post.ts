@@ -4,6 +4,14 @@ import type { PostType } from '@/types'
 interface PostState {
   newPost: PostType
   deletePostId: number
+  reportModal: boolean
+  reportPost: {
+    name: string
+    id: number
+    content: string
+  }
+  setReportPost: (name: string, id: number, content: string) => void
+  setReportModal: (v: boolean) => void
   setNewPost: (v: PostType) => void
   setDeletePostId: (v: number) => void
 }
@@ -35,6 +43,24 @@ const initPost: PostType = {
 const PostStore = create<PostState>(set => ({
   newPost: initPost,
   deletePostId: 0,
+  reportModal: false,
+  reportPost: {
+    name: '',
+    id: 0,
+    content: '',
+  },
+  setReportPost(name, id, content) {
+    set(() => ({
+      reportPost: {
+        name, id, content,
+      },
+    }))
+  },
+  setReportModal(v) {
+    set(() => ({
+      reportModal: v,
+    }))
+  },
   setNewPost: (v) => {
     set(() => ({
       newPost: v,
