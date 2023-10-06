@@ -20,22 +20,22 @@ const actionItems: Item[] = [
     icon: 'mdi:favourite-border',
     actionName: 'show_favorited_and_forwarded_by',
   },
-  {
-    icon: 'tabler:link',
-    actionName: 'copy_link_to_post',
-  },
-  {
-    icon: 'ic:baseline-link',
-    actionName: 'copy_original_link_to_post',
-  },
-  {
-    icon: 'oi:ban',
-    actionName: 'mute_conversation',
-  },
-  {
-    icon: 'fluent:open-20-filled',
-    actionName: 'open_in_original_site',
-  },
+  // {
+  //   icon: 'tabler:link',
+  //   actionName: 'copy_link_to_post',
+  // },
+  // {
+  //   icon: 'ic:baseline-link',
+  //   actionName: 'copy_original_link_to_post',
+  // },
+  // {
+  //   icon: 'oi:ban',
+  //   actionName: 'mute_conversation',
+  // },
+  // {
+  //   icon: 'fluent:open-20-filled',
+  //   actionName: 'open_in_original_site',
+  // },
 ]
 
 function PostEditModal({ isSelf, postId }: Props) {

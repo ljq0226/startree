@@ -15,29 +15,29 @@ export const SettingOptions: Readonly<SettingOption[]> = [
     linkName: 'interface',
     icon: 'dashicons:admin-appearance',
   },
-  {
-    href: '/notifications',
-    linkName: 'notifications',
-    icon: 'mdi:notifications-none',
-  },
+  // {
+  //   href: '/notifications',
+  //   linkName: 'notifications',
+  //   icon: 'mdi:notifications-none',
+  // },
   {
     href: '/language',
     linkName: 'language',
     icon: 'grommet-icons:language',
   },
-  {
-    href: '/preferences',
-    linkName: 'preferences',
-    icon: 'pajamas:preferences',
-  },
-  {
-    href: '/users',
-    linkName: 'account_settings',
-    icon: 'ri:group-line',
-  },
-  {
-    href: '/about',
-    linkName: 'about',
-    icon: 'mdi:about-circle-outline',
-  },
+  // {
+  //   href: '/preferences',
+  //   linkName: 'preferences',
+  //   icon: 'pajamas:preferences',
+  // },
+  // {
+  //   href: '/users',
+  //   linkName: 'account_settings',
+  //   icon: 'ri:group-line',
+  // },
+  // {
+  //   href: '/about',
+  //   linkName: 'about',
+  //   icon: 'mdi:about-circle-outline',
+  // },
 ]

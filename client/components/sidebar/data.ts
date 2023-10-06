@@ -14,18 +14,12 @@ export const NavLinks: Readonly<NavLink[]> = [
     iconName: 'ri:home-5-line',
     disabled: true,
   },
-  {
-    href: '/notifications',
-    linkName: 'notifications',
-    iconName: 'ri:notification-4-line',
-    disabled: true,
-  },
-  {
-    href: '/chatroom',
-    linkName: 'chatroom',
-    iconName: 'ri:at-line',
-    disabled: true,
-  },
+  // {
+  //   href: '/notifications',
+  //   linkName: 'notifications',
+  //   iconName: 'ri:notification-4-line',
+  //   disabled: true,
+  // },
   {
     href: '/favorites',
     linkName: 'favorites',
@@ -52,12 +46,12 @@ export const NavLinks: Readonly<NavLink[]> = [
     canBeHidden: true,
     disabled: true,
   },
-  {
-    href: '/intro',
-    linkName: 'intro',
-    iconName: 'material-symbols:article-outline',
-    canBeHidden: true,
-  },
+  // {
+  //   href: '/intro',
+  //   linkName: 'intro',
+  //   iconName: 'material-symbols:article-outline',
+  //   canBeHidden: true,
+  // },
   {
     href: '/settings',
     linkName: 'settings',

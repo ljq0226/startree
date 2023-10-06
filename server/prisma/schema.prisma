@@ -71,17 +71,19 @@ model Star {
 }
 
 model Post {
-  id        Int       @id @default(autoincrement())
-  content   String    @db.LongText
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now()) @updatedAt
-  userName  String
-  forwards  Forward[]
-  likes     Like[]
-  user      User      @relation(fields: [userName], references: [name])
-  replys    Reply[]
-  stars     Star[]
-  tags      Tag[]     @relation("PostToTag")
+  id          Int       @id @default(autoincrement())
+  content     String    @db.LongText
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+  userName    String
+  forwards    Forward[]
+  likes       Like[]
+  user        User      @relation(fields: [userName], references: [name])
+  replys      Reply[]
+  stars       Star[]
+  tags        Tag[]     @relation("PostToTag")
+  Report      Report[]
+  reportCount Int       @default(0)
 }
 
 model Reply {
@@ -101,4 +103,12 @@ model Tag {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
   posts     Post[]   @relation("PostToTag")
+}
+
+model Report {
+  id       Int    @id @default(autoincrement())
+  reporter String
+  content String 
+  postId   Int
+  post     Post   @relation(fields: [postId], references: [id])
 }
