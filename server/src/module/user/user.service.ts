@@ -3,15 +3,59 @@ import { PrismaService } from 'nestjs-prisma'
 import { FollowService } from '../follow/follow.service'
 import { CreateUserInput } from './dto/create-user.input'
 import { UpdateUserInput } from './dto/update-user.input'
+import { CreateReportInput } from './dto/create-report.input'
 
 @Injectable()
 export class UserService {
   constructor(
     private prisma: PrismaService,
     private readonly followService: FollowService,
-    // private readonly postService: PostService,
 
   ) {}
+
+  async createReport({ reporter, content, reason, postId }: CreateReportInput) {
+    const { userName } = await this.prisma.post.findUnique({ where: { id: postId } })
+    const newReport = await this.prisma.report.create({
+      data: {
+        reason,
+        reporter,
+        postId,
+        content,
+        reported: userName,
+      },
+    })
+    return true
+  }
+
+  async findAllPendingReport() {
+    return await this.prisma.report.findMany({
+      where: {
+        status: 'PENDING',
+      },
+    })
+  }
+
+  async findAllReport() {
+    return await this.prisma.report.findMany({
+      where: {
+        status: {
+          not: 'PENDING',
+        },
+      },
+    })
+  }
+
+  async updateReport(id: number, status: string) {
+    const d = await this.prisma.report.update({
+      where: {
+        id,
+      },
+      data: {
+        status,
+      },
+    })
+    return true
+  }
 
   async create({ name, email, image }: CreateUserInput) {
     const user = await this.prisma.user.findUnique({ where: { name }, include: { profile: true } })

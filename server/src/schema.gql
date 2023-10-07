@@ -108,8 +108,7 @@ type Mutation {
   deleteReply(deleteReplyInput: DeleteReplyInput!): Boolean!
   deleteStar(deleteStarInput: DeleteStarInput!): Boolean!
   removeFollow(removeFollowInput: CreateFollowInput!): Boolean!
-  removeReport(id: Int!): Report!
-  updateReport(updateReportInput: UpdateReportInput!): Report!
+  updateReport(id: Float!, status: String!): Boolean!
   updateUserProfile(updateUserInput: UpdateUserInput!): User!
 }
 
@@ -184,7 +183,9 @@ input ProfileInput {
 
 type Query {
   findAll: [User!]!
+  findAllPendingReport: [Report!]!
   findAllPost(name: String!, pageIndex: Float!): [PostInfo!]!
+  findAllReport: [Report!]!
   findByAt(query: String!): [User!]!
   findByHashTag(query: String!): [Tag!]!
   findFollowers(followedName: String!): [User!]!
@@ -204,7 +205,6 @@ type Query {
   getStarPost(userName: String!): [PostInfo!]!
   profileCount(name: String!): ProfileCount!
   queryInput(query: String!): QueryInput!
-  report(id: Int!): Report!
   userData(name: String!): User!
 }
 
@@ -233,7 +233,7 @@ type Report {
   reason: String!
   reported: String!
   reporter: String!
-  status: Float!
+  status: String!
 }
 
 type Star {
@@ -257,14 +257,6 @@ type Tag {
 type TagData {
   id: Float!
   name: String!
-}
-
-input UpdateReportInput {
-  content: String
-  id: Int!
-  postId: Float
-  reason: String
-  reporter: String
 }
 
 input UpdateUserInput {

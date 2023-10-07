@@ -8,28 +8,28 @@ import { UpdateReportInput } from './dto/update-report.input'
 export class ReportResolver {
   constructor(private readonly reportService: ReportService) {}
 
-  @Mutation(() => Boolean)
-  async createReport(@Args('createReportInput') createReportInput: CreateReportInput) {
-    return await this.reportService.create(createReportInput)
-  }
+  // @Mutation(() => Report)
+  // createReport(@Args('createReportInput') createReportInput: CreateReportInput) {
+  //   return this.reportService.create(createReportInput)
+  // }
 
-  @Query(() => [Report], { name: 'report' })
-  findAll() {
-    return this.reportService.findAll()
-  }
+  // @Query(() => [Report], { name: 'report222' })
+  // async findAll() {
+  //   return await this.reportService.findAll()
+  // }
 
-  @Query(() => Report, { name: 'report' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.reportService.findOne(id)
-  }
+  // @Query(() => Report, { name: 'report111' })
+  // findOne(@Args('id', { type: () => Int }) id: number) {
+  //   return this.reportService.findOne(id)
+  // }
 
-  @Mutation(() => Report)
-  updateReport(@Args('updateReportInput') updateReportInput: UpdateReportInput) {
-    return this.reportService.update(updateReportInput.id, updateReportInput)
-  }
+  // @Mutation(() => Report)
+  // updateReport(@Args('updateReportInput') updateReportInput: UpdateReportInput) {
+  //   return this.reportService.update(updateReportInput.id, updateReportInput)
+  // }
 
-  @Mutation(() => Report)
-  removeReport(@Args('id', { type: () => Int }) id: number) {
-    return this.reportService.remove(id)
-  }
+  // @Mutation(() => Report)
+  // removeReport(@Args('id', { type: () => Int }) id: number) {
+  //   return this.reportService.remove(id)
+  // }
 }

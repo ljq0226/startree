@@ -1,16 +1,7 @@
-import { Field, InputType } from '@nestjs/graphql'
+import { InputType, Int, Field } from '@nestjs/graphql';
 
 @InputType()
 export class CreateReportInput {
-  @Field()
-  reporter: string
-
-  @Field()
-  content: string
-
-  @Field()
-  reason: string
-
-  @Field()
-  postId: number
+  @Field(() => Int, { description: 'Example field (placeholder)' })
+  exampleField: number;
 }

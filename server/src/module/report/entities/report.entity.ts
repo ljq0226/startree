@@ -1,11 +1,6 @@
 import { Field, ObjectType } from '@nestjs/graphql'
 import { Post } from 'src/module/post/entities/post.entity'
 
-export enum ReportStatus {
-  PENDING,
-  RESOLVED,
-  DISMISSED,
-}
 @ObjectType()
 export class Report {
   @Field()
@@ -30,7 +25,7 @@ export class Report {
   post: Post
 
   @Field()
-  status: ReportStatus
+  status: string
 
   @Field()
   createdAt: Date

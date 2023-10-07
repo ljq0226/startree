@@ -6,22 +6,12 @@ import { UpdateReportInput } from './dto/update-report.input'
 @Injectable()
 export class ReportService {
   constructor(private prisma: PrismaService) {}
-  async create({ reporter, content, reason, postId }: CreateReportInput) {
-    const { userName } = await this.prisma.post.findUnique({ where: { id: postId } })
-    const newReport = await this.prisma.report.create({
-      data: {
-        reason,
-        reporter,
-        postId,
-        content,
-        reported: userName,
-      },
-    })
-    return true
+  create(createReportInput: CreateReportInput) {
+    return 'This action adds a new report'
   }
 
-  findAll() {
-    return 'This action returns all report'
+  async findAll() {
+    return await this.prisma.report.findMany()
   }
 
   findOne(id: number) {
