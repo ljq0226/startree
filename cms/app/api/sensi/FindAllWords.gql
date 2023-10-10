@@ -1,0 +1,6 @@
+query FindAllWords {
+  findAllWords {
+    id
+    word
+  }
+}

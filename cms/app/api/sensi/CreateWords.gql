@@ -1,0 +1,3 @@
+mutation CreateWord($word: String!) {
+  CreateWord(word: $word)
+}

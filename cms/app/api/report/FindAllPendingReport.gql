@@ -1,0 +1,12 @@
+query findAllPendingReport {
+  findAllPendingReport {
+    content
+    createdAt
+    id
+    postId
+    reason
+    reported
+    reporter
+    status
+  }
+}

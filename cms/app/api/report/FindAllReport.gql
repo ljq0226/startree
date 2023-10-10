@@ -1,0 +1,12 @@
+query FindAllReport {
+  findAllReport {
+    content
+    createdAt
+    id
+    postId
+    reason
+    reported
+    reporter
+    status
+  }
+}

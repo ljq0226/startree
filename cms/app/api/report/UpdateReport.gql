@@ -1,0 +1,3 @@
+mutation UpdateReport($id: Float!, $status: String!) {
+  updateReport(id: $id, status: $status)
+}

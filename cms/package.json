@@ -1,0 +1,45 @@
+{
+  "name": "startree",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "@ant-design/cssinjs": "^1.17.0",
+    "@ant-design/icons": "^5.2.6",
+    "@apollo/client": "^3.7.17",
+    "@iconify/react": "^4.1.1",
+    "@types/node": "20.4.5",
+    "@types/react": "18.2.17",
+    "@types/react-dom": "18.2.7",
+    "antd": "^5.9.3",
+    "autoprefixer": "10.4.14",
+    "clsx": "^2.0.0",
+    "eslint": "8.45.0",
+    "framer-motion": "^10.13.1",
+    "graphql": "^16.7.1",
+    "graphql-tag": "^2.12.6",
+    "next": "13.4.12",
+    "postcss": "8.4.27",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tailwindcss": "3.3.3",
+    "typescript": "5.1.6",
+    "zustand": "^4.3.9"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.39.8",
+    "eslint": "8.45.0",
+    "raw-loader": "^4.0.2",
+    "rehype-sanitize": "^5.0.1",
+    "rehype-stringify": "^9.0.4",
+    "remark-parse": "^10.0.2",
+    "remark-rehype": "^10.1.0",
+    "unified": "^11.0.2"
+  }
+}
