@@ -17,10 +17,10 @@ interface Item {
 }
 
 const actionItems: Item[] = [
-  {
-    icon: 'mdi:favourite-border',
-    actionName: 'show_favorited_and_forwarded_by',
-  },
+  // {
+  //   icon: 'mdi:favourite-border',
+  //   actionName: 'show_favorited_and_forwarded_by',
+  // },
   // {
   //   icon: 'tabler:link',
   //   actionName: 'copy_link_to_post',

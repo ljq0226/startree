@@ -16,6 +16,7 @@ import { ReplyModule } from './module/reply/reply.module'
 import { TagModule } from './module/tag/tag.module'
 import { ProfileModule } from './module/profile/profile.module'
 import { ReportModule } from './module/report/report.module'
+import { SensitiveWordModule } from './module/sensitive-word/sensitive-word.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { ReportModule } from './module/report/report.module'
     TagModule,
     ProfileModule,
     ReportModule,
+    SensitiveWordModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -23,6 +23,7 @@ export default function Page({ params }: Props) {
   return (
     <div>
       <div className="hidden h-6 xl:block"></div>
+      <div className="flex h-10 flex-center text-primary">#{params.tag}</div>
       {
         posts.map((post) => {
           return (

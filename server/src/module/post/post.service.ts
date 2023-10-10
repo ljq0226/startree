@@ -3,6 +3,7 @@ import { PrismaService } from 'nestjs-prisma'
 import { checkTag, createTag } from 'src/lib'
 import { FollowService } from '../follow/follow.service'
 import { UserService } from '../user/user.service'
+import { constructDFA, filterSensitiveWords } from '../../lib/dfa'
 import { CreatePostInput } from './dto/create-post.input'
 
 const PAGE_SIZE = 10
@@ -15,6 +16,14 @@ export class PostService {
   ) {}
 
   async create({ content, userName }: CreatePostInput) {
+    // 敏感词处理
+    const words = await this.prisma.sensitiveWord.findMany({
+      select: { word: true },
+    })
+    const sensitiveWords = words.map(item => item?.word)
+
+    const dfa = constructDFA(sensitiveWords)
+    const filteredText = filterSensitiveWords(content, dfa)
     const [existTags, notExistTags] = checkTag(content)
     const tagIds = await Promise.all([
       ...existTags.map(async (item) => {
@@ -29,7 +38,7 @@ export class PostService {
 
     const newPost = await this.prisma.post.create({
       data: {
-        content: createTag(notExistTags, content),
+        content: createTag(notExistTags, filteredText),
         userName,
       },
     })
@@ -131,7 +140,17 @@ export class PostService {
       take: PAGE_SIZE,
     })
     const postIds = posts.map(item => item.id)
-    return this.getPostInfoByIds([...postIds], name)
+    const a = await this.prisma.report.findMany({
+      where: {
+        status: 'RESOLVED'
+      },
+      select: {
+        postId: true
+      }
+    })
+    const filterIds = a.map((item)=>item.postId)
+    const filteredPostIds = postIds.filter(id => !filterIds.includes(id));
+    return this.getPostInfoByIds([...filteredPostIds], name)
   }
 
   async getPostInfoByIds(postIds: number[], name: string) {
@@ -168,7 +187,18 @@ export class PostService {
       take: PAGE_SIZE,
     })
     const postIds = posts.map(item => item.id)
-    return this.getPostInfoByIds([...postIds], name)
+    const a = await this.prisma.report.findMany({
+      where: {
+        status: 'RESOLVED'
+      },
+      select: {
+        postId: true
+      }
+    })
+    const filterIds = a.map((item)=>item.postId)
+    const filteredPostIds = postIds.filter(id => !filterIds.includes(id));
+
+    return this.getPostInfoByIds([...filteredPostIds], name)
   }
 
   async profileData(name: string) {

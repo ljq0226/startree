@@ -122,3 +122,8 @@ model NoReport {
   id   Int    @id @default(autoincrement())
   user String
 }
+
+model SensitiveWord {
+  id   Int    @id @default(autoincrement())
+  word String
+}

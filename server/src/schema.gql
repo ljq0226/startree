@@ -93,6 +93,8 @@ type Like {
 }
 
 type Mutation {
+  CreateWord(word: String!): Boolean!
+  DeleteWord(id: Float!): Boolean!
   createFollow(createFollowInput: CreateFollowInput!): Boolean!
   createForward(createForwardInput: CreateForwardInput!): Boolean!
   createLike(createLikeInput: CreateLikeInput!): Boolean!
@@ -186,6 +188,7 @@ type Query {
   findAllPendingReport: [Report!]!
   findAllPost(name: String!, pageIndex: Float!): [PostInfo!]!
   findAllReport: [Report!]!
+  findAllWords: [Sensi!]!
   findByAt(query: String!): [User!]!
   findByHashTag(query: String!): [Tag!]!
   findFollowers(followedName: String!): [User!]!
@@ -234,6 +237,11 @@ type Report {
   reported: String!
   reporter: String!
   status: String!
+}
+
+type Sensi {
+  id: Float!
+  word: String!
 }
 
 type Star {
